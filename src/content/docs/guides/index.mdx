@@ -1,0 +1,51 @@
+---
+title: Get started
+---
+
+## What is Nopwd?
+
+Nopwd is a set of web components to authenticate your users without a password using an **email link** or **Passkeys** authentication. It allows your user to log in or register seamlessly, quickly and securely. You don't believe us? [test it and go passwordless!](https://nopwd.rocks).
+
+**No API Key** nor **credit card** required 🕺
+
+## Motivation
+
+Authentication is used to be hard for users but also for developers. At Nopwd, we work hard to keep our API simple and minimal 💆.
+
+Using Nopwd, you **won't** have to:
+
+- ~~give us money~~ (but you can still support us 😅)
+- ~~register your app or website~~
+- ~~manage any API Key or secrets~~
+
+## Installation
+
+You can load our web components via CDN or by installing it locally.
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+import { Code } from "astro:components";
+import { cdn, npmInstall, npmImport } from "../../../assets/snippet.js";
+
+<Tabs>
+  <TabItem label="using CDN">
+    Each components (`np-email-login`, `np-passkey-login`, `np-register-login`) can be loaded individualy from a CDN.
+
+    Exemple using the email link authentication button component:
+    <Code code={cdn} lang="html"/>
+
+    Easy right?
+
+:::tip[About version management]
+It is not recommended to use the `@latest` suffix, as a major release could break your application. Instead, use a fixed version such as `0.3.2`.
+:::
+
+  </TabItem>
+  <TabItem label="using NPM">
+  If you don’t want to use the CDN, you can install the latest version of our sdk from npm with the following command.
+  <Code code={npmInstall} lang="sh"/>
+
+Once installed, you only have to import the desired component and you are good to go.
+
+  <Code code={npmImport} lang="js"/>
+</TabItem>
+</Tabs>

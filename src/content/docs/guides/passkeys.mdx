@@ -1,0 +1,74 @@
+---
+title: Passkeys authentication
+description: A guide to integrate Passkeys authentication.
+---
+
+Based on FIDO Alliance and **W3C standards**, Passkeys are a safer and easier alternative to passwords.
+With passkeys, users can sign in to apps and websites with a biometric sensor (such as a fingerprint or facial recognition), PIN, or pattern, freeing them from having to remember and manage passwords.
+
+Passkeys are:
+
+- easier: Users can select an account to sign in with biometric sensor.
+- safer: passkeys are proven to be resistant to phishing, credential stuffing, and other remote attacks.
+
+## Creating a passkey
+
+Before asking your user to create a Passkey you need to make sure that their browsers are compatible.
+The `np:auth` event emitted from the email authentication `<np-email-login>` compontent contains a `suggest_passkeys` attribute.
+It is set to `true` if the user's browser support Passkeys. Use it to suggest a passkey creation process only for compatible browsers.
+
+To create a passkey, just add the `<np-passkey-create>` compontent and set the `token` attribute with the user access token.
+
+```html
+<np-passkey-register></np-passkey-register>
+
+<script>
+  const passkeyRegisterButton = document.querySelector("np-passkey-register");
+  passkeyRegisterButton.token = "...";
+</script>
+`;
+```
+
+Once the user clicks on this button, the browser will prompt the user to create a passkey.
+This component will then emit a `np:register` event when created.
+
+```html
+<np-passkey-register></np-passkey-register>
+
+<script>
+  const passkeyRegisterButton = document.querySelector("np-email-login");
+
+  passkeyRegisterButton.addEventListner("np:register", (e) => {
+    // The passkey has been created 🎉
+    console.log(e.detail.kid); // the passkey id.
+  });
+</script>
+```
+
+This event contains the passkey id `kid`. It can be used to perform further optionak administration operations such as revokation.
+
+## Authenticating with Passkeys
+
+Just add the `<np-passkey-login>` component to your login page.
+When focused by the user, it displays the created passkey for your website and perform authentification flow when selected.
+
+```html
+<np-passkey-login></np-passkey-login>
+
+<script>
+  const button = document.querySelector("np-passkey-login");
+
+  button.addEventListner("np:auth", (e) => {
+    // Your user is authenticated 🎉
+    console.log(e.detail.token); // the access token
+  });
+</script>
+```
+
+This component will act as a classic email input element for users without a Passkey.
+You can use it as an email form input to pass the email value to the `<np-email-login>` component to fallback to the email link authentication flow.
+
+:::tip[End to end exemple]
+The source code of our [demo website](https://nopwd.rocks) is available on [github](https://github.com/nopwdio/nopwd.rocks).
+Give it a try!
+:::

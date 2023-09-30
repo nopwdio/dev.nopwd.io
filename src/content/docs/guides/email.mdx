@@ -3,9 +3,51 @@ title: Email link authentication
 description: A guide to integrate email link authentication.
 ---
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+Also known as a magic link, email authentication is a passwordless flow where users click a unique link sent to their email address to log in.
 
-## Further reading
+## Integration
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+From your login page, add the `<np-email-login>` component and set the `email` attribute with your user's email address.
+
+```html
+<np-email-login></np-email-login>
+
+<script>
+  const button = document.querySelector("np-email-login");
+  button.email = "ada@lovelace.uk";
+</script>
+`;
+```
+
+Once the user clicks on this button, an email will be sent to its inbox.
+By clicking on the received authorization link, he will be redirected to the original page with an extra `code` parameter.
+This component will then automatically exchange it for an access token and emit it inside the `np:auth` event.
+
+```html
+<np-email-login></np-email-login>
+
+<script>
+  const button = document.querySelector("np-email-login");
+
+  button.addEventListner("np:auth", (e) => {
+    // Your user is authenticated 🎉
+    console.log(e.detail.token); // the access token
+  });
+</script>
+```
+
+> see the `np-email-login` specification for more info.
+
+:::tip[Promote Passkeys]
+Consider offering your users an even smoother and secure experience by letting them use Passkeys.
+Passkeys use your fingerprint or other biometric to log you into your websites, just like unlocking your device.
+See [Passkey Integration](passkeys) to learn more.
+:::
+
+## You are done!
+
+Transmit the access `token` to your backend to create the user's session. it can be verified with your own JWT library or using our own API endpoint.
+
+:::tip[Verifying the access token]
+See [token verification](tokens) to learn how to verify the `token`.
+:::

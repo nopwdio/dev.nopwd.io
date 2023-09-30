@@ -1,0 +1,40 @@
+---
+title: Nopwd rest API
+---
+
+## API base url
+
+All endpoints live under the URL `https://api.nopwd.io/:version` and then generally follow the REST architecture.
+
+The current version is `v1`.
+
+:::tip[encoding]
+All requests must be encoded as JSON with the `Content-Type: application/json` header. If not otherwise specified, responses from the NoPwd API, including errors, are encoded exclusively as JSON as well.
+:::
+
+## Managing error
+
+### Error Code
+
+Nopwd uses conventional HTTP response codes to indicate the success or failure of an API request. In general: Codes in the 2xx range indicate success. Codes in the 4xx range indicate an error that failed given the information provided (e.g., a required parameter was omitted or malformed). Codes in the 5xx range indicate an error with Nopwd's servers (these are rare).
+
+All error responses match the following format:
+
+```ts
+{
+  error: "The attribute 'email' is missing", // a short description of the issue
+}
+```
+
+Some of them (such as 429) may have additional parameters (see rate limits section).
+
+### Rate limits
+
+The Nopwd API employs a number of safeguards against bursts of incoming traffic to help maximize its stability. Users who send many requests in quick succession may see error responses that show up as status code 429.
+
+```ts
+{
+  error: "slow down", // a short description of the issue
+  wait_in_sec: 69, // time to wait before being able to try again
+}
+```

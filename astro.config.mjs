@@ -5,28 +5,36 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: '<dev/>',
+			title: '<nopwd-dev/>',
 			customCss: [
-				// Relative path to your custom CSS file
 				'./src/styles/custom.css',
 			],			
 			social: {
 				github: 'https://github.com/nopwdio',
-				x: 'https://twitter.com/adrienforward',
 			},
 			sidebar: [
 				{
 					label: 'Guides',
 					items: [
 						// Each item here is one entry in the navigation menu.
-						{ label: 'Get started', link: '/guides/getstarted' },
-						{ label: 'Email link authentication', link: '/guides/email' },
-						{ label: 'Passkey authentication', link: '/guides/passkeys' },
+						{ label: 'Get started', link: '/guides' },
+						{ label: 'Auth with Email link', link: '/guides/email' },
+						{ label: 'Auth with Passkey', link: '/guides/passkeys' },
+						{ label: 'Verifying token', link: '/guides/tokens' },
+						{ label: 'Customization', link: '/guides/customization' },
 					],
 				},
 				{
 					label: 'Reference',
-					autogenerate: { directory: 'reference' },
+					items: [
+						{ label: 'API', 
+						items: [
+							{ label: 'Nopwd rest API', link: '/reference/api' },
+							{ label: 'token endpoints', link: '/reference/api/token' },
+						]
+						},
+						
+					],
 				},
 			],
 		}),
