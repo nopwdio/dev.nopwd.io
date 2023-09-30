@@ -5,15 +5,15 @@ description: A guide to integrate email link authentication.
 
 Also known as a magic link, email authentication is a passwordless flow where users click a unique link sent to their email address to log in.
 
-## Integration
+## Add the login with email button
 
-From your login page, add the `<np-email-login>` component and set the `email` attribute with your user's email address.
+From your login page, add the [`np-email-signin`](/reference/components/np-email-signin) component and set the `email` property with your user's email address.
 
 ```html
-<np-email-login></np-email-login>
+<np-email-signin></np-email-signin>
 
 <script>
-  const button = document.querySelector("np-email-login");
+  const button = document.querySelector("np-email-signin");
   button.email = "ada@lovelace.uk";
 </script>
 `;
@@ -24,10 +24,10 @@ By clicking on the received authorization link, he will be redirected to the ori
 This component will then automatically exchange it for an access token and emit it inside the `np:auth` event.
 
 ```html
-<np-email-login></np-email-login>
+<np-email-signin></np-email-signin>
 
 <script>
-  const button = document.querySelector("np-email-login");
+  const button = document.querySelector("np-email-signin");
 
   button.addEventListner("np:auth", (e) => {
     // Your user is authenticated 🎉
@@ -36,7 +36,13 @@ This component will then automatically exchange it for an access token and emit 
 </script>
 ```
 
-> see the `np-email-login` specification for more info.
+import { LinkCard } from "@astrojs/starlight/components";
+
+<LinkCard
+  title="np-email-signin reference"
+  description=""
+  href="/reference/components/np-email-signin"
+/>
 
 :::tip[Promote Passkeys]
 Consider offering your users an even smoother and secure experience by letting them use Passkeys.
@@ -48,6 +54,4 @@ See [Passkey Integration](passkeys) to learn more.
 
 Transmit the access `token` to your backend to create the user's session. it can be verified with your own JWT library or using our own API endpoint.
 
-:::tip[Verifying the access token]
-See [token verification](tokens) to learn how to verify the `token`.
-:::
+<LinkCard title="Verifying the access token" description="" href="/guides/tokens" />

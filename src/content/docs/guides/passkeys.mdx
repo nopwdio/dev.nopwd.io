@@ -11,6 +11,11 @@ Passkeys are:
 - easier: Users can select an account to sign in with biometric sensor.
 - safer: passkeys are proven to be resistant to phishing, credential stuffing, and other remote attacks.
 
+:::caution[Browsers support consideration]
+Passkeys is fully supported by Safari since `≥16.6` but not for Chrome at this moment:
+Conditional UI (a way to display a passkey from a login form) is not triggered when used inside a custom element [bug here](https://bugs.chromium.org/p/chromium/issues/detail?id=1404106).
+:::
+
 ## Creating a passkey
 
 Before asking your user to create a Passkey you need to make sure that their browsers are compatible.
@@ -33,10 +38,10 @@ Once the user clicks on this button, the browser will prompt the user to create 
 This component will then emit a `np:register` event when created.
 
 ```html
-<np-passkey-register></np-passkey-register>
+<np-passkey-signin></np-passkey-signin>
 
 <script>
-  const passkeyRegisterButton = document.querySelector("np-email-login");
+  const passkeyRegisterButton = document.querySelector("np-passkey-register");
 
   passkeyRegisterButton.addEventListner("np:register", (e) => {
     // The passkey has been created 🎉

@@ -1,10 +1,10 @@
 export const cdn = `<script
   type="module"
-  src="https://cdn.jsdelivr.net/npm/@nopwdio/sdk@latest/cdn/components/np-email-login.js"
+  src="https://cdn.jsdelivr.net/npm/@nopwdio/sdk@latest/cdn/components/np-email-signin.js"
 ></script>
 
 <!-- just set the email attribute and you're done -->
-<np-email-login email="ada@lovelace.uk"></np-email-login>
+<np-email-signin email="ada@lovelace.uk"></np-email-signin>
 `;
 
 export const npmInstall = `npm i @nopwdio/sdk@latest`;

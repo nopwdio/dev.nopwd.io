@@ -5,7 +5,7 @@ title: Component customization
 Nopwd components can be customized at a high level.
 This gives you control over theme colors, general styling and localization.
 
-## styling
+## Styling
 
 Nopwd uses standard [CSS parts](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) to let you target and styling individual components.
 
@@ -18,7 +18,7 @@ np-email-login::part(button) {
 You can also customize every component's state:
 
 ```css
-np-email-login[state="requesting"]::part(button) {
+np-email-signin[state="requesting"]::part(button) {
   background-color: transparent;
   color: grey;
 }
@@ -30,7 +30,7 @@ Override with ease strings for any element to localize to any language or change
 
 ```html
 <!-- to change the default slot -->
-<np-email-login>Login</np-email-login>
+<np-email-signin>Login</np-email-signin>
 ```
 
 Every single component state is also customizable using named slot:

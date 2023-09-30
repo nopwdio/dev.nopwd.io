@@ -27,13 +27,18 @@ export default defineConfig({
 				{
 					label: 'Reference',
 					items: [
+						{ label: 'Components', 
+						items: [
+							{ label: '<np-email-login>', link: '/reference/components/np-email-signin' },
+						]
+						},						
 						{ label: 'API', 
 						items: [
 							{ label: 'Nopwd rest API', link: '/reference/api' },
 							{ label: 'token endpoints', link: '/reference/api/token' },
+							{ label: 'JWKS endpoints', link: '/reference/api/jwks' },
 						]
 						},
-						
 					],
 				},
 			],

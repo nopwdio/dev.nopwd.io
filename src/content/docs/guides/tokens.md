@@ -3,7 +3,11 @@ title: Token verification
 description: Verifying authentication tokens.
 ---
 
-Authentication components such as `np-email-login` `np-passkey-login` emit an `np:auth` event containing the access `token` attribute.
+All authentication components (such as `np-email-signin` `np-passkey-signin`) emit an `np:auth` event. This event contains the access `token` representing the user authentication proof.
+
+## When to verify the access token?
+
+You need to verify the `token` just before creating the user's session.
 
 ## How to send the access token to your backend?
 
@@ -23,10 +27,6 @@ const response = await fetch("https://yourapi.com/...", {
 :::caution[Security consideration]
 Always use a TLS connection to send the `token` to your backend.
 :::
-
-## When to verify the access token?
-
-You need to verify the `token` just before creating the user's session.
 
 ## How to verify the access token?
 
@@ -79,7 +79,7 @@ const authenticatedUser = jwt.sub; //the authenticated user's email
 
 ### On your own
 
-The `token` is a JWT Token, and it's signed using Asymmetric Signing Algorithm ES256. This means, unlike symmetric JWT tokens that are signed and verified using the same secret key, this asymmetric JWT Token is signed using a secret key that only Nopwd knows, but can be verified using a public key that you can find [here](../api/jwks).
+The `token` is a JWT Token, and it's signed using Asymmetric Signing Algorithm ES256. This means, unlike symmetric JWT tokens that are signed and verified using the same secret key, this asymmetric JWT Token is signed using a secret key that only Nopwd knows, but can be verified using a public key that you can find [here](/reference/api/jwks).
 
 **Checklist:**
 

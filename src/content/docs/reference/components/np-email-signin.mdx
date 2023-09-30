@@ -1,0 +1,101 @@
+---
+title: <np-email-signin>
+---
+
+## Properties
+
+| Name    | Format | required | Description                     |
+| ------- | ------ | -------- | ------------------------------- |
+| `email` | email  | yes      | The user's email.               |
+| `state` | State  | no       | The component's internal state. |
+
+```ts
+type State = "requesting" | "requested";
+```
+
+## Methods
+
+| Name       | Description                              |
+| ---------- | ---------------------------------------- |
+| `signin()` | Starts the signin flow programmatically. |
+
+## Custom Events
+
+| Name       | Description                      | Type       |
+| ---------- | -------------------------------- | ---------- |
+| `np:auth`  | The user has been authenticated. | AuthEvent  |
+| `np:error` | Something went wrong.            | ErrorEvent |
+
+```ts
+type AuthEvent = {
+  token: string; // the user access token
+  payload: JwtPayload; // the access token payload (containing claims)
+  suggest_passkey: boolean; // true if the browser supports Passkeys, false otherwise.
+};
+
+type ErrorEvent = {
+  type: "network" | "toomanyrequests" | "unauthorized" | "unexpected"; // the error code
+  desc: string; // the error description
+};
+```
+
+## Slots
+
+| Name                    | Description                              |
+| ----------------------- | ---------------------------------------- |
+| (default)               | The button’s label.                      |
+| `requesting`            | Sending an authentication request.       |
+| `requested`             | An email has been sent to the user.      |
+| `authenticating`        | Verifying the authorization link.        |
+| `authenticated`         | The user has been authenticated.         |
+| `error:network`         | No internet connection.                  |
+| `error:toomanyrequests` | User has to wait to prevent email abuse. |
+| `error:unauthorized`    | Invalid link.                            |
+| `error:unexpected`      | An unexpected error occured.             |
+
+Usage examples:
+
+```html
+<!-- Default slot-->
+<np-email-signin>Login</np-email-signin>
+
+<!-- named slots-->
+<np-email-signin>
+  Login
+  <span slot="requesting">Sending email...</span>
+  <span slot="requested">Check your mailbox</span>
+  <span slot="error:unexpected">Oooooops</span>
+</np-email-signin>
+```
+
+# Parts
+
+| Name     | Description                     |
+| -------- | ------------------------------- |
+| `button` | The component’s button wrapper. |
+
+Usage examples:
+
+```css
+/* default */
+np-email-signin::part(button) {
+  background-color: black;
+  color: white;
+}
+
+/* sending request */
+np-email-signin[state="requesting"]::part(button) {
+  background-color: transparent;
+  color: grey;
+}
+
+/* styling all errors */
+np-email-signin[state^="error"]::part(button) {
+  background-color: red;
+  color: white;
+}
+```
+
+```
+
+```

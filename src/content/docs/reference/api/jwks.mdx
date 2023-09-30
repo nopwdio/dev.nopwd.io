@@ -1,0 +1,80 @@
+---
+title: JSON Web Key Sets endpoints
+---
+
+These two endpoints are used to retrieve the public keys to verify any access `token` issued by our authorization server (iss=nopwd.io).
+
+Nopwd uses the JSON Web Key (JWK) specification to represent the cryptographic keys used for signing P256 tokens. This specification defines two high-level data structures: JSON Web Key (JWK) and JSON Web Key Set (JWKS)
+Public key is in [the JWKS Format](https://tools.ietf.org/html/rfc7517) so you can verify the signature for all generated access `token`.
+
+| Method | Ressources      | Purpose                              |
+| ------ | --------------- | ------------------------------------ |
+| GET    | **/jwks/\:kid** | Return a specific JSON Web Key (JWK) |
+| GET    | **/jwks**       | Returns a set of JSON Web Key (JWK)  |
+
+:::tip[Signing keys rotation]
+Nopwd signs with only one signing key at a time but we performing key rotation for security reasons. As your `access_token` could be signed just before our key rotation, we must let you access the previous one using these two endpoints.
+:::
+
+## GET /jwks/\:kid
+
+Returns a JWK identified by its `kid`.
+
+### Request
+
+| Param  | Type | Mandatory | Description                                          |
+| ------ | ---- | --------- | ---------------------------------------------------- |
+| `:kid` | Path | Yes       | represents the unique identifier for the signing key |
+
+:::tip[How to retrieve the jwk kid?]
+You can get the signing key's `kid` used to sign any of our access `token` from its JWT Header (`kid` parameter).
+:::
+
+### Response
+
+```ts
+interface Jwk {
+  kid: string; // The unique identifier for the key
+  kty: string; // The family of cryptographic algorithms used with the key (we are using EC)
+  crv: string; // we are using "P-256"
+  x: string; // the x coordinate of the elliptic Curve (base64 url safe)
+  x: string; // the y coordinate of the elliptic Curve (base64 url safe)
+}
+```
+
+### Response Codes
+
+| Code | Description                                 |
+| ---- | ------------------------------------------- |
+| 200  | You did great.                              |
+| 404  | This key doesn't exist or has been revoked. |
+
+### Exemple
+
+```ts
+const response = await fetch(`https://api.nopwd.io/v1/jwks/${kid}`);
+const jwk = await response.json();
+```
+
+## GET /jwks
+
+Returns all valid JSON Web Keys (JWK).
+
+### Response
+
+```ts
+interface Jwks extends Array<Jwk> {}
+```
+
+### Response Codes
+
+| Code | Description    |
+| ---- | -------------- |
+| 200  | You did great. |
+
+### Exemple
+
+```ts
+const response = await fetch("https://api.nopwd.io/v1/jwks");
+const jwks = await response.json();
+```
