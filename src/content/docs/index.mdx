@@ -3,11 +3,11 @@ title: Documentation | nopwd
 description: Get started integrating passwordless authentication.
 template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  tagline: Nopwd is a set of web components to authenticate your users using email link or Passkeys authentication.
   image:
     file: ../../assets/houston.webp
   actions:
-    - text: Get Started
+    - text: Go passwordless
       link: /guides
       icon: right-arrow
       variant: primary
@@ -16,21 +16,13 @@ hero:
       icon: external
 ---
 
-import { Card, CardGrid } from "@astrojs/starlight/components";
-
 ## Quick access
 
+import { Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
+
 <CardGrid>
-  <Card title="Guide : Email authentication" icon="open-book">
-    Add email link authentication to your website in 3 sec.
-  </Card>
-  <Card title="Guide : Passkey authentication" icon="open-book">
-    Bring biometric authentication to your users.
-  </Card>
-  <Card title="Components references" icon="setting">
-    Edit your `sidebar` and other config in `astro.config.mjs`.
-  </Card>
-  <Card title="API references" icon="setting">
-    Learn more in [the Starlight Docs](https://starlight.astro.build/).
-  </Card>
+  <LinkCard title="Authenticate with email link" description="" href="/guides/email" />
+  <LinkCard title="Authenticate with Passkeys" description="" href="/guides/passkeys" />
+  <LinkCard title="Customize components" description="" href="/guides/customization" />
+  <LinkCard title="Verifying an access token" description="" href="/guides/tokens" />
 </CardGrid>

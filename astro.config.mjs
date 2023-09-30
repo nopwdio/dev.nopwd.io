@@ -5,7 +5,11 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: '<nopwd-dev/>',
+			title: '',
+			logo: {
+				light: './src/assets/light.svg',
+				dark: './src/assets/dark.svg',
+			},
 			customCss: [
 				'./src/styles/custom.css',
 			],			
