@@ -1,5 +1,7 @@
 ---
-title: Get started
+title: Getting started
+sidebar:
+  order: 0
 ---
 
 ## What is Nopwd?
@@ -8,7 +10,7 @@ Nopwd is a set of web components to authenticate your users using **email link**
 
 **No API Key** nor **credit card** required 🕺
 
-## Motivation
+## Why?
 
 Authentication is used to be hard for users but also for developers. At Nopwd, we work hard to keep our API simple and minimal 💆.
 
@@ -18,7 +20,7 @@ Using Nopwd, you **won't** have to:
 - ~~register your app or website~~
 - ~~manage any API Key or secrets~~
 
-## Installation
+## How to install it?
 
 You can load our web components via CDN or by installing it locally.
 
@@ -49,3 +51,12 @@ Once installed, you only have to import the desired component and you are good t
   <Code code={npmImport} lang="js"/>
 </TabItem>
 </Tabs>
+
+## What's next?
+
+import { Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
+
+<CardGrid>
+  <LinkCard title="Authenticating with email link" description="" href="/guides/email" />
+  <LinkCard title="Authenticating with Passkeys" description="" href="/guides/passkeys" />
+</CardGrid>

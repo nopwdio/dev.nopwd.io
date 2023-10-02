@@ -2,6 +2,8 @@
 title: <np-email-signin>
 ---
 
+This button element is used to 
+
 ## Properties
 
 | Name    | Format | required | Description                     |
@@ -10,14 +12,22 @@ title: <np-email-signin>
 | `state` | State  | no       | The component's internal state. |
 
 ```ts
-type State = "requesting" | "requested";
+type State =
+  | "requesting" // sending an authentication request
+  | "requested" // the authentication request has been sent
+  | "authenticating" // verifying the authorization link
+  | "authenticated" // the user  has been authenticated
+  | "error:nonetwork" // No internet connection.
+  | "error:invalidlink" // the authorization link has expired or is invalid
+  | "error:toomanyrequests" // this email has received too many requests
+  | "error:unexpected"; // please report it to us :)
 ```
 
 ## Methods
 
-| Name       | Description                              |
-| ---------- | ---------------------------------------- |
-| `signin()` | Starts the signin flow programmatically. |
+| Name       | Description                                                                                         |
+| ---------- | --------------------------------------------------------------------------------------------------- |
+| `signin()` | Starts the signin flow programmatically. Don't forget to set the `email` property before calling it |
 
 ## Custom Events
 
@@ -34,7 +44,7 @@ type AuthEvent = {
 };
 
 type ErrorEvent = {
-  type: "network" | "toomanyrequests" | "unauthorized" | "unexpected"; // the error code
+  type: "network" | "toomanyrequests" | "invalidlink" | "unexpected"; // the error code
   desc: string; // the error description
 };
 ```
@@ -56,10 +66,10 @@ type ErrorEvent = {
 Usage examples:
 
 ```html
-<!-- Default slot-->
+<!-- To override the default slot-->
 <np-email-signin>Login</np-email-signin>
 
-<!-- named slots-->
+<!-- to override specific slots-->
 <np-email-signin>
   Login
   <span slot="requesting">Sending email...</span>

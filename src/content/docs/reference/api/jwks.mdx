@@ -1,5 +1,7 @@
 ---
-title: JSON Web Key Sets endpoints
+title: JWKS endpoints
+sidebar:
+  order: 2
 ---
 
 These two endpoints are used to retrieve the public keys to verify any access `token` issued by our authorization server (iss=nopwd.io).
@@ -7,10 +9,10 @@ These two endpoints are used to retrieve the public keys to verify any access `t
 Nopwd uses the JSON Web Key (JWK) specification to represent the cryptographic keys used for signing P256 tokens. This specification defines two high-level data structures: JSON Web Key (JWK) and JSON Web Key Set (JWKS)
 Public key is in [the JWKS Format](https://tools.ietf.org/html/rfc7517) so you can verify the signature for all generated access `token`.
 
-| Method | Ressources      | Purpose                              |
-| ------ | --------------- | ------------------------------------ |
-| GET    | **/jwks/\:kid** | Return a specific JSON Web Key (JWK) |
-| GET    | **/jwks**       | Returns a set of JSON Web Key (JWK)  |
+| Method | Ressources      | Purpose                               |
+| ------ | --------------- | ------------------------------------- |
+| GET    | **/jwks/\:kid** | Returns a specific JSON Web Key (JWK) |
+| GET    | **/jwks**       | Returns a set of JSON Web Key (JWK)   |
 
 :::tip[Signing keys rotation]
 Nopwd signs with only one signing key at a time but we performing key rotation for security reasons. As your `access_token` could be signed just before our key rotation, we must let you access the previous one using these two endpoints.

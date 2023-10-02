@@ -1,6 +1,8 @@
 ---
 title: Token verification
 description: Verifying authentication tokens.
+sidebar:
+  order: 4
 ---
 
 All authentication components (such as `np-email-signin` `np-passkey-signin`) emit an `np:auth` event. This event contains the access `token` representing the user authentication proof.

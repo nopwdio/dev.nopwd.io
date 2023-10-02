@@ -1,6 +1,7 @@
 ---
 title: Email link authentication
-description: A guide to integrate email link authentication.
+sidebar:
+  order: 1
 ---
 
 Also known as a magic link, email authentication is a passwordless flow where users click a unique link sent to their email address to log in.
@@ -16,7 +17,6 @@ From your login page, add the [`np-email-signin`](/reference/components/np-email
   const button = document.querySelector("np-email-signin");
   button.email = "ada@lovelace.uk";
 </script>
-`;
 ```
 
 Once the user clicks on this button, an email will be sent to its inbox.

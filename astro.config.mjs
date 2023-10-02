@@ -5,43 +5,38 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: '',
+			title: 'Nopwd documentation',
 			logo: {
 				light: './src/assets/light.svg',
 				dark: './src/assets/dark.svg',
 			},
+
 			customCss: [
 				'./src/styles/custom.css',
 			],			
 			social: {
 				github: 'https://github.com/nopwdio',
 			},
+			editLink: {
+				baseUrl: 'https://github.com/nopwdio/dev.nopwd.io/edit/main/',
+			},
+			lastUpdated: true,
 			sidebar: [
 				{
 					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Get started', link: '/guides' },
-						{ label: 'Auth with Email link', link: '/guides/email' },
-						{ label: 'Auth with Passkey', link: '/guides/passkeys' },
-						{ label: 'Verifying token', link: '/guides/tokens' },
-						{ label: 'Customization', link: '/guides/customization' },
-					],
+					autogenerate: { directory: 'guides' },
 				},
 				{
 					label: 'Reference',
+					autogenerate: { directory: 'reference' },
 					items: [
-						{ label: 'Components', 
-						items: [
-							{ label: '<np-email-login>', link: '/reference/components/np-email-signin' },
-						]
+						{
+							label: 'Components', 
+							autogenerate: { directory: 'reference/components' },
 						},						
-						{ label: 'API', 
-						items: [
-							{ label: 'Nopwd rest API', link: '/reference/api' },
-							{ label: 'token endpoints', link: '/reference/api/token' },
-							{ label: 'JWKS endpoints', link: '/reference/api/jwks' },
-						]
+						{
+							label: 'API', 
+							autogenerate: { directory: 'reference/api' },
 						},
 					],
 				},
