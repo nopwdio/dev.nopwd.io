@@ -9,8 +9,8 @@ With passkeys, users can sign in to apps and websites with a biometric sensor (s
 
 Passkeys are:
 
-- easier: users can select an account to sign in with biometric sensor.
-- safer: passkeys are proven to be resistant to phishing, credential stuffing, and other remote attacks.
+- **easier** - users can select an account to sign in with biometric sensor.
+- **safer** - passkeys are proven to be resistant to phishing, credential stuffing, and other remote attacks.
 
 :::caution[Browsers support]
 Passkeys is fully supported by Safari since `≥16.6` but not for Chrome at this moment:
@@ -39,7 +39,7 @@ Once the user clicks on this button, the browser will prompt the user to create 
 This component will then emit a `np:register` event when created.
 
 ```html
-<np-passkey-signin></np-passkey-signin>
+<np-passkey-login></np-passkey-login>
 
 <script>
   const passkeyRegisterButton = document.querySelector("np-passkey-register");

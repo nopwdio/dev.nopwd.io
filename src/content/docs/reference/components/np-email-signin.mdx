@@ -1,5 +1,7 @@
 ---
-title: <np-email-signin>
+title: <np-email-login>
+sidebar:
+  order: 1
 ---
 
 A `button` component for authenticating user with magic link.
@@ -25,9 +27,9 @@ type State =
 
 ## Methods
 
-| Name       | Description                                                                                         |
-| ---------- | --------------------------------------------------------------------------------------------------- |
-| `signin()` | Starts the signin flow programmatically. Don't forget to set the `email` property before calling it |
+| Name      | Description                                                                                         |
+| --------- | --------------------------------------------------------------------------------------------------- |
+| `login()` | Starts the login flow programmatically. Don't forget to set the `email` property before calling it. |
 
 ## Custom Events
 
@@ -67,15 +69,15 @@ Usage examples:
 
 ```html
 <!-- To override the default slot-->
-<np-email-signin>Login</np-email-signin>
+<np-email-login>Login</np-email-login>
 
 <!-- to override specific slots-->
-<np-email-signin>
+<np-email-login>
   Login
   <span slot="requesting">Sending email...</span>
   <span slot="requested">Check your mailbox</span>
   <span slot="error:unexpected">Oooooops</span>
-</np-email-signin>
+</np-email-login>
 ```
 
 # Parts
@@ -88,19 +90,19 @@ Usage examples:
 
 ```css
 /* default */
-np-email-signin::part(button) {
+np-email-login::part(button) {
   background-color: black;
   color: white;
 }
 
 /* sending request */
-np-email-signin[state="requesting"]::part(button) {
+np-email-login[state="requesting"]::part(button) {
   background-color: transparent;
   color: grey;
 }
 
 /* styling all errors */
-np-email-signin[state^="error"]::part(button) {
+np-email-login[state^="error"]::part(button) {
   background-color: red;
   color: white;
 }

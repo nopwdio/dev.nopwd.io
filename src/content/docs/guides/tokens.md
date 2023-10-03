@@ -5,7 +5,7 @@ sidebar:
   order: 4
 ---
 
-All authentication components (such as `np-email-signin` `np-passkey-signin`) emit an `np:auth` event. This event contains the access `token` representing the user authentication proof.
+All authentication components (such as `np-email-login` `np-passkey-login`) emit an `np:auth` event. This event contains the access `token` representing the user authentication proof.
 
 ## When to verify the access token?
 
