@@ -1,9 +1,6 @@
 ---
-title: Terms
-authors: Adrien Pinet
+title: Terms of Service
 ---
-
-# Terms of Service
 
 By using NoPwd (“Service”), you are agreeing to be bound by the following terms and conditions (“Terms of Service”).
 This Service reserves the right to update and change these Terms of Service without notice.

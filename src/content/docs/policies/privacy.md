@@ -1,9 +1,6 @@
 ---
 title: Privacy Policy
-authors: Adrien Pinet
 ---
-
-# Privacy Policy
 
 Your privacy is important to us. We collect personal information only when it is necessary to provide our services. This Privacy Policy ("Policy") details our privacy practices and how you can exercise your rights under this Policy the privacy legislation applicable in your jurisdiction.
 

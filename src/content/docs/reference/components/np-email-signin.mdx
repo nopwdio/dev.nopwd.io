@@ -17,7 +17,7 @@ A `button` component for authenticating user with magic link.
 type State =
   | "requesting" // sending an authentication request
   | "requested" // the authentication request has been sent
-  | "authenticating" // verifying the authorization link
+  | "verifying" // verifying the authorization link
   | "authenticated" // the user  has been authenticated
   | "error:nonetwork" // No internet connection.
   | "error:invalidlink" // the authorization link has expired or is invalid
@@ -58,7 +58,7 @@ type ErrorEvent = {
 | (default)               | The button’s label.                      |
 | `requesting`            | Sending an authentication request.       |
 | `requested`             | An email has been sent to the user.      |
-| `authenticating`        | Verifying the authorization link.        |
+| `verifying`             | Verifying the authorization link.        |
 | `authenticated`         | The user has been authenticated.         |
 | `error:network`         | No internet connection.                  |
 | `error:toomanyrequests` | User has to wait to prevent email abuse. |
