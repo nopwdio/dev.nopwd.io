@@ -4,32 +4,43 @@ sidebar:
   order: 0
 ---
 
+## How to install it?
+
 You can load our web components via CDN or by installing it locally.
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
-import { Code } from "astro:components";
-import { cdn, npmInstall, npmImport } from "../../../../assets/snippet.js";
 
 <Tabs>
-  <TabItem label="using CDN">
-    Each components (`np-email-signin`, `np-passkey-register`, `np-passkey-signin`) can be loaded individualy from a CDN.
+<TabItem label="using CDN">
+Each components (`np-email-login`, `np-passkey-register`, `np-passkey-login`) can be loaded individualy from a CDN.
 
-    Exemple using the email link authentication button component:
-    <Code code={cdn} lang="html"/>
+Example using the email link authentication button component:
 
-    Easy right?
+```html
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/@nopwdio/sdk@latest/cdn/components/np-email-login.js"
+></script>
+```
+
+Easy right?
 
 :::tip[About version management]
 It is not recommended to use the `@latest` suffix, as a major release could break your application. Instead, use a fixed version such as `0.3.2`.
 :::
 
-  </TabItem>
-  <TabItem label="using NPM">
-  If you don’t want to use the CDN, you can install the latest version of our sdk from npm with the following command.
-  <Code code={npmInstall} lang="sh"/>
+</TabItem>
+<TabItem label="using NPM">
+If you don’t want to use the CDN, you can install the latest version of our sdk from npm with the following command.
+```sh
+npm i @nopwdio/sdk@latest
+```
 
 Once installed, you only have to import the desired component and you are good to go.
 
-  <Code code={npmImport} lang="js"/>
+```js
+import "@nopwdio/sdk/dist/components/{component-name}.js";
+```
+
 </TabItem>
 </Tabs>

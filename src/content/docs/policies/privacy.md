@@ -39,10 +39,11 @@ We use third-party service providers for the networking, infrastructure, and sof
 
 Our third party sub-processors may have access to your personal information only to perform specific tasks on our behalf. They are obligated to not disclose or use your information for any other purpose and to maintain GDPR compliant privacy practices.
 
-| Entity (Location) | Purpose                        |
-| ----------------- | ------------------------------ |
-| Google Inc (US)   | Cloud Infrastructure           |
-| Twilio Inc (US)   | Communication and email sender |
+| Entity (Location)        | Purpose                        |
+| ------------------------ | ------------------------------ |
+| Google Inc (US)          | Cloud Infrastructure           |
+| Twilio Inc (US)          | Communication and email sender |
+| Amazon Web Services (US) | Communication and email sender |
 
 ## Cookies
 
