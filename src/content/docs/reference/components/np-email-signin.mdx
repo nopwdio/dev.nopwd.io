@@ -8,62 +8,85 @@ A `button` component for authenticating user with magic link.
 
 ## Properties
 
-| Name    | Format | required | Description                     |
-| ------- | ------ | -------- | ------------------------------- |
-| `email` | email  | yes      | The user's email.               |
-| `state` | State  | no       | The component's internal state. |
+| Name    | Format | required | default   | Description                     |
+| ------- | ------ | -------- | --------- | ------------------------------- |
+| `email` | email  | yes      | undefined | The user's email.               |
+| `state` | State  | no       | undefined | The component's internal state. |
 
 ```ts
 type State =
   | "requesting" // sending an authentication request
   | "requested" // the authentication request has been sent
   | "verifying" // verifying the authorization link
-  | "authenticated" // the user  has been authenticated
-  | "error:nonetwork" // No internet connection.
-  | "error:invalidlink" // the authorization link has expired or is invalid
-  | "error:toomanyrequests" // this email has received too many requests
-  | "error:unexpected"; // please report it to us :)
+  | "authenticated" // the user has been authenticated
+  | "error"; // An error occured
 ```
 
 ## Methods
 
-| Name      | Description                                                                                         |
-| --------- | --------------------------------------------------------------------------------------------------- |
-| `login()` | Starts the login flow programmatically. Don't forget to set the `email` property before calling it. |
+| Name       | Description                                                                                         |
+| ---------- | --------------------------------------------------------------------------------------------------- |
+| `login()`  | Starts the login flow programmatically. Don't forget to set the `email` property before calling it. |
+| `cancel()` | Cancels the authentication flow.                                                                    |
 
 ## Custom Events
 
 | Name       | Description                      | Type       |
 | ---------- | -------------------------------- | ---------- |
 | `np:auth`  | The user has been authenticated. | AuthEvent  |
-| `np:error` | Something went wrong.            | ErrorEvent |
+| `np:error` | Something went wrong.            | NoPwdError |
+
+The `np:auth` custom event detail is defined as follow:
 
 ```ts
+// AuthEvent type definition
 type AuthEvent = {
-  token: string; // the user access token
-  payload: JwtPayload; // the access token payload (containing claims)
-  suggest_passkey: boolean; // true if the browser supports Passkeys, false otherwise.
+  access_token: string; // the user access token
+  access_token_payload: JwtPayload; // the access token payload (containing claims)
+  suggest_passkeys: boolean; // true if the browser supports Passkeys, false otherwise.
 };
+```
 
-type ErrorEvent = {
-  type: "network" | "toomanyrequests" | "invalidlink" | "unexpected"; // the error code
-  desc: string; // the error description
-};
+The `np:error` custom event detail inherites from the `NoPwdError`.
+There are 4 types of error:
+
+```ts
+if (event.detail instanceof NetworkError) {
+  // no network
+}
+
+if (event.detail instanceof MissingEmailError) {
+  // you must set the `email` property
+}
+
+if (event.detail instanceof InvalidEmailError) {
+  // the email is malformed
+}
+
+if (event.detail instanceof InvalidCodeParameterError) {
+  // the authentication code is malformed or expired
+}
+
+if (event.detail instanceof QuotaError) {
+  // Request limit reached. The user has to wait:
+  event.detail.getRetryAt(); // in seconds
+}
+
+if (event.detail instanceof UnexpectedError) {
+  // Something went wrong.
+}
 ```
 
 ## Slots
 
-| Name                    | Description                              |
-| ----------------------- | ---------------------------------------- |
-| (default)               | The button’s label.                      |
-| `requesting`            | Sending an authentication request.       |
-| `requested`             | An email has been sent to the user.      |
-| `verifying`             | Verifying the authorization link.        |
-| `authenticated`         | The user has been authenticated.         |
-| `error:network`         | No internet connection.                  |
-| `error:toomanyrequests` | User has to wait to prevent email abuse. |
-| `error:unauthorized`    | Invalid link.                            |
-| `error:unexpected`      | An unexpected error occured.             |
+| Name            | Description                         |
+| --------------- | ----------------------------------- |
+| (default)       | The button’s label.                 |
+| `requesting`    | Sending an authentication request.  |
+| `requested`     | An email has been sent to the user. |
+| `verifying`     | Verifying the authorization link.   |
+| `authenticated` | The user has been authenticated.    |
+| `error`         | An error occured.                   |
 
 Usage examples:
 
@@ -76,7 +99,7 @@ Usage examples:
   Login
   <span slot="requesting">Sending email...</span>
   <span slot="requested">Check your mailbox</span>
-  <span slot="error:unexpected">Oooooops</span>
+  <span slot="error">Oooooops</span>
 </np-email-login>
 ```
 
@@ -101,8 +124,8 @@ np-email-login[state="requesting"]::part(button) {
   color: grey;
 }
 
-/* styling all errors */
-np-email-login[state^="error"]::part(button) {
+/* styling error */
+np-email-login[state="error"]::part(button) {
   background-color: red;
   color: white;
 }

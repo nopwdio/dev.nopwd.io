@@ -17,19 +17,20 @@ Passkeys is fully supported by Safari since `≥16.6` but not for Chrome at this
 Conditional UI (a way to display a passkey from a login form) is not triggered when used inside a custom element [bug here](https://bugs.chromium.org/p/chromium/issues/detail?id=1404106).
 :::
 
-## Creating a passkey
+## (1/2) Creating a passkey
 
 Before asking your user to create a Passkey you need to make sure that their browsers are compatible.
 The `np:auth` event emitted from the email authentication `<np-email-login>` compontent contains a `suggest_passkeys` attribute.
 It is set to `true` if the user's browser support Passkeys. Use it to suggest a passkey creation process only for compatible browsers.
 
-To create a passkey, just add the `<np-passkey-create>` compontent and set the `token` attribute from the authenticated user.
+To create a passkey, just add the `<np-passkey-register>` compontent and set the `token` attribute from the authenticated user.
 
 ```html
 <np-passkey-register></np-passkey-register>
 
 <script>
   const passkeyRegisterButton = document.querySelector("np-passkey-register");
+  // set the token property with the user's access token
   passkeyRegisterButton.token = "...";
 </script>
 `;
@@ -53,7 +54,7 @@ This component will then emit a `np:register` event when created.
 
 This event contains the passkey id `kid`. It can be used to perform further optionak administration operations such as revokation.
 
-## Authenticating with Passkeys
+## (2/2) Authenticating with Passkeys
 
 Just add the `<np-passkey-login>` component to your login page.
 When focused by the user, it displays the created passkey for your website and perform authentification flow when selected.
@@ -71,5 +72,7 @@ When focused by the user, it displays the created passkey for your website and p
 </script>
 ```
 
-This component will act as a classic email input element for users without a Passkey.
-You can use it as an email form input to pass the email value to the `<np-email-login>` component to fallback to the email link authentication flow.
+:::tip[What if the user didn't create a passkey?]
+In that situation, this component will simply act as a classic email input element for users without a Passkey.
+You can use it as an email input to pass the email value to the `<np-email-login>` component to fallback to the email link authentication flow.
+:::

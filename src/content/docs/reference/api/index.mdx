@@ -37,6 +37,6 @@ The Nopwd API employs a number of safeguards against bursts of incoming traffic 
 ```ts
 {
   error: "slow down", // a short description of the issue
-  wait_in_sec: 69, // time to wait before being able to try again
+  retry_at: 408430500, // unix date to reach out before retry.
 }
 ```
