@@ -34,3 +34,4 @@ jobs:
 
       - name: 🤫 removing credential.json
         run: rm ./credential.json
+
