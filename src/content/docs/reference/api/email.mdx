@@ -45,7 +45,7 @@ type Response = {
 | 400  | Malformed request. Could be a malformed `email` or `callback` url. Important: callback url must use `https`.                                                     |
 | 429  | Too many auth requests. The user must retry after `retry_at`. Could append if too many requests are made against a specific email address or from an abusing IP. |
 
-### Exemples
+### Usage
 
 #### simple authentication
 
@@ -120,7 +120,7 @@ The `access_token` has to be send securely to your backend with **https**.
 | 400  | Malformed request.                                                                   |
 | 401  | The authorization `code` is invalid (malformed or expired) or has already been used. |
 
-### Exemple
+### Usage
 
 ```ts
 // retrieve the code paramater from your url.

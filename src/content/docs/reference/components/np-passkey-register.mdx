@@ -1,0 +1,116 @@
+---
+title: <np-passkey-register>
+sidebar:
+  order: 2
+---
+
+A `button` component for authenticating user with magic link.
+
+## Properties
+
+| Name    | Format | required | default   | Description                     |
+| ------- | ------ | -------- | --------- | ------------------------------- |
+| `token` | jwt    | yes      | undefined | The user's `access_token`.      |
+| `state` | State  | no       | undefined | The component's internal state. |
+
+```ts
+type State =
+  | "registering" // Passkey registration in progress
+  | "registered" // the passkey has been register
+  | "error"; // an error occured
+```
+
+## Methods
+
+| Name         | Description                                                                                                |
+| ------------ | ---------------------------------------------------------------------------------------------------------- |
+| `register()` | Starts the registration flow programmatically. Don't forget to set the `token` property before calling it. |
+| `cancel()`   | Cancels the authentication flow.                                                                           |
+
+## Custom Events
+
+| Name          | Description                    | Type          |
+| ------------- | ------------------------------ | ------------- |
+| `np:register` | The passkey has been register. | RegisterEvent |
+| `np:error`    | Something went wrong.          | NoPwdError    |
+
+The `np:auth` custom event detail is defined as follow:
+
+```ts
+// AuthEvent type definition
+type RegisterEvent = {
+  id: string; // the passkey id
+  alg: string;
+};
+```
+
+The `np:error` custom event detail inherites from the `NoPwdError`.
+There are 4 types of error:
+
+```ts
+if (event.detail instanceof WebauthnNotSupportedError) {
+  // this browser doesn't support webauthn
+}
+
+if (event.detail instanceof InvalidTokenError) {
+  // the provided token is invalid (malformed or expired)
+}
+
+if (event.detail instanceof NetworkError) {
+  // no network
+}
+
+if (event.detail instanceof UnexpectedError) {
+  // Something went wrong
+}
+```
+
+## Slots
+
+| Name          | Description                       |
+| ------------- | --------------------------------- |
+| (default)     | The button’s label.               |
+| `registering` | Passkey registration in progress. |
+| `registered`  | Passkey has been registered.      |
+| `error`       | An error occured.                 |
+
+Usage examples:
+
+```html
+<!-- To override the default slot-->
+<np-passkey-register>Login</np-passkey-register>
+
+<!-- to override specific slots-->
+<np-passkey-register>
+  Login
+  <span slot="requesting">Sending email...</span>
+  <span slot="requested">Check your mailbox</span>
+  <span slot="error">Oooooops</span>
+</np-passkey-register>
+```
+
+# Parts
+
+| Name     | Description                     |
+| -------- | ------------------------------- |
+| `button` | The component’s button wrapper. |
+
+Usage examples:
+
+```css
+/* default */
+np-passkey-register::part(button) {
+  background-color: black;
+  color: white;
+}
+
+np-passkey-register[state="registering"]::part(button) {
+  background-color: transparent;
+  color: grey;
+}
+
+np-passkey-register[state="error"]::part(button) {
+  background-color: red;
+  color: white;
+}
+```

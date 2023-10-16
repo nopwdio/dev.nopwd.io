@@ -1,0 +1,129 @@
+---
+title: <np-passkey-login>
+sidebar:
+  order: 3
+---
+
+An `input` component for authenticating user with passkey.
+
+## Properties
+
+| Name           | Format | required | default            | Description                                                                                                        |
+| -------------- | ------ | -------- | ------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `placeholder`  | text   | no       | `enter your email` | The input field placeholder.                                                                                       |
+| `enterkeyhint` | State  | no       | `Send`             | Virtual keyboard action [label](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/enterkeyhint). |
+| `state`        | State  | no       | undefined          | The component's internal state.                                                                                    |
+
+```ts
+type State =
+  | "initializing" // getting challenge
+  | "authenticating" // waiting user to authenticate
+  | "verifying" // verifying the challenge signature
+  | "authenticated" // the user is authenticated
+  | "error"; // an error occured
+```
+
+## Custom Events
+
+| Name       | Description                      | Type       |
+| ---------- | -------------------------------- | ---------- |
+| `np:auth`  | The user has been authenticated. | AuthEvent  |
+| `np:error` | Something went wrong.            | NoPwdError |
+
+The `np:auth` custom event detail is defined as follow:
+
+```ts
+// AuthEvent type definition
+type AuthEvent = {
+  access_token: string; // the user access token
+  access_token_payload: JwtPayload; // the access token payload (containing claims)
+};
+```
+
+The `np:error` custom event detail inherites from the `NoPwdError`.
+There are 4 types of error:
+
+```ts
+WebauthnNotSupportedError;
+UnknownChallengeOrPasskeyError;
+InvalidSignatureError;
+
+if (event.detail instanceof WebauthnNotSupportedError) {
+  // webauthn is not supported
+}
+
+if (event.detail instanceof UnknownChallengeOrPasskeyError) {
+  // unknown challenge or passkey
+}
+
+if (event.detail instanceof InvalidSignatureError) {
+  // the signature is invalid
+}
+
+if (event.detail instanceof QuotaError) {
+  // Request limit reached. The user has to wait:
+  event.detail.getRetryAt(); // in seconds
+}
+
+if (event.detail instanceof NetworkError) {
+  // no network
+}
+
+if (event.detail instanceof UnexpectedError) {
+  // Something went wrong
+}
+```
+
+## Slots
+
+| Name             | Description                      |
+| ---------------- | -------------------------------- |
+| (default)        | The input's label.               |
+| `initializing`   | Getting challenge.               |
+| `authenticating` | waiting user to authenticate.    |
+| `verifying`      | Verifying the passkey.           |
+| `authenticated`  | The user has been authenticated. |
+| `error`          | An error occured.                |
+
+Usage:
+
+```html
+<!-- To override the default slot-->
+<np-email-login>Login</np-email-login>
+
+<!-- to override specific slots-->
+<np-email-login>
+  Login
+  <span slot="requesting">Sending email...</span>
+  <span slot="requested">Check your mailbox</span>
+  <span slot="error">Oooooops</span>
+</np-email-login>
+```
+
+# Parts
+
+| Name     | Description                     |
+| -------- | ------------------------------- |
+| `button` | The component’s button wrapper. |
+
+Usage examples:
+
+```css
+/* default */
+np-email-login::part(button) {
+  background-color: black;
+  color: white;
+}
+
+/* sending request */
+np-email-login[state="requesting"]::part(button) {
+  background-color: transparent;
+  color: grey;
+}
+
+/* styling error */
+np-email-login[state="error"]::part(button) {
+  background-color: red;
+  color: white;
+}
+```

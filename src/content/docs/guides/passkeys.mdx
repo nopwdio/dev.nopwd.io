@@ -47,12 +47,12 @@ This component will then emit a `np:register` event when created.
 
   passkeyRegisterButton.addEventListner("np:register", (e) => {
     // The passkey has been created 🎉
-    console.log(e.detail.kid); // the passkey id.
+    console.log(e.detail.id); // the passkey id.
   });
 </script>
 ```
 
-This event contains the passkey id `kid`. It can be used to perform further optionak administration operations such as revokation.
+This event contains the passkey `id`. It can be used to perform further optional administration operations such as revokation.
 
 ## (2/2) Authenticating with Passkeys
 

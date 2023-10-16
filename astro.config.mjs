@@ -5,7 +5,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'Nopwd documentation',
+			title: 'Nopwd doc',
 			logo: {
 				light: './src/assets/light.svg',
 				dark: './src/assets/dark.svg',
