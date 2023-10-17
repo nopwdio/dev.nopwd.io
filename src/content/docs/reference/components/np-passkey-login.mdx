@@ -5,14 +5,16 @@ sidebar:
 ---
 
 An `input` component for authenticating user with passkey.
+It will act as an standard input element if there is no passkey registered yet.
 
 ## Properties
 
 | Name           | Format | required | default            | Description                                                                                                        |
 | -------------- | ------ | -------- | ------------------ | ------------------------------------------------------------------------------------------------------------------ |
 | `placeholder`  | text   | no       | `enter your email` | The input field placeholder.                                                                                       |
-| `enterkeyhint` | State  | no       | `Send`             | Virtual keyboard action [label](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/enterkeyhint). |
+| `enterkeyhint` | text   | no       | `Send`             | Virtual keyboard action [label](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/enterkeyhint). |
 | `state`        | State  | no       | undefined          | The component's internal state.                                                                                    |
+| `value`        | text   | no       | undefined          | The component's value.                                                                                             |
 
 ```ts
 type State =
@@ -85,7 +87,7 @@ if (event.detail instanceof UnexpectedError) {
 | `authenticated`  | The user has been authenticated. |
 | `error`          | An error occured.                |
 
-Usage:
+**Usage:**
 
 ```html
 <!-- To override the default slot-->
@@ -106,23 +108,17 @@ Usage:
 | -------- | ------------------------------- |
 | `button` | The component’s button wrapper. |
 
-Usage examples:
+**Usage:**
 
 ```css
 /* default */
-np-email-login::part(button) {
+np-passkey-login::part(button) {
   background-color: black;
   color: white;
 }
 
-/* sending request */
-np-email-login[state="requesting"]::part(button) {
-  background-color: transparent;
-  color: grey;
-}
-
 /* styling error */
-np-email-login[state="error"]::part(button) {
+np-passkey-login[state="error"]::part(button) {
   background-color: red;
   color: white;
 }

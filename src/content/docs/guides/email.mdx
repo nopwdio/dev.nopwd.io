@@ -8,7 +8,7 @@ Also known as magic link, email authentication is a passwordless flow where user
 
 ## (1/2) Add the login with email button
 
-From your login page, add the `<np-email-login>` component and set the `email` property with your user's email address.
+From your login page, add the [`<np-email-login>`](/reference/components/np-email-login) component and set the `email` property with your user's email address.
 
 ```html
 <np-email-login></np-email-login>
@@ -36,14 +36,6 @@ This component will then automatically exchange it for an access token and emit 
 </script>
 ```
 
-import { LinkCard } from "@astrojs/starlight/components";
-
-<LinkCard
-  title="np-email-login reference"
-  description="Learn how to customize it."
-  href="/reference/components/np-email-login"
-/>
-
 :::tip[Promote Passkeys]
 Consider offering your users an even smoother and secure experience by letting them use Passkeys.
 Passkeys use your fingerprint or other biometric to log you into your websites, just like unlocking your device.
@@ -53,5 +45,7 @@ See [Passkey Integration](/guides/passkeys) to learn more.
 ## (2/2) You are done!
 
 Transmit the access `token` to your backend to create the user's session. it can be verified with your own JWT library or using our own API endpoint.
+
+import { LinkCard } from "@astrojs/starlight/components";
 
 <LinkCard title="Verifying the access token" description="" href="/guides/tokens" />

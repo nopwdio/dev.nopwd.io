@@ -37,8 +37,6 @@ Example using the email link authentication button component:
 ></script>
 ```
 
-Easy right?
-
 :::tip[About version management]
 It is not recommended to use the `@latest` suffix, as a major release could break your application. Instead, use a fixed version such as `0.3.2`.
 :::
@@ -46,7 +44,7 @@ It is not recommended to use the `@latest` suffix, as a major release could brea
 As module is asynchronous, the component may be not loaded during the first render and
 you may notice a Flash of Undefined Custom Elements (FOUCE) when the page loads.
 
-How to prevent it?
+**How to prevent it?**
 
 One option is to use the `:defined` CSS pseudo-class to mask custom elements that haven’t been registered yet.
 
@@ -70,7 +68,7 @@ document.body.classList.add("ready");
 ## The difference between CDN and npm
 
 TL;DR:
-`@nopwdio/sdk-js/cdn` is for CDN cheerleaders and `@nopwdio/sdk-js/dist` for NPM lovers.
+`@nopwdio/sdk-js/cdn` is for CDN supporters and `@nopwdio/sdk-js/dist` for NPM lovers.
 
 You’ll notice that the CDN links all start with `/cdn` and npm imports use `/dist`.
 The `/cdn` files are pre-bundled, minified. Code splitting is also used for optimal bandwidth optimization.
