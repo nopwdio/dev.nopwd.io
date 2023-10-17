@@ -19,10 +19,26 @@ hero:
 import { Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
 
 <CardGrid>
-  <LinkCard title="Authenticating with email link" description="" href="/guides/email" />
-  <LinkCard title="Authenticating with Passkeys" description="" href="/guides/passkeys" />
-  <LinkCard title="Customizing components" description="" href="/guides/customization" />
-  <LinkCard title="Verifying an access token" description="" href="/guides/tokens" />
+  <LinkCard
+    title="Authenticating with email magic-link"
+    description="Onboard your users with a one-click email authentication"
+    href="/guides/email"
+  />
+  <LinkCard
+    title="Authenticating with Passkeys"
+    description="Delight them with biometric authentication right in the browser"
+    href="/guides/passkeys"
+  />
+  <LinkCard
+    title="Customizing components"
+    description="Match our components with your brand"
+    href="/guides/customization"
+  />
+  <LinkCard
+    title="Verifying an access token"
+    description="Check the authentication from your backend to create the user session"
+    href="/guides/tokens"
+  />
 </CardGrid>
 
 ## References
@@ -31,8 +47,3 @@ import { Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
   <LinkCard title="Components" description="" href="/reference/components" />
   <LinkCard title="API" description="" href="/reference/api" />
 </CardGrid>
-
-:::tip[See it in action]
-The source code of our [demo website](https://nopwd.rocks) is available on [github](https://github.com/nopwdio/nopwd.rocks).
-Give it a try!
-:::
