@@ -5,7 +5,7 @@ sidebar:
   order: 4
 ---
 
-All authentication components (such as `np-email-login` `np-passkey-login`) emit an `np:auth` event. This event contains the access `token` representing the user authentication proof.
+Authentication components (such as `np-email-login` `np-passkey-login`) emit an `np:auth` event. This event contains the access `token` representing the user authentication proof.
 
 ## When to verify the access token?
 
@@ -85,11 +85,11 @@ The `token` is a JWT Token, and it's signed using Asymmetric Signing Algorithm E
 
 **Checklist:**
 
-- [ ] check 1: Check that the JWT is well-formed
-- [ ] check 2: Make sure that the token is issued by nopwd: `iss = nopwd.io`
-- [ ] check 3: Make sure that the audience matches your own domain's name:`aud = yourwebsite.com`
-- [ ] check 4: Make sure that the token is not expired: `exp < now`
-- [ ] check 5: Check the signature
+[ ] check 1: Check that the JWT is well-formed
+[ ] check 2: Make sure that the token is issued by nopwd: `iss = nopwd.io`
+[ ] check 3: Make sure that the audience matches your own domain's name:`aud = yourwebsite.com`
+[ ] check 4: Make sure that the token is not expired: `now < exp`
+[ ] check 5: Check the signature
 
 :::tip[Performance tips]
 To avoid calling public keys endpoint on every verification, you can cache them for further use. You then have to update your cache only when the key is not found locally.
