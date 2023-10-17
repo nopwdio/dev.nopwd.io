@@ -11,6 +11,20 @@ You can load our web components via CDN or by installing it locally.
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 
 <Tabs>
+<TabItem label="using NPM">
+If you don’t want to use the CDN, you can install the latest version of our sdk from npm with the following command.
+```sh
+npm i @nopwdio/sdk-js@latest
+```
+
+Once installed, you only have to import the desired component and you are good to go.
+
+```js
+import "@nopwdio/sdk-js/dist/components/{component-name}.js";
+```
+
+</TabItem>
+
 <TabItem label="using CDN">
 Each components (`np-email-login`, `np-passkey-register`, `np-passkey-login`) can be loaded individualy from a CDN.
 
@@ -29,18 +43,35 @@ Easy right?
 It is not recommended to use the `@latest` suffix, as a major release could break your application. Instead, use a fixed version such as `0.3.2`.
 :::
 
-</TabItem>
-<TabItem label="using NPM">
-If you don’t want to use the CDN, you can install the latest version of our sdk from npm with the following command.
-```sh
-npm i @nopwdio/sdk-js@latest
+As module is asynchronous, the component may be not loaded during the first render and
+you may notice a Flash of Undefined Custom Elements (FOUCE) when the page loads.
+
+How to prevent it?
+
+One option is to use the `:defined` CSS pseudo-class to mask custom elements that haven’t been registered yet.
+
+```css
+np-email-login:not(:defined) {
+  visibility: hidden;
+}
 ```
 
-Once installed, you only have to import the desired component and you are good to go.
+Another option is to use `customElements.whenDefined()` function, which returns a promise that resolves when the specified element is registered.
+You can then add a specific class to adapt the CSS accordingly.
 
 ```js
-import "@nopwdio/sdk-js/dist/components/{component-name}.js";
+await customElements.whenDefined("np-email-login");
+document.body.classList.add("ready");
 ```
 
 </TabItem>
 </Tabs>
+
+## The difference between CDN and npm
+
+TL;DR:
+`@nopwdio/sdk-js/cdn` is for CDN cheerleaders and `@nopwdio/sdk-js/dist` for NPM lovers.
+
+You’ll notice that the CDN links all start with `/cdn` and npm imports use `/dist`.
+The `/cdn` files are pre-bundled, minified. Code splitting is also used for optimal bandwidth optimization.
+The /dist files DO NOT come pre-bundled, allowing your bundler of choice to more efficiently deduplicate dependencies, resulting in smaller bundles and optimal code sharing.

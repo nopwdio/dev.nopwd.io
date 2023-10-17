@@ -6,7 +6,7 @@ sidebar:
 
 ## What is Nopwd?
 
-Nopwd is a set of web components to authenticate your users using **email link** or **Passkeys** authentication. It allows your user to log in or register seamlessly, quickly and securely. You don't believe us? [test it and go passwordless!](https://nopwd.rocks).
+Nopwd is a set of [web components](/reference/components) to authenticate your users using **email link** or **Passkeys** authentication. It allows your user to log in or register seamlessly, quickly and securely. You don't believe us? [test it and go passwordless!](https://nopwd.rocks).
 
 **No API Key** nor **credit card** required 🕺
 
@@ -20,52 +20,19 @@ Using Nopwd, you **won't** have to:
 - ~~register your app or website~~
 - ~~manage any API Key or secrets~~
 
-## How to install it?
-
-You can load our web components via CDN or by installing it locally.
-
-import { Tabs, TabItem } from "@astrojs/starlight/components";
-
-<Tabs>
-<TabItem label="using CDN">
-Each components (`np-email-login`, `np-passkey-register`, `np-passkey-login`) can be loaded individualy from a CDN.
-
-Example using the email link authentication button component:
-
-```html
-<script
-  type="module"
-  src="https://cdn.jsdelivr.net/npm/@nopwdio/sdk-js@latest/cdn/components/np-email-login.js"
-></script>
-```
-
-Easy right?
-
-:::tip[About version management]
-It is not recommended to use the `@latest` suffix, as a major release could break your application. Instead, use a fixed version such as `0.3.2`.
-:::
-
-</TabItem>
-<TabItem label="using NPM">
-If you don’t want to use the CDN, you can install the latest version of our sdk from npm with the following command.
-```sh
-npm i @nopwdio/sdk-js@latest
-```
-
-Once installed, you only have to import the desired component and you are good to go.
-
-```js
-import "@nopwdio/sdk-js/dist/components/{component-name}.js";
-```
-
-</TabItem>
-</Tabs>
-
-## What's next?
+## Let's go!
 
 import { Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
 
 <CardGrid>
-  <LinkCard title="Authenticating with email link" description="" href="/guides/email" />
-  <LinkCard title="Authenticating with Passkeys" description="" href="/guides/passkeys" />
+  <LinkCard
+    title="Authenticating with email magic-link"
+    description="Onboard your users with a one-click email authentication"
+    href="/guides/email"
+  />
+  <LinkCard
+    title="Authenticating with Passkeys"
+    description="Delight them with biometric authentication right in the browser"
+    href="/guides/passkeys"
+  />
 </CardGrid>
