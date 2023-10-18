@@ -3,6 +3,7 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://dev.nopwd.io',
 	integrations: [
 		starlight({
 			title: 'Nopwd doc',
