@@ -2,6 +2,7 @@
   "name": "dev.nopwd.io",
   "type": "module",
   "version": "0.0.1",
+  "author": "Adrien Pinet",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

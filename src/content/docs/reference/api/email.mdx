@@ -86,6 +86,7 @@ await fetch("https://api.nopwd.io/v1/email/requests", {
 
 ## POST /email/tokens
 
+Exchange an authorization `code` for an access `token`.
 The authorization `code` is valid **only one time** and up to **20 minutes**: Your users have to click on the authorization button before this delay to grant the access.
 
 ### Request Body
