@@ -28,9 +28,12 @@ To create a passkey, just add the [`<np-passkey-register>`](/reference/component
 ```html
 <np-passkey-register></np-passkey-register>
 
-<script>
-  const passkeyRegisterButton = document.querySelector("np-passkey-register");
+<script type="module">
+  // If you use CDN, ensure the component is loaded before interacting with it.
+  await customElements.whenDefined("np-email-login");
+
   // set the token property with the user's access token
+  const passkeyRegisterButton = document.querySelector("np-passkey-register");
   passkeyRegisterButton.token = "...";
 </script>
 `;
@@ -42,7 +45,11 @@ This component will then emit a `np:register` event when created.
 ```html
 <np-passkey-login></np-passkey-login>
 
-<script>
+<script type="module">
+  // If you use CDN, ensure the component is loaded before interacting with it.
+  await customElements.whenDefined("np-email-login");
+
+  // listen to the 'np:register' event
   const passkeyRegisterButton = document.querySelector("np-passkey-register");
 
   passkeyRegisterButton.addEventListner("np:register", (e) => {
@@ -62,7 +69,11 @@ When focused by the user, it displays the created passkey for your website and p
 ```html
 <np-passkey-login></np-passkey-login>
 
-<script>
+<script type="module">
+  // If you use CDN, ensure the component is loaded before interacting with it.
+  await customElements.whenDefined("np-email-login");
+
+  // listen to the 'np:auth' event
   const button = document.querySelector("np-passkey-login");
 
   button.addEventListner("np:auth", (e) => {
@@ -74,7 +85,7 @@ When focused by the user, it displays the created passkey for your website and p
 
 **What if the user didn't create a passkey yet?**
 
-Don't worry! In that situation, this component will simply act as a classic email input element for users without a Passkey.
+Don't worry! In that case, this component will simply act as a classic email input element for users without a Passkey.
 You can use it as an email input to pass the email value to the [`<np-email-login>`](/reference/components/np-email-login) component to fallback to the email link authentication flow.
 
 ## (3/3) You are done!

@@ -13,7 +13,11 @@ From your login page, add the [`<np-email-login>`](/reference/components/np-emai
 ```html
 <np-email-login></np-email-login>
 
-<script>
+<script type="module">
+  // If you use CDN, ensure the component is loaded before interacting with it.
+  await customElements.whenDefined("np-email-login");
+
+  // set the email property
   const button = document.querySelector("np-email-login");
   button.email = "ada@lovelace.uk"; // from an input field somewhere
 </script>
@@ -36,12 +40,6 @@ This component will then automatically exchange it for an access token and emit 
 </script>
 ```
 
-:::tip[Promote Passkeys]
-Consider offering your users an even smoother and secure experience by letting them use Passkeys.
-Passkeys use your fingerprint or other biometric to log you into your websites, just like unlocking your device.
-See [Passkey Integration](/guides/passkeys) to learn more.
-:::
-
 ## (2/2) You are done!
 
 Transmit the access `token` to your backend to create the user's session. it can be verified with your own JWT library or using our own API endpoint.
@@ -49,3 +47,9 @@ Transmit the access `token` to your backend to create the user's session. it can
 import { LinkCard } from "@astrojs/starlight/components";
 
 <LinkCard title="Verifying the access token" description="" href="/guides/tokens" />
+
+:::tip[Promote Passkeys]
+Consider offering your users an even smoother and secure experience by letting them use Passkeys.
+Passkeys use your fingerprint or other biometric to log you into your websites, just like unlocking your device.
+See [Passkey Integration](/guides/passkeys) to learn more.
+:::

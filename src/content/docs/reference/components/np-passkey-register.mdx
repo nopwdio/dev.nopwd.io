@@ -74,7 +74,7 @@ if (event.detail instanceof UnexpectedError) {
 | `registered`  | Passkey has been registered.      |
 | `error`       | An error occured.                 |
 
-Usage examples:
+Usage:
 
 ```html
 <!-- To override the default slot-->
@@ -95,11 +95,11 @@ Usage examples:
 | -------- | ------------------------------- |
 | `button` | The component’s button wrapper. |
 
-Usage examples:
+Usage:
 
 ```css
-/* default */
-np-passkey-register::part(button) {
+/* to target only the default state  */
+np-passkey-register:not([state])::part(button) {
   background-color: black;
   color: white;
 }

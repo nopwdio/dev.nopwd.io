@@ -112,8 +112,8 @@ if (event.detail instanceof UnexpectedError) {
 **Usage:**
 
 ```css
-/* default */
-np-email-login::part(button) {
+/* to target only the default state  */
+np-email-login:not([state])::part(button) {
   background-color: black;
   color: white;
 }

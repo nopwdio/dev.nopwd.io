@@ -4,7 +4,84 @@ sidebar:
   order: 2
 ---
 
-| Method | Ressources          | Purpose             |
-| ------ | ------------------- | ------------------- |
-| GET    | **/passkeys/\:kid** | Get a passkey info. |
-| DELETE | **/passkeys/\:kid** | Revoke the passkey. |
+| Method | Ressources         | Purpose             |
+| ------ | ------------------ | ------------------- |
+| GET    | **/passkeys/\:id** | Get a passkey info. |
+| DELETE | **/passkeys/\:id** | Revoke the passkey. |
+
+## GET /passkeys/\:id
+
+Returns a Passkey info identified by its `id`.
+
+### Request
+
+| Param | Type | Mandatory | Description                                    |
+| ----- | ---- | --------- | ---------------------------------------------- |
+| `:id` | Path | Yes       | represents the unique identifier for a passkey |
+
+:::tip[How to retrieve the passkey id?]
+The id is emitted on the passkey registration flow.
+See [np-passkey-register](/reference/components/np-passkey-register) to learn more.
+:::
+
+### Response
+
+```ts
+interface Passkey {
+  alg: string; // The passkey algorithm (P-256)
+  expires_at: number; // the unix time when this passkey is going to expire if it has not been used.
+}
+```
+
+### Response Codes
+
+| Code | Description                                     |
+| ---- | ----------------------------------------------- |
+| 200  | You did great.                                  |
+| 404  | This passkey doesn't exist or has been deleted. |
+
+### Usage
+
+```ts
+const response = await fetch(`https://api.nopwd.io/v1/passkeys/${id}`);
+const jwk = await response.json();
+```
+
+## DELETE /passkeys/\:id
+
+Returns a Passkey info identified by its `id`.
+
+### Request
+
+| Param | Type | Mandatory | Description                                    |
+| ----- | ---- | --------- | ---------------------------------------------- |
+| `:id` | Path | Yes       | represents the unique identifier for a passkey |
+
+:::tip[How to retrieve the passkey id?]
+The id is emitted on the passkey registration flow.
+See [np-passkey-register](/reference/components/np-passkey-register) to learn more.
+:::
+
+### Response
+
+```ts
+interface Passkey {
+  alg: string; // The passkey algorithm (P-256)
+  expires_at: number; // the unix time when this passkey is going to expire if it has not been used.
+}
+```
+
+### Response Codes
+
+| Code | Description                                     |
+| ---- | ----------------------------------------------- |
+| 200  | You did great.                                  |
+| 404  | This passkey doesn't exist or has been deleted. |
+
+### Usage
+
+```ts
+await fetch(`https://api.nopwd.io/v1/passkeys/${id}`, {
+  method: "DELETE",
+});
+```

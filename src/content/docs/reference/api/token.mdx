@@ -42,7 +42,7 @@ interface JwtPayload {
 | 403  | The access `token` has a wrong issuer (iss != nopwd.io)                        |
 | 404  | The access `token` is valid but has expired (exp < now)                        |
 
-### Example
+### Usage
 
 ```ts
 const response = await fetch(`https://api.nopwd.io/v1/tokens/${access_token}`);
@@ -68,7 +68,7 @@ Could be useful if you wan't to prevent replay attack after creating the user se
 | 403  | The access `token` has a wrong issuer (iss != nopwd.io)                        |
 | 404  | The access `token` is valid but has expired (exp < now)                        |
 
-### Example
+### Usage
 
 ```ts
 await fetch(`https://api.nopwd.io/v1/tokens/${access_token}`, {
