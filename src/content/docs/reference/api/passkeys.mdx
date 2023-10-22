@@ -7,7 +7,7 @@ sidebar:
 | Method | Ressources         | Purpose             |
 | ------ | ------------------ | ------------------- |
 | GET    | **/passkeys/\:id** | Get a passkey info. |
-| DELETE | **/passkeys/\:id** | Revoke the passkey. |
+| DELETE | **/passkeys/\:id** | Revoke a passkey.   |
 
 ## GET /passkeys/\:id
 
@@ -35,10 +35,10 @@ interface Passkey {
 
 ### Response Codes
 
-| Code | Description                                     |
-| ---- | ----------------------------------------------- |
-| 200  | You did great.                                  |
-| 404  | This passkey doesn't exist or has been deleted. |
+| Code | Description                                             |
+| ---- | ------------------------------------------------------- |
+| 200  | You did great.                                          |
+| 404  | This passkey doesn't exist or has been already revoked. |
 
 ### Usage
 
@@ -49,7 +49,7 @@ const jwk = await response.json();
 
 ## DELETE /passkeys/\:id
 
-Returns a Passkey info identified by its `id`.
+Revoke a Passkey by its `id`.
 
 ### Request
 
@@ -62,21 +62,12 @@ The id is emitted on the passkey registration flow.
 See [np-passkey-register](/reference/components/np-passkey-register) to learn more.
 :::
 
-### Response
-
-```ts
-interface Passkey {
-  alg: string; // The passkey algorithm (P-256)
-  expires_at: number; // the unix time when this passkey is going to expire if it has not been used.
-}
-```
-
 ### Response Codes
 
-| Code | Description                                     |
-| ---- | ----------------------------------------------- |
-| 200  | You did great.                                  |
-| 404  | This passkey doesn't exist or has been deleted. |
+| Code | Description                                             |
+| ---- | ------------------------------------------------------- |
+| 200  | You did great.                                          |
+| 404  | This passkey doesn't exist or has been already revoked. |
 
 ### Usage
 

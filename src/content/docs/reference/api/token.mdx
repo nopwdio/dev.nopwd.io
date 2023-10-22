@@ -14,7 +14,7 @@ sidebar:
 Verifies an access `token` and returns its payload if valid.
 The returned payload respects the [RFC7519](https://tools.ietf.org/html/rfc7519) specs.
 
-### Query Parameters
+### Parameters
 
 | Param   | Type | Mandatory | Description                  |
 | ------- | ---- | --------- | ---------------------------- |
@@ -51,7 +51,7 @@ const jwt = <JwtPayload>response.json();
 
 ## DELETE /tokens/\:token
 
-Revoke an `token`.
+Revoke a `token`.
 Could be useful if you wan't to prevent replay attack after creating the user session.
 
 ### Query Parameters
