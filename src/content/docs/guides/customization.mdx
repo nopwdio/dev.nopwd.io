@@ -12,8 +12,9 @@ This gives you control over theme colors, general styling and localization.
 Nopwd uses standard [CSS parts](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) to let you target and styling individual components.
 
 ```css
-np-email-login::part(button) {
+np-email-login:not([state])::part(button) {
   background-color: black;
+  color: white;
 }
 ```
 

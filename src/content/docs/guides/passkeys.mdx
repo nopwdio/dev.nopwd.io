@@ -30,11 +30,11 @@ To create a passkey, just add the [`<np-passkey-register>`](/reference/component
 
 <script type="module">
   // If you use CDN, ensure the component is loaded before interacting with it.
-  await customElements.whenDefined("np-email-login");
+  await customElements.whenDefined("np-passkey-register");
 
   // set the token property with the user's access token
-  const passkeyRegisterButton = document.querySelector("np-passkey-register");
-  passkeyRegisterButton.token = "...";
+  const el = document.querySelector("np-passkey-register");
+  el.token = "...";
 </script>
 `;
 ```
@@ -42,21 +42,11 @@ To create a passkey, just add the [`<np-passkey-register>`](/reference/component
 Once the user clicks on this button, the browser will prompt the user to create a passkey.
 This component will then emit a `np:register` event when created.
 
-```html
-<np-passkey-login></np-passkey-login>
-
-<script type="module">
-  // If you use CDN, ensure the component is loaded before interacting with it.
-  await customElements.whenDefined("np-email-login");
-
-  // listen to the 'np:register' event
-  const passkeyRegisterButton = document.querySelector("np-passkey-register");
-
-  passkeyRegisterButton.addEventListner("np:register", (e) => {
-    // The passkey has been created 🎉
-    console.log(e.detail.id); // the passkey id.
-  });
-</script>
+```js
+el.addEventListner("np:register", (e) => {
+  // The passkey has been created 🎉
+  console.log(e.detail.id); // the passkey id.
+});
 ```
 
 This event contains the passkey `id`. It can be used to perform further optional administration operations such as revokation.
@@ -70,13 +60,10 @@ When focused by the user, it displays the created passkey for your website and p
 <np-passkey-login></np-passkey-login>
 
 <script type="module">
-  // If you use CDN, ensure the component is loaded before interacting with it.
-  await customElements.whenDefined("np-email-login");
-
   // listen to the 'np:auth' event
-  const button = document.querySelector("np-passkey-login");
+  const el = document.querySelector("np-passkey-login");
 
-  button.addEventListner("np:auth", (e) => {
+  el.addEventListner("np:auth", (e) => {
     // Your user is authenticated 🎉
     console.log(e.detail.token); // the access token
   });

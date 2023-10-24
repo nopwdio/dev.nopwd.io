@@ -18,8 +18,8 @@ From your login page, add the [`<np-email-login>`](/reference/components/np-emai
   await customElements.whenDefined("np-email-login");
 
   // set the email property
-  const button = document.querySelector("np-email-login");
-  button.email = "ada@lovelace.uk"; // from an input field somewhere
+  const el = document.querySelector("np-email-login");
+  el.email = "ada@lovelace.uk"; // from an input field somewhere
 </script>
 ```
 
@@ -27,17 +27,11 @@ Once the user clicks on this button, an email will be sent to its inbox.
 By clicking on the received authorization link, he will be redirected to the original page with an extra `code` parameter.
 This component will then automatically exchange it for an access token and emit it inside the `np:auth` event.
 
-```html
-<np-email-login></np-email-login>
-
-<script>
-  const button = document.querySelector("np-email-login");
-
-  button.addEventListner("np:auth", (e) => {
-    // Your user is authenticated 🎉
-    console.log(e.detail.token); // the access token
-  });
-</script>
+```js
+el.addEventListner("np:auth", (e) => {
+  // Your user is authenticated 🎉
+  console.log(e.detail.token); // the access token
+});
 ```
 
 ## (2/2) You are done!
@@ -49,7 +43,7 @@ import { LinkCard } from "@astrojs/starlight/components";
 <LinkCard title="Verifying the access token" description="" href="/guides/tokens" />
 
 :::tip[Promote Passkeys]
-Once the user authenticated, consider offering him an even smoother and secure experience by letting them use Passkeys.
+Once the user authenticated, consider offering him an even smoother and secure experience with Passkeys.
 Passkeys use your fingerprint or other biometric to log you into your websites, just like unlocking your device.
 See [Passkey Integration](/guides/passkeys) to learn more.
 :::
