@@ -1,5 +1,5 @@
 ---
-title: <np-email-login>
+title: <np-email-auth>
 sidebar:
   order: 1
 ---
@@ -92,15 +92,15 @@ if (event.detail instanceof UnexpectedError) {
 
 ```html
 <!-- To override the default slot-->
-<np-email-login>Login</np-email-login>
+<np-email-auth>Login</np-email-auth>
 
 <!-- to override specific slots-->
-<np-email-login>
+<np-email-auth>
   Login
   <span slot="requesting">Sending email...</span>
   <span slot="requested">Check your mailbox</span>
   <span slot="error">Oooooops</span>
-</np-email-login>
+</np-email-auth>
 ```
 
 # Parts
@@ -113,19 +113,19 @@ if (event.detail instanceof UnexpectedError) {
 
 ```css
 /* to target only the default state  */
-np-email-login:not([state])::part(button) {
+np-email-auth:not([state])::part(button) {
   background-color: black;
   color: white;
 }
 
 /* sending request */
-np-email-login[state="requesting"]::part(button) {
+np-email-auth[state="requesting"]::part(button) {
   background-color: transparent;
   color: grey;
 }
 
 /* styling error */
-np-email-login[state="error"]::part(button) {
+np-email-auth[state="error"]::part(button) {
   background-color: red;
   color: white;
 }

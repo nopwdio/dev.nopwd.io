@@ -12,7 +12,7 @@ This gives you control over theme colors, general styling and localization.
 Nopwd uses standard [CSS parts](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) to let you target and styling individual components.
 
 ```css
-np-email-login:not([state])::part(button) {
+np-email-auth:not([state])::part(button) {
   background-color: black;
   color: white;
 }
@@ -21,7 +21,7 @@ np-email-login:not([state])::part(button) {
 You can also customize every component's state:
 
 ```css
-np-email-login[state="requesting"]::part(button) {
+np-email-auth[state="requesting"]::part(button) {
   background-color: transparent;
   color: grey;
 }
@@ -33,19 +33,19 @@ Override with ease strings for any element to localize to any language or change
 
 ```html
 <!-- to change the default slot -->
-<np-email-login>Login</np-email-login>
+<np-email-auth>Login</np-email-auth>
 ```
 
 Every single component state is also customizable using named slot:
 
 ```html
-<np-email-login>
+<np-email-auth>
   <!-- sending an email -->
   <span slot="requesting">Sending email...</span>
   <!-- the email has been sent -->
   <span slot="requested">Check your mailbox!</span>
   <!-- ... -->
-</np-email-login>
+</np-email-auth>
 ```
 
 :::tip[Read the component's reference]

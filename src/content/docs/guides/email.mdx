@@ -8,17 +8,17 @@ Also known as magic link, email authentication is a passwordless flow where user
 
 ## (1/2) Add the login with email button
 
-From your login page, add the [`<np-email-login>`](/reference/components/np-email-login) component and set the `email` property with your user's email address.
+From your login page, add the [`<np-email-auth>`](/reference/components/np-email-auth) component and set the `email` property with your user's email address.
 
 ```html
-<np-email-login></np-email-login>
+<np-email-auth></np-email-auth>
 
 <script type="module">
   // If you use CDN, ensure the component is loaded before interacting with it.
-  await customElements.whenDefined("np-email-login");
+  await customElements.whenDefined("np-email-auth");
 
   // set the email property
-  const el = document.querySelector("np-email-login");
+  const el = document.querySelector("np-email-auth");
   el.email = "ada@lovelace.uk"; // from an input field somewhere
 </script>
 ```

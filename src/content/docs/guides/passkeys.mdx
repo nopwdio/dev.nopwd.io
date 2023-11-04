@@ -20,7 +20,7 @@ Conditional UI (a way to display a passkey from a login form) is not triggered w
 ## (1/3) Creating a passkey
 
 Before asking your user to create a Passkey you need to make sure that their browsers are compatible.
-The `np:auth` event emitted from the email authentication [`<np-email-login>`](/reference/components/np-email-login) compontent contains a `suggest_passkeys` attribute.
+The `np:auth` event emitted from the email authentication [`<np-email-auth>`](/reference/components/np-email-auth) compontent contains a `suggest_passkeys` attribute.
 It is set to `true` if the user's browser support Passkeys. Use it to suggest a passkey creation process only for compatible browsers.
 
 To create a passkey, just add the [`<np-passkey-register>`](/reference/components/np-passkey-register) component and set the `token` attribute from the authenticated user.
@@ -57,15 +57,15 @@ This event contains the passkey `id`. It can be used to perform further optional
 
 ## (2/3) Authenticating with Passkeys
 
-Just add the [`<np-passkey-login>`](/reference/components/np-passkey-login) component to your login page.
+Just add the [`<np-passkey-conditional>`](/reference/components/np-passkey-conditional) component to your login page.
 When focused by the user, it displays the created passkey for your website and perform authentification flow when selected.
 
 ```html
-<np-passkey-login></np-passkey-login>
+<np-passkey-conditional></np-passkey-conditional>
 
 <script type="module">
   // listen to the 'np:auth' event
-  const el = document.querySelector("np-passkey-login");
+  const el = document.querySelector("np-passkey-conditional");
 
   el.addEventListner("np:auth", (e) => {
     // Your user is authenticated 🎉
@@ -77,7 +77,7 @@ When focused by the user, it displays the created passkey for your website and p
 **What if the user didn't create a passkey yet?**
 
 Don't worry! In that case, this component will simply act as a classic email input element for users without a Passkey.
-You can use it as an email input to pass the email value to the [`<np-email-login>`](/reference/components/np-email-login) component to fallback to the email link authentication flow.
+You can use it as an email input to pass the email value to the [`<np-email-auth>`](/reference/components/np-email-auth) component to fallback to the email link authentication flow.
 
 ## (3/3) You are done!
 

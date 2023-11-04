@@ -8,20 +8,20 @@ sidebar:
 
 Nopwd provides one component to handle **magic link** authentication:
 
-| name                                                     | Type     | Description                           |
-| -------------------------------------------------------- | -------- | ------------------------------------- |
-| [`np-email-login`](/reference/components/np-email-login) | `button` | Authenticate a user with a magic-link |
+| name                                                   | Type     | Description                           |
+| ------------------------------------------------------ | -------- | ------------------------------------- |
+| [`np-email-auth`](/reference/components/np-email-auth) | `button` | Authenticate a user with a magic-link |
 
 and two others to provide **passkey** authentication:
 
-| name                                                               | Type     | Description                      |
-| ------------------------------------------------------------------ | -------- | -------------------------------- |
-| [`np-passkey-register`](/reference/components/np-passkey-register) | `button` | Register a passkey               |
-| [`np-passkey-login`](/reference/components/np-passkey-login)       | `input`  | Authenticate a user with passkey |
+| name                                                                     | Type     | Description                      |
+| ------------------------------------------------------------------------ | -------- | -------------------------------- |
+| [`np-passkey-register`](/reference/components/np-passkey-register)       | `button` | Register a passkey               |
+| [`np-passkey-conditional`](/reference/components/np-passkey-conditional) | `input`  | Authenticate a user with passkey |
 
 ## How to install it?
 
-You can load our web components via CDN or by installing it locally.
+You can load our web components via CDN or by installing it locally using package manager such as NPM.
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 
@@ -41,14 +41,14 @@ import "@nopwdio/sdk-js/dist/components/{component-name}.js";
 </TabItem>
 
 <TabItem label="using CDN">
-Each components (`np-email-login`, `np-passkey-register`, `np-passkey-login`) can be loaded individualy from a CDN.
+Each components (`np-email-auth`, `np-passkey-register`, `np-passkey-conditional`) can be loaded individualy from a CDN.
 
 Example using the email link authentication button component:
 
 ```html
 <script
   type="module"
-  src="https://cdn.jsdelivr.net/npm/@nopwdio/sdk-js@latest/cdn/components/np-email-login.js"
+  src="https://cdn.jsdelivr.net/npm/@nopwdio/sdk-js@latest/cdn/components/np-email-auth.js"
 ></script>
 ```
 
@@ -64,7 +64,7 @@ you may notice a Flash of Undefined Custom Elements (FOUCE) when the page loads.
 One option is to use the `:defined` CSS pseudo-class to mask custom elements that haven’t been registered yet.
 
 ```css
-np-email-login:not(:defined) {
+np-email-auth:not(:defined) {
   visibility: hidden;
 }
 ```
@@ -73,14 +73,14 @@ Another option is to use `customElements.whenDefined()` function, which returns 
 You can then add a specific class to adapt the CSS accordingly.
 
 ```js
-await customElements.whenDefined("np-email-login");
+await customElements.whenDefined("np-email-auth");
 document.body.classList.add("ready");
 ```
 
 </TabItem>
 </Tabs>
 
-## The difference between CDN and npm
+## The difference between CDN and NPM
 
 TL;DR:
 `@nopwdio/sdk-js/cdn` is for CDN supporters and `@nopwdio/sdk-js/dist` for NPM lovers.
