@@ -63,20 +63,13 @@ To avoid mistakes in this critical flow, you can use third party libraries to ve
 Here is an example using the battle-tested [jose library](https://github.com/panva/jose/blob/main/docs/functions/jwt_verify.jwtVerify.md).
 
 ```ts
-const accessToken = "...";
+const token = "..."; // the user's access token
+const JWKS = createRemoteJWKSet(new URL("https://api.nopwd.io/v1/jwks"));
 
-// To verify the access_token
-const { jwt } = await jose.jwtVerify(accessToken, getKey, {
+const { payload } = await jwtVerify(token, JWKS, {
   issuer: "nopwd.io",
-  audience: "yourwebsite.com",
+  audience: "nopwd.rocks", // your own domain
 });
-
-/* 
-  Set the function getKey to return the public key associated with the kid.
-  Don't forget to cache it after that.
- */
-
-const authenticatedUser = jwt.sub; //the authenticated user's email
 ```
 
 ### On your own

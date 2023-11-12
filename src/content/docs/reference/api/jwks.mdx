@@ -65,7 +65,9 @@ Returns all valid JSON Web Keys (JWK).
 ### Response
 
 ```ts
-interface Jwks extends Array<Jwk> {}
+interface Jwks {
+  keys: []Jwk
+}
 ```
 
 ### Response Codes
