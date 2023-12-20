@@ -4,17 +4,21 @@ sidebar:
   order: 4
 ---
 
-A `button` component for authenticating user with magic link.
+A `button` component for logging out the authenticated user.
 
 ## Properties
 
-None.
+| Name    | Format | required | default   | Description                     |
+| ------- | ------ | -------- | --------- | ------------------------------- |
+| `state` | State  | no       | undefined | The component's internal state. |
+
 
 ```ts
-type State =
-  | "busy" // session is closing
-  | "loggedout" // the session is closed
-  | "error"; // an error occured
+enum State {
+  LOGGINGOUT = "loggingout", // revoking session
+  LOGGEDOUT = "loggedout", // session is revoked
+  ERROR = "error", // something went wrong
+}
 ```
 
 ## Methods
@@ -26,13 +30,12 @@ type State =
 
 ## Custom Events
 
-| Name          | Description                    | Type          |
+| Name          | Description                   | Type          |
 | ------------- | ------------------------------ | ------------- |
-| `np:logout` | The session is closed. | void |
-| `np:error`    | Something went wrong.          | NoPwdError    |
+| `np:logout` | The session is closed. | void   |
+| `np:error`    | Something went wrong.         | NoPwdError    |
 
 The `np:error` custom event detail inherites from the `NoPwdError`.
-There are 4 types of error:
 
 ```ts
 if (event.detail instanceof NetworkError) {
@@ -49,7 +52,7 @@ if (event.detail instanceof UnexpectedError) {
 | Name          | Description                       |
 | ------------- | --------------------------------- |
 | (default)     | The button’s label.               |
-| `busy` | closing the session. |
+| `loggingout` | closing the session. |
 | `loggedout`  | Session is closed.      |
 | `error`       | An error occured.                 |
 
@@ -62,7 +65,7 @@ Usage:
 <!-- to override specific slots-->
 <np-logout>
   Logout
-  <span slot="busy"><svg></svg></span>
+  <span slot="loggingout">please wait</span>
   <span slot="loggedout">Bye!</span>
   <span slot="error">Oooooops</span>
 </np-logout>
@@ -83,7 +86,7 @@ np-logout:not([state])::part(button) {
   color: white;
 }
 
-np-logout[state="busy"]::part(button) {
+np-logout[state="loggingout"]::part(button) {
   background-color: transparent;
   color: grey;
 }

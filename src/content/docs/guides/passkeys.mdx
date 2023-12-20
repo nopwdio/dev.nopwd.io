@@ -67,7 +67,7 @@ When focused by the user, it displays the created passkey for your website and p
   // listen to the 'np:auth' event
   const el = document.querySelector("np-passkey-conditional");
 
-  el.addEventListner("np:session", (e) => {
+  el.addEventListner("np:login", (e) => {
   // a session has been created 🎉
   const {expires_at, token} = e.detail;
   });

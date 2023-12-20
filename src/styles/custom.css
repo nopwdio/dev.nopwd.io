@@ -45,7 +45,12 @@
 }
 
 /* customizing tips */
-.starlight-aside--tip {
+:root .starlight-aside--tip {
+	border: none;
+	background-color: var(--sl-color-gray-6);
+}
+
+:root[data-theme='light'] .starlight-aside--tip {
 	border: none;
 	background-color: var(--sl-color-gray-7);
 }

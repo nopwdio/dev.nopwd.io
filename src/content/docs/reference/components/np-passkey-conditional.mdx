@@ -40,13 +40,15 @@ The `np:login` custom event detail is defined as follow:
 
 ```ts
 interface Session {
-  idle_lifetime: number; // the session idle lifetime
   created_at: number; // when the session has been created
-  refreshed_at: number; // when a new token has been generated
   expires_at: number; // the session expiration date
+  idle_lifetime: number; // the session idle lifetime
 
   token: string; // the last generated token
+  refreshed_at: number; // when a new token has been generated
   token_payload: TokenPayload; // its payload
+
+  suggest_passkeys: boolean; // true if the user doesn't use a passkey and the browser support it
 }
 ```
 

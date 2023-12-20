@@ -14,12 +14,14 @@ A `button` component for authenticating user with magic link.
 | `state` | State  | no       | undefined | The component's internal state. |
 
 ```ts
-type State =
-  | "requesting" // sending an authentication request
-  | "requested" // the authentication request has been sent
-  | "verifying" // verifying the authorization link
-  | "authenticated" // the user has been authenticated
-  | "error"; // An error occured
+export enum State {
+  REQUESTING = "requesting", // sending an authentication request
+  REQUESTED = "requested", // the authentication request has been sent
+  VERIFYING = "verifying", // verifying the authorization code
+  LOGGINGIN = "loggingin", // creating the session
+  LOGGEDIN = "loggedin", // session created
+  ERROR = "error", // something went wrong
+}
 ```
 
 ## Methods
@@ -33,18 +35,24 @@ type State =
 
 | Name       | Description                      | Type       |
 | ---------- | -------------------------------- | ---------- |
-| `np:auth`  | The user has been authenticated. | AuthEvent  |
+| `np:login`  | The user has been authenticated. | Session  |
 | `np:error` | Something went wrong.            | NoPwdError |
 
-The `np:auth` custom event detail is defined as follow:
+The `np:login` custom event detail is defined as follow:
 
 ```ts
 // AuthEvent type definition
-type AuthEvent = {
-  access_token: string; // the user access token
-  access_token_payload: JwtPayload; // the access token payload (containing claims)
-  suggest_passkeys: boolean; // true if the browser supports Passkeys, false otherwise.
-};
+interface Session {
+  created_at: number; // when the session has been created
+  expires_at: number; // the session expiration date
+  idle_lifetime: number; // the session idle lifetime
+
+  token: string; // the last generated token
+  refreshed_at: number; // when a new token has been generated
+  token_payload: TokenPayload; // its payload
+
+  suggest_passkeys: boolean; // true if the user doesn't use a passkey and the browser support it
+}
 ```
 
 The `np:error` custom event detail inherites from the `NoPwdError`.

@@ -4,27 +4,27 @@ sidebar:
   order: 2
 ---
 
-A `button` component for authenticating user with magic link.
+A `button` component for registering a new passkey.
 
 ## Properties
 
 | Name    | Format | required | default   | Description                     |
 | ------- | ------ | -------- | --------- | ------------------------------- |
-| `token` | jwt    | yes      | undefined | The user's `access_token`.      |
 | `state` | State  | no       | undefined | The component's internal state. |
 
 ```ts
-type State =
-  | "busy" // Passkey registration in progress
-  | "registered" // the passkey has been register
-  | "error"; // an error occured
+enum State {
+  REGISTERING = "registering", // registering the passkey
+  REGISTERED = "registered", // passkey has been registered
+  ERROR = "error", // an error occured
+}
 ```
 
 ## Methods
 
 | Name         | Description                                                                                                |
 | ------------ | ---------------------------------------------------------------------------------------------------------- |
-| `register()` | Starts the registration flow programmatically. Don't forget to set the `token` property before calling it. |
+| `register()` | Starts the registration flow programmatically. |
 | `cancel()`   | Cancels the authentication flow.                                                                           |
 
 ## Custom Events
@@ -34,15 +34,12 @@ type State =
 | `np:register` | The passkey has been register. | RegisterEvent |
 | `np:error`    | Something went wrong.          | NoPwdError    |
 
-The `np:auth` custom event detail is defined as follow:
+The `np:register` custom event detail is defined as follow:
 
 ```ts
-// AuthEvent type definition
-type RegisterEvent = {
-  id: string; // the passkey id
-  alg: string;
-};
-```
+interface RegisterEvent {
+  kid: string; // the passkey's id
+}```
 
 The `np:error` custom event detail inherites from the `NoPwdError`.
 There are 4 types of error:
