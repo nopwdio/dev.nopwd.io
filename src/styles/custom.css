@@ -41,4 +41,11 @@
 	--sl-text-h1: 2em;
 	--sl-text-h2: 1.6em;
 	--sl-text-h3: 1.2em;
+	--sl-text-h4: 1em;
+}
+
+/* customizing tips */
+.starlight-aside--tip {
+	border: none;
+	background-color: var(--sl-color-gray-7);
 }

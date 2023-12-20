@@ -7,7 +7,6 @@ sidebar:
 | Method | Ressources          | Purpose                                                     |
 | ------ | ------------------- | ----------------------------------------------------------- |
 | GET    | **/tokens/\:token** | Verifies an access `token` and returns its payload if valid |
-| DELETE | **/tokens/\:token** | Revoke an access `token`                                    |
 
 ## GET /tokens/\:token
 
@@ -49,29 +48,3 @@ const response = await fetch(`https://api.nopwd.io/v1/tokens/${access_token}`);
 const jwt = <JwtPayload>response.json();
 ```
 
-## DELETE /tokens/\:token
-
-Revoke a `token`.
-Could be useful if you wan't to prevent replay attack after creating the user session.
-
-### Query Parameters
-
-| Param   | Type | Mandatory | Description                  |
-| ------- | ---- | --------- | ---------------------------- |
-| `token` | Path | Yes       | The `access_token` to verify |
-
-| Code | Description                                                                    |
-| ---- | ------------------------------------------------------------------------------ |
-| 200  | This token has been revoked                                                    |
-| 400  | The access `token` is malformed                                                |
-| 401  | The access `token` is invalid (expired signature key or wrong token signature) |
-| 403  | The access `token` has a wrong issuer (iss != nopwd.io)                        |
-| 404  | The access `token` is valid but has expired (exp < now)                        |
-
-### Usage
-
-```ts
-await fetch(`https://api.nopwd.io/v1/tokens/${access_token}`, {
-  method: "DELETE",
-});
-```

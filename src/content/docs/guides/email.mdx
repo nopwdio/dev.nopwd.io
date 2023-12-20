@@ -6,7 +6,7 @@ sidebar:
 
 Also known as magic link, email authentication is a passwordless flow where users click a unique link sent to their email address to log in.
 
-## (1/2) Add the login with email button
+## Add the login with email button
 
 From your login page, add the [`<np-email-auth>`](/reference/components/np-email-auth) component and set the `email` property with your user's email address.
 
@@ -23,31 +23,27 @@ From your login page, add the [`<np-email-auth>`](/reference/components/np-email
 </script>
 ```
 
-:::tip[importing component]
-You can import it with CDN or NPM. [Learn more](/reference/components/#how-to-install-it).
-:::
-
 Once the user clicks on this button, an email will be sent to its inbox.
 By clicking on the received authorization link, he will be redirected to the original page with an extra `code` parameter.
-This component will then automatically exchange it for an access token and emit it inside the `np:auth` event.
+This component will then automatically exchange it for an access token and emit a `np:session` event.
 
 ```js
-el.addEventListner("np:auth", (e) => {
-  // Your user is authenticated 🎉
-  console.log(e.detail.token); // the access token
+el.addEventListner("np:login", (e) => {
+  // a session has been created 🎉
+  const {expires_at, token} = e.detail;
 });
 ```
 
-## (2/2) You are done!
+## You are done!
 
-Transmit the access `token` to your backend to create the user's session. it can be verified with your own JWT library or using our own API endpoint.
+Once the session established, you only have to transmit the session token to your server and verify it.
 
 import { LinkCard } from "@astrojs/starlight/components";
 
-<LinkCard title="Verifying the access token" description="" href="/guides/tokens" />
+<LinkCard title="Session management" description="Learn how to manage session and verify the session token" href="/guides/session" />
 
 :::tip[Promote Passkeys]
-Once the user authenticated, consider offering him an even smoother and secure experience with Passkeys.
+Once the user is authenticated, consider offering him an even smoother and secure experience with Passkeys.
 Passkeys use your fingerprint or other biometric to log you into your websites, just like unlocking your device.
 See [Passkey Integration](/guides/passkeys) to learn more.
 :::

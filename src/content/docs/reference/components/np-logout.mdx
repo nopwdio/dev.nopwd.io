@@ -1,0 +1,100 @@
+---
+title: <np-logout>
+sidebar:
+  order: 4
+---
+
+A `button` component for authenticating user with magic link.
+
+## Properties
+
+None.
+
+```ts
+type State =
+  | "busy" // session is closing
+  | "loggedout" // the session is closed
+  | "error"; // an error occured
+```
+
+## Methods
+
+| Name         | Description           |
+| ------------ | --------------------- |
+| `logout()` | End the current session.|
+
+
+## Custom Events
+
+| Name          | Description                    | Type          |
+| ------------- | ------------------------------ | ------------- |
+| `np:logout` | The session is closed. | void |
+| `np:error`    | Something went wrong.          | NoPwdError    |
+
+The `np:error` custom event detail inherites from the `NoPwdError`.
+There are 4 types of error:
+
+```ts
+if (event.detail instanceof NetworkError) {
+  // no network
+}
+
+if (event.detail instanceof UnexpectedError) {
+  // Something went wrong
+}
+```
+
+## Slots
+
+| Name          | Description                       |
+| ------------- | --------------------------------- |
+| (default)     | The button’s label.               |
+| `busy` | closing the session. |
+| `loggedout`  | Session is closed.      |
+| `error`       | An error occured.                 |
+
+Usage:
+
+```html
+<!-- To override the default slot-->
+<np-logout></np-logout>
+
+<!-- to override specific slots-->
+<np-logout>
+  Logout
+  <span slot="busy"><svg></svg></span>
+  <span slot="loggedout">Bye!</span>
+  <span slot="error">Oooooops</span>
+</np-logout>
+```
+
+# Parts
+
+| Name     | Description                     |
+| -------- | ------------------------------- |
+| `button` | The component’s button wrapper. |
+
+Usage:
+
+```css
+/* to target only the default state  */
+np-logout:not([state])::part(button) {
+  background-color: black;
+  color: white;
+}
+
+np-logout[state="busy"]::part(button) {
+  background-color: transparent;
+  color: grey;
+}
+
+np-logout[state="loggedout"]::part(button) {
+  background-color: green;
+  color: white;
+}
+
+np-logout[state="error"]::part(button) {
+  background-color: red;
+  color: white;
+}
+```

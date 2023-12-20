@@ -15,41 +15,45 @@ It will act as an standard input element if there is no passkey registered yet.
 | `enterkeyhint` | text   | no       | "Send"             | Virtual keyboard action [label](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/enterkeyhint). |
 | `state`        | State  | no       | undefined          | The component's internal state.                                                                                    |
 | `value`        | text   | no       | ""                 | The component's value.                                                                                             |
+| `sessionlifetime`        | number   | no       | "86400" (24h)      | The session maximum duration in seconds |
+| `sessionidlelifetime`        | number   | no       | `sessionlifetime`      | The session timeout in seconds |
 
 ```ts
-type State =
-  | "initializing" // getting challenge
-  | "authenticating" // waiting user to authenticate
-  | "verifying" // verifying the challenge signature
-  | "authenticated" // the user is authenticated
-  | "error"; // an error occured
+enum State {
+  INITIALIZING = "initializing", // getting challenge
+  WAITING = "waiting", // waiting user to select a passkey
+  VERIFYING = "verifying", // verifying passkey
+  LOGGINGIN = "loggingin", // creating session
+  LOGGEDIN = "loggedin", // session created
+  ERROR = "error", // something went wrong
+}
 ```
 
 ## Custom Events
 
 | Name       | Description                      | Type       |
 | ---------- | -------------------------------- | ---------- |
-| `np:auth`  | The user has been authenticated. | AuthEvent  |
+| `np:login`  | Session created. | Session  |
 | `np:error` | Something went wrong.            | NoPwdError |
 
-The `np:auth` custom event detail is defined as follow:
+The `np:login` custom event detail is defined as follow:
 
 ```ts
-// AuthEvent type definition
-type AuthEvent = {
-  access_token: string; // the user access token
-  access_token_payload: JwtPayload; // the access token payload (containing claims)
-};
+interface Session {
+  idle_lifetime: number; // the session idle lifetime
+  created_at: number; // when the session has been created
+  refreshed_at: number; // when a new token has been generated
+  expires_at: number; // the session expiration date
+
+  token: string; // the last generated token
+  token_payload: TokenPayload; // its payload
+}
 ```
 
 The `np:error` custom event detail inherites from the `NoPwdError`.
 There are 6 types of error:
 
 ```ts
-WebauthnNotSupportedError;
-UnknownChallengeOrPasskeyError;
-InvalidSignatureError;
-
 if (event.detail instanceof WebauthnNotSupportedError) {
   // webauthn is not supported
 }
@@ -81,9 +85,7 @@ if (event.detail instanceof UnexpectedError) {
 | Name             | Description                      |
 | ---------------- | -------------------------------- |
 | (default)        | The input's label.               |
-| `initializing`   | Getting challenge.               |
-| `authenticating` | waiting user to authenticate.    |
-| `verifying`      | Verifying the passkey.           |
+| `busy`   | waiting or processing authentication.    |
 | `authenticated`  | The user has been authenticated. |
 | `error`          | An error occured.                |
 
