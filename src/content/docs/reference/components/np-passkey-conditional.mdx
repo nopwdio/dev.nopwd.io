@@ -16,7 +16,7 @@ It will act as an standard input element if there is no passkey registered yet.
 | `state`        | State  | no       | undefined          | The component's internal state.                                                                                    |
 | `value`        | text   | no       | ""                 | The component's value.                                                                                             |
 | `sessionlifetime`        | number   | no       | "86400" (24h)      | The session maximum duration in seconds |
-| `sessionidlelifetime`        | number   | no       | `sessionlifetime`      | The session timeout in seconds |
+| `idletimeout`        | number   | no       | `sessionlifetime`      | The session inactivity timeout in seconds |
 
 ```ts
 enum State {

@@ -25,12 +25,12 @@ From your login page, add the [`<np-email-auth>`](/reference/components/np-email
 
 Once the user clicks on this button, an email will be sent to its inbox.
 By clicking on the received authorization link, he will be redirected to the original page with an extra `code` parameter.
-This component will then automatically exchange it for an access token and emit a `np:login` event.
+This component will then use it to create the user session and emits a `np:login` event.
 
 ```js
 el.addEventListner("np:login", (e) => {
   // a session has been created 🎉
-  const {expires_at, token} = e.detail;
+  const { expires_at, token } = e.detail;
 });
 ```
 

@@ -23,7 +23,7 @@ np-email-auth:not([state])::part(button) {
 You can also customize every component's state:
 
 ```css
-np-email-auth[state="busy"]::part(button) {
+np-email-auth[state="requesting"]::part(button) {
   background-color: transparent;
   color: grey;
 }
@@ -43,7 +43,7 @@ Every single component state is also customizable using named slot:
 ```html
 <np-email-auth>
   <!-- sending an email -->
-  <span slot="busy"><svg>your animated icon</svg></span>
+  <span slot="requesting">Sending email...</span>
   <!-- the email has been sent -->
   <span slot="requested">Check your mailbox!</span>
   <!-- ... -->
