@@ -15,7 +15,7 @@ Longer sessions are generally better for UX but worse for security; and vice-ver
 Fortunately, with Nopwd you have to ability to fully control the lifetime of your users' sessions.
 There are two settings for doing so and you can specify the authentication components attributes:
  - `sessionlifetime`: to set the maximum session lifetime (up to a year);
- - `sessionidlelifetime` : to optionaly set the inactivity timeout.
+ - `sessionidletimeout` : to optionaly set the inactivity timeout.
 
 ```html
 <!-- by default, session lifetime is set to 24 hours without any inactivity threshold -->
@@ -25,7 +25,7 @@ There are two settings for doing so and you can specify the authentication compo
 <np-email-auth sessionlifetime="604800"></np-email-auth>
 
 <!-- to set one day session lifetime with 1hour inactivity timeout -->
-<np-email-auth sessionlifetime="604800" sessionidlelifetime="86400"></np-email-auth>
+<np-email-auth sessionlifetime="604800" sessionidletimeout="86400"></np-email-auth>
 ```
 
 
