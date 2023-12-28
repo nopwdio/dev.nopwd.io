@@ -12,6 +12,8 @@ A `button` component for authenticating user with magic link.
 | ------- | ------ | -------- | --------- | ------------------------------- |
 | `email` | email  | yes      | undefined | The user's email.               |
 | `state` | State  | no       | undefined | The component's internal state. |
+| `sessionlifetime`        | number   | no       | "86400" (24h)      | The session maximum duration in seconds |
+| `sessionidletimeout`        | number   | no       | `sessionlifetime`      | The session inactivity timeout in seconds |
 
 ```ts
 export enum State {
