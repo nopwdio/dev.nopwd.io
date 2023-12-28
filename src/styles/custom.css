@@ -1,7 +1,7 @@
 :root {
 	--sl-color-accent-low: #242424;
-	--sl-color-accent: #fff;
-	--sl-color-accent-high: #c8c8c8;
+	--sl-color-accent: #8b5cf6;
+	--sl-color-accent-high: #Ab7cff;
 	
 	--sl-color-white: #ffffff;
 	--sl-color-gray-1: #eeeeee;
@@ -19,7 +19,7 @@
 /* Light mode colors. */
 :root[data-theme='light'] {
 	--sl-color-accent-low: #d7d7d7;
-	--sl-color-accent: #000;
+	--sl-color-accent: #8b5cf6;
 	--sl-color-accent-high: #323232;
 
 	--sl-color-white: #181818;
@@ -45,12 +45,46 @@
 }
 
 /* customizing tips */
+:root .starlight-aside {
+	border-left-width: 1px;
+	
+}
+
 :root .starlight-aside--tip {
-	border: none;
 	background-color: var(--sl-color-gray-6);
 }
 
 :root[data-theme='light'] .starlight-aside--tip {
-	border: none;
 	background-color: var(--sl-color-gray-7);
+}
+
+/* customizing header */
+.header a {
+	gap: .5em;
+}
+
+/* customizing button */
+.action.primary {
+	background-image: linear-gradient(45deg, #3b82f6, #8b5cf6);
+	color: white;
+}
+
+/* customizing link card */
+.card-grid > div:hover,
+.pagination-links a:hover {
+	border: var(--sl-color-accent) 1px solid;
+}
+
+/* nav bar */
+.right-sidebar-panel nav ul li a[aria-current="true"] {
+	background-color: transparent;
+	color: var(--sl-color-accent-high);
+}
+
+:root[data-theme='light'] .right-sidebar-panel nav ul li a[aria-current="true"] {
+	color: var(--sl-color-accent);
+}
+
+.right-sidebar-panel nav h2 {
+	display: none;
 }
