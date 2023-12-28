@@ -15,8 +15,8 @@ It will act as an standard input element if there is no passkey registered yet.
 | `enterkeyhint` | text   | no       | "Send"             | Virtual keyboard action [label](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/enterkeyhint). |
 | `state`        | State  | no       | undefined          | The component's internal state.                                                                                    |
 | `value`        | text   | no       | ""                 | The component's value.                                                                                             |
-| `sessionlifetime`        | number   | no       | "86400" (24h)      | The session maximum duration in seconds |
-| `sessionidletimeout`        | number   | no       | `sessionlifetime`      | The session inactivity timeout in seconds |
+| `lifetime`        | number   | no       | "86400" (24h)      | The session maximum duration in seconds |
+| `idletimeout`        | number   | no       | `lifetime`      | The session inactivity timeout in seconds |
 
 ```ts
 enum State {
