@@ -37,7 +37,7 @@ authentication components.
 To Retrieve the user's session token just call `get` method:
 
 ```ts
-import { get } from "@nopwdio/sdk-js/core/session";
+import { get } from "@nopwdio/sdk-js/dist/core/session";
 
 const session = await get();
 
@@ -161,7 +161,7 @@ component or after a period of inactivity. In that case, this component emit a `
 
 You can also terminate a session programmaticaly using the revoke method:
 ```ts
-import { revoke } from "@nopwdio/sdk-js/core/session";
+import { revoke } from "@nopwdio/sdk-js/dist/core/session";
 
 await revoke();
 ```
@@ -169,7 +169,7 @@ await revoke();
 
 ## A word about Security
 
-to strengthen security, we use **asymmetric cryptography** (also known as public-key cryptographic) to maintain and verify the validity of a session.
+To strengthen security, we use **asymmetric cryptography** (also known as public-key cryptographic) to maintain and verify the validity of a session.
 The **private key** is generated and stored (only) on the end-user device and **can't be extracted** even by your web application.
 A compromission of a session token don't compromize the entire session.
 
