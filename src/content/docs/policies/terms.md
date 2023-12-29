@@ -26,6 +26,7 @@ Prices of all Services are subject to change upon 30 days notice from us. Such n
 
 ## General Conditions
 
+- The Service is still in beta and not production ready at this time.
 - Your use of the Service is at your sole risk. The service is provided on an “as is” and “as available” basis.
 - Technical support is only provided via email.
 - You understand that the Company uses third party vendors and hosting partners to provide the necessary hardware, software, networking, storage, and related technology required to run the Service.
