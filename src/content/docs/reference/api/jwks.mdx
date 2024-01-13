@@ -54,7 +54,7 @@ interface Jwk {
 ### Usage
 
 ```ts
-const response = await fetch(`https://api.nopwd.io/v1/jwks/${kid}`);
+const response = await fetch(`https://api.nopwd.io/v0/jwks/${kid}`);
 const jwk = await response.json();
 ```
 
@@ -79,6 +79,6 @@ interface Jwks {
 ### Usage
 
 ```ts
-const response = await fetch("https://api.nopwd.io/v1/jwks");
+const response = await fetch("https://api.nopwd.io/v0/jwks");
 const jwks = await response.json();
 ```

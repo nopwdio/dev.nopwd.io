@@ -48,7 +48,7 @@ type Response = {
 #### simple authentication
 
 ```ts
-await fetch("https://api.nopwd.io/v1/email/requests", {
+await fetch("https://api.nopwd.io/v0/email/requests", {
   method: "POST",
   body: JSON.stringify({
     email: "user@email.com",
@@ -72,7 +72,7 @@ const digest64 = btoa(String.fromCharCode(...new Uint8Array(digest)))
   .replace(/\//g, "_");
 
 // pass it to the server along with the authenticate request
-await fetch("https://api.nopwd.io/v1/email/requests", {
+await fetch("https://api.nopwd.io/v0/email/requests", {
   method: "POST",
   body: JSON.stringify({
     email: "user@email.com",
@@ -126,7 +126,7 @@ The `access_token` has to be send securely to your backend with **https**.
 // ...
 
 // pass it to the server along with the authenticate request
-await fetch("https://api.nopwd.io/v1/email/tokens", {
+await fetch("https://api.nopwd.io/v0/email/tokens", {
   method: "POST",
   body: JSON.stringify({
     code, // the code parameter from your callback url

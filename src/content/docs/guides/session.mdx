@@ -92,7 +92,7 @@ If you don't have a backend server, for example, if you're using Webflow, we hav
 const accessToken = "...";
 const myDomain = "mywebsite.com";
 
-const response = await fetch(`https://api.nopwd.io/v1/tokens/${accessToken}`);
+const response = await fetch(`https://api.nopwd.io/v0/tokens/${accessToken}`);
 
 if (!response.ok) {
   return; // invalid/expired token
@@ -116,7 +116,7 @@ Here is an example using the battle-tested [jose library](https://github.com/pan
 
 ```ts
 const token = "..."; // the user's access token
-const JWKS = createRemoteJWKSet(new URL("https://api.nopwd.io/v1/jwks"));
+const JWKS = createRemoteJWKSet(new URL("https://api.nopwd.io/v0/jwks"));
 
 const { payload } = await jwtVerify(token, JWKS, {
   issuer: "nopwd.io",
