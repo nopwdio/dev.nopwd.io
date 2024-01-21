@@ -6,7 +6,7 @@ export default defineConfig({
 	site: 'https://dev.nopwd.io',
 	integrations: [
 		starlight({
-			title: '<dev/>',
+			title: 'dev',
 			logo: {
 				light: './src/assets/light.svg',
 				dark: './src/assets/dark.svg',
