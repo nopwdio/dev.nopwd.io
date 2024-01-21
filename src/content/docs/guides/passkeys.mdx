@@ -12,8 +12,15 @@ Passkeys are:
 - **easier** - users can select an account to sign in with biometric sensor.
 - **safer** - passkeys are proven to be resistant to phishing, credential stuffing, and other remote attacks.
 
-:::caution[Browsers support]
-Passkeys is fully supported by Safari since `≥16.6` but not for Chrome at this moment:
+## Browser limitations
+When adding support for WebAuthn, special considerations must be made for browsers as it is still an "emerging" technology.
+
+:::caution[Safari]
+Passkeys are fully supported by Safari since `≥16.6` but in some cases, registration may fail if a conditional UI has been already started.
+This could lead to an "NotAllowedError" if the current page hasn't been reloaded: [learn more](https://bugs.webkit.org/show_bug.cgi?id=257176). [A pull request](https://github.com/WebKit/WebKit/pull/22983) has been proposed and is waiting to be merged.
+:::
+
+:::caution[Chrome]
 Conditional UI (a way to display a passkey from a login form) is not triggered when used inside a custom element [bug here](https://bugs.chromium.org/p/chromium/issues/detail?id=1404106) and [here](https://bugs.chromium.org/p/chromium/issues/detail?id=1505191).
 :::
 
