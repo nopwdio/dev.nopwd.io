@@ -27,7 +27,7 @@ Conditional UI (a way to display a passkey from a login form) is not triggered w
 ## Creating a passkey
 
 Before asking your user to create a Passkey you need to make sure that their browsers are compatible.
-The `np:login` event emitted from the email authentication [`<np-email-auth>`](/reference/components/np-email-auth) compontent contains a `suggest_passkeys` attribute.
+The `np:login` event emitted from the email authentication [`<np-email-auth>`](/reference/components/np-email-auth) component contains a `suggest_passkeys` attribute.
 It is set to `true` if the user's browser support Passkeys. Use it to suggest a passkey creation process only for compatible browsers.
 
 To create a passkey, just add the [`<np-passkey-register>`](/reference/components/np-passkey-register) component.
@@ -61,7 +61,7 @@ When focused by the user, this input element displays the created passkey for yo
 <np-passkey-conditional></np-passkey-conditional>
 
 <script type="module">
-  // listen to the 'np:auth' event
+  // listen to the 'np:login' event
   const el = document.querySelector("np-passkey-conditional");
 
   el.addEventListner("np:login", (e) => {
