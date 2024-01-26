@@ -39,9 +39,6 @@ This component will then emit a `np:register` event when created.
 <np-passkey-register></np-passkey-register>
 
 <script type="module">
-  // If you use CDN, ensure the component is loaded before interacting with it.
-  await customElements.whenDefined("np-passkey-register");
-
   el.addEventListner("np:register", (e) => {
     // The passkey has been created 🎉
     const { id } = e.detail; // the passkey id.

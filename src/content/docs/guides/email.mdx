@@ -14,9 +14,6 @@ From your login page, add the [`<np-email-auth>`](/reference/components/np-email
 <np-email-auth></np-email-auth>
 
 <script type="module">
-  // If you use CDN, ensure the component is loaded before interacting with it.
-  await customElements.whenDefined("np-email-auth");
-
   // set the email property
   const el = document.querySelector("np-email-auth");
   el.email = "ada@lovelace.uk"; // from an input field somewhere
