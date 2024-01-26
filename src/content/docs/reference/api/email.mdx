@@ -4,7 +4,7 @@ sidebar:
   order: 1
 ---
 
-These two API allows you to authenticate a user using a **magic link**.
+These two API allow you to authenticate a user using a **magic link**.
 
 | Method | Ressources          | Description                                           |
 | ------ | ------------------- | ----------------------------------------------------- |
@@ -14,7 +14,7 @@ These two API allows you to authenticate a user using a **magic link**.
 ## POST /email/requests
 
 This endpoint send an authentication request to the provided user's `email`.
-The user is sent back to the `callback` url with an authorization `code`.
+The user is sent back to the `callback_uri` url with an authorization `code`.
 
 ### Request Body
 
@@ -57,7 +57,7 @@ await fetch("https://api.nopwd.io/v0/email/requests", {
 });
 ```
 
-#### With Proof Key for Code Exchange (PKCE)
+#### Optional: With Proof Key for Code Exchange (PKCE)
 
 For additional security and prevent the authorization code to be intercepted (URL scheme spoofing on app, malicious browser extension, web server logs, etc.) you can generate a random string and send the associated hash result (`code_challenge`) to the authenticate endpoint.
 
@@ -84,7 +84,9 @@ await fetch("https://api.nopwd.io/v0/email/requests", {
 
 ## POST /email/tokens
 
-Exchange an authorization `code` for an access `token`.
+Once the user has clicked on the link sent by email, they will be redirected to the url defined by `callback_uri` with the parameter `code`.
+This can be exchanged for an access `token` with this following API endpoint.
+
 The authorization `code` is valid **only one time** and up to **20 minutes**: Your users have to click on the authorization button before this delay to grant the access.
 
 ### Request Body
@@ -104,11 +106,11 @@ interface Response {
 }
 ```
 
-The `access_token` is valid for **10 minutes**.
+The access `token` is valid for **10 minutes**.
 
 :::tip[Security considerations]
-Never store the `access_token` from your client side nor server side.
-The `access_token` has to be send securely to your backend with **https**.
+Never store the access `token` from your client side nor server side.
+It has to be send securely to your backend with **https**.
 :::
 
 ### Response Codes
