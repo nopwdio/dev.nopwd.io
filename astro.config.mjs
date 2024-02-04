@@ -42,6 +42,17 @@ export default defineConfig({
 					],
 				},
 			],
+			head: [
+				// Example: add Fathom analytics script tag.
+				{
+					tag: 'script',
+					attrs: {
+						src: 'https://cdn.jsdelivr.net/npm/@nopwdio/sdk-js@latest/cdn/components/np-status.js',
+						type: "module"
+					},
+				},
+			],
 		}),
+		
 	],
 });

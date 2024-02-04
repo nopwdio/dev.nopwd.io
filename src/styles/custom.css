@@ -1,115 +1,121 @@
 :root {
-	--sl-color-accent-low: #242424;
-	--sl-color-accent: #8b5cf6;
-	--sl-color-accent-high: #Ab7cff;
-	
-	--sl-color-white: #ffffff;
-	--sl-color-gray-1: #eeeeee;
-	--sl-color-gray-2: #c2c2c2;
-	--sl-color-gray-3: #8b8b8b;
-	--sl-color-gray-4: #585858;
-	--sl-color-gray-5: #383838;
-	--sl-color-gray-6: #272727;
-	--sl-color-black: #000;
+  --sl-color-accent-low: #242424;
+  --sl-color-accent: #8b5cf6;
+  --sl-color-accent-high: #ab7cff;
 
-	--sl-color-bg-sidebar: #000;
-	--sl-color-bg-nav: #000;
-	--sl-color-bg: #000;
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #eeeeee;
+  --sl-color-gray-2: #c2c2c2;
+  --sl-color-gray-3: #8b8b8b;
+  --sl-color-gray-4: #585858;
+  --sl-color-gray-5: #383838;
+  --sl-color-gray-6: #272727;
+  --sl-color-black: #000;
+
+  --sl-color-bg-sidebar: #000;
+  --sl-color-bg-nav: #000;
+  --sl-color-bg: #000;
 }
 /* Light mode colors. */
-:root[data-theme='light'] {
-	--sl-color-accent-low: #d7d7d7;
-	--sl-color-accent: #8b5cf6;
-	--sl-color-accent-high: #Ab7cff;
+:root[data-theme="light"] {
+  --sl-color-accent-low: #d7d7d7;
+  --sl-color-accent: #8b5cf6;
+  --sl-color-accent-high: #ab7cff;
 
-	--sl-color-white: #181818;
-	--sl-color-gray-1: #272727;
-	--sl-color-gray-2: #383838;
-	--sl-color-gray-3: #585858;
-	--sl-color-gray-4: #8b8b8b;
-	--sl-color-gray-5: #c2c2c2;
-	--sl-color-gray-6: #eeeeee;
-	--sl-color-gray-7: #f6f6f6;
-	--sl-color-black: #ffffff;
+  --sl-color-white: #181818;
+  --sl-color-gray-1: #272727;
+  --sl-color-gray-2: #383838;
+  --sl-color-gray-3: #585858;
+  --sl-color-gray-4: #8b8b8b;
+  --sl-color-gray-5: #c2c2c2;
+  --sl-color-gray-6: #eeeeee;
+  --sl-color-gray-7: #f6f6f6;
+  --sl-color-black: #ffffff;
 
-	--sl-color-bg-nav: #fff;
-	--sl-color-bg: #fff;
-
+  --sl-color-bg-nav: #fff;
+  --sl-color-bg: #fff;
 }
 
 :root {
-	--sl-text-h1: 2em;
-	--sl-text-h2: 1.6em;
-	--sl-text-h3: 1.2em;
-	--sl-text-h4: 1em;
+  --sl-text-h1: 2em;
+  --sl-text-h2: 1.6em;
+  --sl-text-h3: 1.2em;
+  --sl-text-h4: 1em;
+}
+
+/**/
+:root np-status {
+  background: #111;
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+}
+
+:root[data-theme="light"] np-status {
+  background: #eee;
 }
 
 /* customizing site title */
 .site-title {
-	font-size: 1em;
-	gap: 0.2em;
+  font-size: 1em;
+  gap: 0.2em;
 }
 
-
 .site-title img {
-	width: 1.2em;
+  width: 1.2em;
 }
 
 /* customizing tips */
 :root .starlight-aside {
-	border-left-width: 2px;	
+  border-left-width: 2px;
 }
 
 :root .starlight-aside--tip {
-	background-color: var(--sl-color-gray-6);
+  background-color: var(--sl-color-gray-6);
 }
 
-:root[data-theme='light'] .starlight-aside--tip {
-	background-color: var(--sl-color-gray-7);
+:root[data-theme="light"] .starlight-aside--tip {
+  background-color: var(--sl-color-gray-7);
 }
-
 
 /* customizing darkmod selector */
 .header select {
-	
 }
 
 /* customizing button */
 .action.primary {
-	background-image: linear-gradient(45deg, #3b82f6, #8b5cf6);
-	color: white;
+  background-image: linear-gradient(45deg, #3b82f6, #8b5cf6);
+  color: white;
 }
 
 /* customizing link card */
 .card-grid > div:hover,
 .pagination-links a:hover {
-	border: var(--sl-color-accent) 1px solid;
+  border: var(--sl-color-accent) 1px solid;
 }
 
 /* right nav bar */
 .right-sidebar-panel nav ul li {
-	border-left: 2px solid var(--sl-color-gray-5);
-	margin-left: 4px;
+  border-left: 2px solid var(--sl-color-gray-5);
+  margin-left: 4px;
 }
 
 .right-sidebar-panel nav ul li:hover {
-	border-left-color: var(--sl-color-grey-4);
+  border-left-color: var(--sl-color-grey-4);
 }
 .right-sidebar-panel nav ul li:has(a[aria-current="true"]) {
-	border-left-color: var(--sl-color-accent);
+  border-left-color: var(--sl-color-accent);
 }
-
 
 .right-sidebar-panel nav ul li a[aria-current="true"] {
-	background-color: transparent;
-	color: var(--sl-color-accent-high);
+  background-color: transparent;
+  color: var(--sl-color-accent-high);
 }
 
-:root[data-theme='light'] .right-sidebar-panel nav ul li a[aria-current="true"] {
-	color: var(--sl-color-accent);
-	border-left-color: var(--sl-color-accent);
+:root[data-theme="light"] .right-sidebar-panel nav ul li a[aria-current="true"] {
+  color: var(--sl-color-accent);
+  border-left-color: var(--sl-color-accent);
 }
 
 .right-sidebar-panel nav h2 {
-	display: none;
+  display: none;
 }
