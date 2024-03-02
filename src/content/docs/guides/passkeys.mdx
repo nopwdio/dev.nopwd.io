@@ -63,7 +63,7 @@ When focused by the user, this input element displays the created passkey for yo
 
   el.addEventListner("np:login", (e) => {
   // a session has been created 🎉
-  const { expires_at, token } = e.detail;
+  const { expires_at, token } = e.target.getSession();
   });
 </script>
 ```

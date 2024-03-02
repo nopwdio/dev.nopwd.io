@@ -27,7 +27,7 @@ This component will then use it to create the user session and emits a `np:login
 ```js
 el.addEventListner("np:login", (e) => {
   // a session has been created 🎉
-  const { expires_at, token } = e.detail;
+  const { expires_at, token } = e.target.getSession();
 });
 ```
 
