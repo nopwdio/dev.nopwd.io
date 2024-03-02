@@ -32,7 +32,7 @@ export enum State {
 | ---------- | --------------------------------------------------------------------------------------------------- |
 | `login()`  | Starts the login flow programmatically. Don't forget to set the `email` property before calling it. |
 | `cancel()` | Cancels the authentication flow.                                                                    |
-| `getSession()` | Returns the current session. Null if user is not authenticated.                                 |
+| `getSession()` | Returns the current session (promise). Null if user is not authenticated.                       |
 
 ## Custom Events
 

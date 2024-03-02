@@ -61,9 +61,9 @@ When focused by the user, this input element displays the created passkey for yo
   // listen to the 'np:login' event
   const el = document.querySelector("np-passkey-conditional");
 
-  el.addEventListner("np:login", (e) => {
+  el.addEventListner("np:login", async (e) => {
   // a session has been created 🎉
-  const { expires_at, token } = e.target.getSession();
+  const { expires_at, token } = await e.target.getSession();
   });
 </script>
 ```

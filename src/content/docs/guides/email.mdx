@@ -25,9 +25,9 @@ By clicking on the received authorization link, he will be redirected to the ori
 This component will then use it to create the user session and emits a `np:login` event.
 
 ```js
-el.addEventListner("np:login", (e) => {
+el.addEventListner("np:login", async (e) => {
   // a session has been created 🎉
-  const { expires_at, token } = e.target.getSession();
+  const { expires_at, token } = await e.target.getSession();
 });
 ```
 
