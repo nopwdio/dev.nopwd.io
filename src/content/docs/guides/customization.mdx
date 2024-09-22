@@ -9,45 +9,53 @@ This gives you control over theme colors, general styling and localization.
 
 ## Styling
 
+### using CSS Parts
 Nopwd uses standard [CSS parts](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) to let you target and styling individual components.
 
 Example to target the empty state:
 
 ```css
-np-email-auth:not([state])::part(button) {
+/* To customize the default state */
+np-logout:not([state])::part(button) {
   background-color: black;
+  color: white;
+}
+
+/* You can also customize every component's state */
+np-logout[state="loggingout"]::part(button) {
+  background-color: transparent;
+  color: grey;
+}
+
+np-logout[state="loggedout"]::part(button) {
+  background-color: green;
+  color: white;
+}
+
+np-logout[state="error"]::part(button) {
+  background-color: red;
   color: white;
 }
 ```
 
-You can also customize every component's state:
+### using tokens
 
-```css
-np-email-auth[state="requesting"]::part(button) {
-  background-color: transparent;
-  color: grey;
-}
-```
 
 ## Localization
 
 Override with ease strings for any element to localize to any language or change the wording to match your brand.
 
 ```html
-<!-- to change the default slot -->
-<np-email-auth>Login</np-email-auth>
-```
+<!-- To override the default slot-->
+<np-logout></np-logout>
 
-Every single component state is also customizable using named slot:
-
-```html
-<np-email-auth>
-  <!-- sending an email -->
-  <span slot="requesting">Sending email...</span>
-  <!-- the email has been sent -->
-  <span slot="requested">Check your mailbox!</span>
-  <!-- ... -->
-</np-email-auth>
+<!-- to override specific slots-->
+<np-logout>
+  Logout
+  <span slot="loggingout">please wait</span>
+  <span slot="loggedout">Bye!</span>
+  <span slot="error">Oooooops</span>
+</np-logout>
 ```
 
 :::tip[Read the component's reference]

@@ -12,22 +12,11 @@ Passkeys are:
 - **easier** - users can select an account to sign in with biometric sensor.
 - **safer** - passkeys are proven to be resistant to phishing, credential stuffing, and other remote attacks.
 
-## Browser limitations
-When adding support for WebAuthn, special considerations must be made for browsers as it is still an "emerging" technology.
-
-:::caution[Safari]
-Passkeys are fully supported by Safari since `≥16.6` but in some cases, registration may fail if a conditional UI has been already started.
-This could lead to an "NotAllowedError" if the current page hasn't been reloaded: [learn more](https://bugs.webkit.org/show_bug.cgi?id=257176). [A pull request](https://github.com/WebKit/WebKit/pull/22983) has been proposed and is waiting to be merged.
-:::
-
-:::caution[Chrome]
-Conditional UI (a way to display a passkey from a login form) is not triggered when used inside a custom element [bug here](https://bugs.chromium.org/p/chromium/issues/detail?id=1404106) and [here](https://bugs.chromium.org/p/chromium/issues/detail?id=1505191).
-:::
 
 ## Creating a passkey
 
 Before asking your user to create a Passkey you need to make sure that their browsers are compatible.
-The `np:login` event emitted from the email authentication [`<np-email-auth>`](/reference/components/np-email-auth) component contains a `suggest_passkeys` attribute.
+The `np:login` event emitted from the email authentication [`<np-login>`](/reference/components/np-login) component contains a `suggest_passkeys` attribute.
 It is set to `true` if the user's browser support Passkeys. Use it to suggest a passkey creation process only for compatible browsers.
 
 To create a passkey, just add the [`<np-passkey-register>`](/reference/components/np-passkey-register) component.
@@ -47,19 +36,20 @@ This component will then emit a `np:register` event when created.
 `;
 ```
 
-This `np:register` event contains the passkey `id`. It can be used to perform further optional administration operations such as revokation.
+This `np:register` event contains the passkey `id`.
+It can be used to perform further optional administration operations such as revokation.
 
 ## Authenticating with Passkeys
 
-Just add the [`<np-passkey-conditional>`](/reference/components/np-passkey-conditional) component to your login page.
-When focused by the user, this input element displays the created passkey for your website and perform authentification flow when selected.
+The [`<np-login>`](/reference/components/np-login) component, which allows the user to enter their email address,
+also enables the selection of passkeys created on your domain. The user simply has to select it to start authentication with the passkey.
 
 ```html
-<np-passkey-conditional></np-passkey-conditional>
+<np-login></np-login>
 
 <script type="module">
   // listen to the 'np:login' event
-  const el = document.querySelector("np-passkey-conditional");
+  const el = document.querySelector("np-login");
 
   el.addEventListner("np:login", async (e) => {
   // a session has been created 🎉
@@ -70,9 +60,7 @@ When focused by the user, this input element displays the created passkey for yo
 
 **What if the user didn't create a passkey yet?**
 
-Don't worry! In that case, the `np-passkey-conditional` component will simply act as a classic email input element for users without a Passkey.
-You can use it as an email input to pass the email value to the [`<np-email-auth>`](/reference/components/np-email-auth) component to fallback to the email link authentication flow.
-
+Don’t worry, the [`<np-login>`](/reference/components/np-login) component allows the user to enter their email address (as a fallback) and will send them an authentication link.
 
 ## You are done!
 

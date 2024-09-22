@@ -45,13 +45,12 @@
 
 /**/
 :root np-status::part(link) {
-  background: #111;
+  background: transparent;
   padding: 0.5em 1em;
   border-radius: 0.5em;
 }
 
 :root[data-theme="light"] np-status::part(link) {
-  background: #eee;
 }
 
 /* customizing site title */

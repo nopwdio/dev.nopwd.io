@@ -4,7 +4,11 @@ sidebar:
   order: 4
 ---
 
-A `button` component for logging out the authenticated user.
+| Description                                           | Overview               |
+| ----------------------------------------------------- | ---------------------- |
+| An `button` component to logout an authenticated user.|<np-logout></np-logout> |
+
+A `button` component .
 
 ## Properties
 
@@ -37,15 +41,6 @@ enum State {
 
 The `np:error` custom event detail inherites from the `NoPwdError`.
 
-```ts
-if (event.detail instanceof NetworkError) {
-  // no network
-}
-
-if (event.detail instanceof UnexpectedError) {
-  // Something went wrong
-}
-```
 
 ## Slots
 
@@ -76,6 +71,8 @@ Usage:
 | Name     | Description                     |
 | -------- | ------------------------------- |
 | `button` | The component’s button wrapper. |
+
+
 
 Usage:
 

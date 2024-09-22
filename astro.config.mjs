@@ -51,6 +51,28 @@ export default defineConfig({
 						type: "module"
 					},
 				},
+				{
+					tag: 'script',
+					attrs: {
+						src: 'https://cdn.jsdelivr.net/npm/@nopwdio/sdk-js@latest/cdn/components/np-login.js',
+						type: "module"
+					},
+				},
+				{
+					tag: 'script',
+					attrs: {
+						src: 'https://cdn.jsdelivr.net/npm/@nopwdio/sdk-js@latest/cdn/components/np-logout.js',
+						type: "module"
+					},
+				},
+				{
+					tag: 'script',
+					attrs: {
+						src: 'https://cdn.jsdelivr.net/npm/@nopwdio/sdk-js@latest/cdn/components/np-passkey-register.js',
+						type: "module"
+					},
+				},
+
 			],
 		}),
 		

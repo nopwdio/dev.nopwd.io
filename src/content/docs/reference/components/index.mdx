@@ -8,9 +8,8 @@ sidebar:
 
 | name                                                   | Type     | Description                           |
 | ------------------------------------------------------ | -------- | ------------------------------------- |
-| [`np-email-auth`](/reference/components/np-email-auth) | `button` | Authenticate a user with a magic-link |
+| [`np-login`](/reference/components/np-login) | `input` | Authenticate a user with a magic-link or passkey |
 | [`np-passkey-register`](/reference/components/np-passkey-register)       | `button` | Register a passkey               |
-| [`np-passkey-conditional`](/reference/components/np-passkey-conditional) | `input`  | Authenticate a user with passkey |
 | [`np-logout`](/reference/components/np-logout) | `button` | Revoke the current session |
 
 ## How to install it?
@@ -35,19 +34,20 @@ import "@nopwdio/sdk-js/dist/components/{component-name}.js";
 </TabItem>
 
 <TabItem label="using CDN">
-Each components (`np-email-auth`, `np-passkey-register`, `np-passkey-conditional`) can be loaded individualy from a CDN.
+Each components (`np-login`, `np-passkey-register`, `np-logout`) can be loaded individualy from a CDN.
 
 Example using the email link authentication button component:
 
 ```html
 <script
   type="module"
-  src="https://cdn.jsdelivr.net/npm/@nopwdio/sdk-js@latest/cdn/components/np-email-auth.js"
+  src="https://cdn.jsdelivr.net/npm/@nopwdio/sdk-js@latest/cdn/components/{component-name}.js"
 ></script>
 ```
 
 :::tip[About version management]
-It is not recommended to use the `@latest` suffix, as a major release could break your application. Instead, use a fixed version such as `0.3.2`.
+It is not recommended to use the `@latest` suffix, as a major release could break your application.
+Instead, use a fixed version such as `X.Y.Z`.
 :::
 
 As module is asynchronous, the component may be not loaded during the first render and
@@ -58,7 +58,7 @@ you may notice a Flash of Undefined Custom Elements (FOUCE) when the page loads.
 One option is to use the `:defined` CSS pseudo-class to mask custom elements that haven’t been registered yet.
 
 ```css
-np-email-auth:not(:defined) {
+np-login:not(:defined) {
   visibility: hidden;
 }
 ```
@@ -67,7 +67,7 @@ Another option is to use `customElements.whenDefined()` function, which returns 
 You can then add a specific class to adapt the CSS accordingly.
 
 ```js
-await customElements.whenDefined("np-email-auth");
+await customElements.whenDefined("np-login");
 document.body.classList.add("ready");
 ```
 

@@ -8,23 +8,19 @@ Also known as magic link, email authentication is a passwordless flow where user
 
 ## Add the login with email button
 
-From your login page, add the [`<np-email-auth>`](/reference/components/np-email-auth) component and set the `email` property with your user's email address.
+| Description | Overview                                                                                                      |
+| ----------- | ------------------------------------------------------------------------------------------------------------- |
+| From your login page, just add the [`<np-login>`](/reference/components/np-login) component. |<np-login></np-login> |
 
-```html
-<np-email-auth></np-email-auth>
 
-<script type="module">
-  // set the email property
-  const el = document.querySelector("np-email-auth");
-  el.email = "ada@lovelace.uk"; // from an input field somewhere
-</script>
-```
 
-Once the user clicks on this button, an email will be sent to its inbox.
+Once the user has entered their email address and validated it, an authentication email is sent to the entered address.
 By clicking on the received authorization link, he will be redirected to the original page with an extra `code` parameter.
 This component will then use it to create the user session and emits a `np:login` event.
 
 ```js
+const el = document.querySelector("np-login");
+
 el.addEventListner("np:login", async (e) => {
   // a session has been created 🎉
   const { expires_at, token } = await e.target.getSession();

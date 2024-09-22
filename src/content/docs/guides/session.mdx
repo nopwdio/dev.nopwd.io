@@ -19,20 +19,20 @@ There are two settings for doing so and you can specify the authentication compo
 
 ```html
 <!-- by default, session lifetime is set to 24 hours without any inactivity threshold -->
-<np-email-auth></np-email-auth>
+<np-login></np-login>
 
 <!-- to set a one week session lifetime -->
-<np-email-auth lifetime="604800"></np-email-auth>
+<np-login lifetime="604800"></np-login>
 
 <!-- to set a one week session lifetime with one day inactivity timeout -->
-<np-email-auth lifetime="604800" idletimeout="86400"></np-email-auth>
+<np-login lifetime="604800" idletimeout="86400"></np-login>
 ```
 
 
 ## Getting a fresh session token
 
-A session is initiated when a user is authenticated with `<np-email-auth>` or `<np-passkey-conditional>`
-authentication components.
+A session is initiated when a user is authenticated with `<np-login>`
+authentication component.
 
 To retrieve the user's session token just call `get` method:
 
