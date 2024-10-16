@@ -43,16 +43,6 @@
   --sl-text-h4: 1em;
 }
 
-/**/
-:root np-status::part(link) {
-  background: transparent;
-  padding: 0.5em 1em;
-  border-radius: 0.5em;
-}
-
-:root[data-theme="light"] np-status::part(link) {
-}
-
 /* customizing site title */
 .site-title {
   font-size: 1em;
@@ -117,4 +107,27 @@
 
 .right-sidebar-panel nav h2 {
   display: none;
+}
+
+/* customize components */
+:root np-status::part(link) {
+  background: transparent;
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+}
+
+:root[data-theme="light"] np-status::part(link) {
+}
+
+:root[data-theme="dark"] np-login {
+  --np-component-border-color: #888;
+  --np-component-text-color: #aaa;
+  --np-component-background-color: #111;
+}
+
+:root[data-theme="dark"] np-logout {
+  --np-component-border-color: #aaa;
+}
+:root[data-theme="dark"] np-passkey-register {
+  --np-component-border-color: #aaa;
 }
