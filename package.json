@@ -12,9 +12,7 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@astrojs/starlight": "^0.28.2",
-    "astro": "^4.15.9"
-  },
-  "devDependencies": {
+    "@astrojs/starlight": "^0.28.3",
+    "astro": "^4.16.5"
   }
 }
