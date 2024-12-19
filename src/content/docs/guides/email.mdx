@@ -1,42 +1,40 @@
 ---
-title: Email link authentication
+title: Email Link Authentication
 sidebar:
   order: 1
 ---
 
-Also known as magic link, email authentication is a passwordless flow where users click a unique link sent to their email address to log in.
+Also known as a magic link, email authentication is a passwordless method where users log in by clicking a unique link sent to their email address.
 
-## Add the `np-login` input component
+## Add the `np-login` Input Component
 
 | Description | Overview                                                                                                      |
 | ----------- | ------------------------------------------------------------------------------------------------------------- |
-| From your login page, just add the [`<np-login>`](/reference/components/np-login) component. |<np-login></np-login> |
+| From your login page, add the [`<np-login>`](/reference/components/np-login) component. |<np-login></np-login> |
 
-
-
-Once the user has entered their email address and validated it, an authentication email is sent to the entered address.
-By clicking on the received authorization link, he will be redirected to the original page with an extra `code` parameter.
-This component will then use it to create the user session and emits a `np:login` event.
+Once the user enters their email address and submits it, an authentication email is sent to that address.
+By clicking the authorization link in the email, the user will be redirected to the original page with an additional `code` parameter.
+The component will use this code to create the user session and emit a `np:login` event.
 
 ```js
 const el = document.querySelector("np-login");
 
-el.addEventListner("np:login", async (e) => {
-  // a session has been created 🎉
+el.addEventListener("np:login", async (e) => {
+  // A session has been created 🎉
   const { expires_at, token } = await e.target.getSession();
 });
 ```
 
-## You are done!
+## You Are Done!
 
-Once the session established, you only have to transmit the session token to your server and verify it.
+Once the session is established, transmit the session token to your server and verify it.
 
 import { LinkCard } from "@astrojs/starlight/components";
 
-<LinkCard title="Session management" description="Learn how to manage session and verify the session token" href="/guides/session" />
+<LinkCard title="Session Management" description="Learn how to manage sessions and verify the session token" href="/guides/session" />
 
 :::tip[Promote Passkeys]
-Once the user is authenticated, consider offering him an even smoother and secure experience with Passkeys.
-Passkeys use your fingerprint or other biometric to log you into your websites, just like unlocking your device.
+Once the user is authenticated, consider offering an even smoother and more secure experience with Passkeys.
+Passkeys use your fingerprint or other biometric data to log you into websites, just like unlocking your device.
 See [Passkey Integration](/guides/passkeys) to learn more.
 :::

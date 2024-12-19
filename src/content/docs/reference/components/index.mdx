@@ -1,39 +1,39 @@
 ---
-title: Getting started
+title: Getting Started
 sidebar:
   order: 0
 ---
 
-## Components list
+## Components List
 
-| name                                                   | Type     | Description                           |
+| Name                                                   | Type     | Description                           |
 | ------------------------------------------------------ | -------- | ------------------------------------- |
-| [`np-login`](/reference/components/np-login) | `input` | Authenticate a user with a magic-link or passkey |
+| [`np-login`](/reference/components/np-login) | `input` | Authenticate a user with a magic link or passkey |
 | [`np-passkey-register`](/reference/components/np-passkey-register)       | `button` | Register a passkey               |
 | [`np-logout`](/reference/components/np-logout) | `button` | Revoke the current session |
 
-## How to install it?
+## How to Install
 
-You can load our web components via CDN or by installing it locally using package manager such as NPM.
+You can load our web components via CDN or install them locally using a package manager like NPM.
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 
 <Tabs>
-<TabItem label="using NPM">
-If you don’t want to use the CDN, you can install the latest version of our sdk from npm with the following command.
+<TabItem label="Using NPM">
+If you prefer not to use the CDN, you can install the latest version of our SDK from npm with the following command:
 ```sh
 npm i @nopwdio/sdk-js@latest
 ```
 
-Once installed, you only have to import the desired component and you are good to go.
+Once installed, simply import the desired component:
 
 ```js
 import "@nopwdio/sdk-js/dist/components/{component-name}.js";
 ```
 </TabItem>
 
-<TabItem label="using CDN">
-Each components (`np-login`, `np-passkey-register`, `np-logout`) can be loaded individualy from a CDN.
+<TabItem label="Using CDN">
+Each component (`np-login`, `np-passkey-register`, `np-logout`) can be loaded individually from a CDN.
 
 Example using the email link authentication button component:
 
@@ -44,17 +44,16 @@ Example using the email link authentication button component:
 ></script>
 ```
 
-:::tip[About version management]
+:::tip[Version Management]
 It is not recommended to use the `@latest` suffix, as a major release could break your application.
 Instead, use a fixed version such as `X.Y.Z`.
 :::
 
-As module is asynchronous, the component may be not loaded during the first render and
-you may notice a Flash of Undefined Custom Elements (FOUCE) when the page loads.
+Since modules are loaded asynchronously, the component may not be available during the initial render, causing a Flash of Undefined Custom Elements (FOUCE) when the page loads.
 
-**How to prevent it?**
+**How to Prevent FOUCE**
 
-One option is to use the `:defined` CSS pseudo-class to mask custom elements that haven’t been registered yet.
+One option is to use the `:defined` CSS pseudo-class to hide custom elements that haven’t been registered yet.
 
 ```css
 np-login:not(:defined) {
@@ -62,8 +61,8 @@ np-login:not(:defined) {
 }
 ```
 
-Another option is to use `customElements.whenDefined()` function, which returns a promise that resolves when the specified element is registered.
-You can then add a specific class to adapt the CSS accordingly.
+Another option is to use the `customElements.whenDefined()` function, which returns a promise that resolves when the specified element is registered.
+You can then add a specific class to adjust the CSS accordingly.
 
 ```js
 await customElements.whenDefined("np-login");
@@ -73,11 +72,11 @@ document.body.classList.add("ready");
 </TabItem>
 </Tabs>
 
-## The difference between CDN and NPM
+## CDN vs NPM
 
 TL;DR:
-`@nopwdio/sdk-js/cdn` is for CDN supporters and `@nopwdio/sdk-js/dist` for NPM lovers.
+Use `@nopwdio/sdk-js/cdn` for CDN and `@nopwdio/sdk-js/dist` for NPM.
 
-You’ll notice that the CDN links all start with `/cdn` and npm imports use `/dist`.
-The `/cdn` files are pre-bundled, minified. Code splitting is also used for optimal bandwidth optimization.
-The /dist files DO NOT come pre-bundled, allowing your bundler of choice to more efficiently deduplicate dependencies, resulting in smaller bundles and optimal code sharing.
+CDN links start with `/cdn` and npm imports use `/dist`.
+The `/cdn` files are pre-bundled and minified, with code splitting for optimal bandwidth usage.
+The `/dist` files are not pre-bundled, allowing your bundler to efficiently deduplicate dependencies, resulting in smaller bundles and optimal code sharing.

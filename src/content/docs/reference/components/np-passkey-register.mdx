@@ -11,15 +11,15 @@ sidebar:
 
 ## Properties
 
-| Name    | Format | required | default   | Description                     |
+| Name    | Format | Required | Default   | Description                     |
 | ------- | ------ | -------- | --------- | ------------------------------- |
-| `state` | State  | no       | undefined | The component's internal state. |
+| `state` | State  | No       | undefined | The component's internal state. |
 
 ```ts
 enum State {
-  REGISTERING = "registering", // registering the passkey
-  REGISTERED = "registered", // passkey has been registered
-  ERROR = "error", // an error occured
+  REGISTERING = "registering", // Registering the passkey
+  REGISTERED = "registered", // Passkey has been registered
+  ERROR = "error", // An error occurred
 }
 ```
 
@@ -28,40 +28,41 @@ enum State {
 | Name         | Description                                                                                                |
 | ------------ | ---------------------------------------------------------------------------------------------------------- |
 | `register()` | Starts the registration flow programmatically. |
-| `cancel()`   | Cancels the authentication flow.                                                                           |
+| `cancel()`   | Cancels the registration flow.                                                                           |
 
 ## Custom Events
 
 | Name          | Description                    | Type          |
 | ------------- | ------------------------------ | ------------- |
-| `np:register` | The passkey has been register. | RegisterEvent |
-| `np:error`    | Something went wrong.          | NoPwdError    |
+| `np:register` | The passkey has been registered. | RegisterEvent |
+| `np:error`    | An error occurred.              | NoPwdError    |
 
-The `np:register` custom event detail is defined as follow:
+The `np:register` custom event detail is defined as follows:
 
 ```ts
 interface RegisterEvent {
-  kid: string; // the passkey's id
-}```
+  kid: string; // The passkey's ID
+}
+```
 
-The `np:error` custom event detail inherites from the `NoPwdError`.
-There are 4 types of error:
+The `np:error` custom event detail inherits from `NoPwdError`.
+There are four types of errors:
 
 ```ts
 if (event.detail instanceof WebauthnNotSupportedError) {
-  // this browser doesn't support webauthn
+  // This browser doesn't support WebAuthn
 }
 
 if (event.detail instanceof InvalidTokenError) {
-  // the provided token is invalid (malformed or expired)
+  // The provided token is invalid (malformed or expired)
 }
 
 if (event.detail instanceof NetworkError) {
-  // no network
+  // No network connection
 }
 
 if (event.detail instanceof UnexpectedError) {
-  // Something went wrong
+  // An unexpected error occurred
 }
 ```
 
@@ -72,24 +73,24 @@ if (event.detail instanceof UnexpectedError) {
 | (default)     | The button’s label.               |
 | `registering` | Passkey registration in progress. |
 | `registered`  | Passkey has been registered.      |
-| `error`       | An error occured.                 |
+| `error`       | An error occurred.                |
 
 Usage:
 
 ```html
-<!-- To override the default slot-->
+<!-- To override the default slot -->
 <np-passkey-register>Login</np-passkey-register>
 
-<!-- to override specific slots-->
+<!-- To override specific slots -->
 <np-passkey-register>
   Login
   <span slot="registering">Please wait...</span>
-  <span slot="registered">done!</span>
-  <span slot="error">Oooooops</span>
+  <span slot="registered">Done!</span>
+  <span slot="error">Oops!</span>
 </np-passkey-register>
 ```
 
-# Parts
+## Parts
 
 | Name     | Description                     |
 | -------- | ------------------------------- |
@@ -98,7 +99,7 @@ Usage:
 Usage:
 
 ```css
-/* to target only the default state  */
+/* To target only the default state */
 np-passkey-register:not([state])::part(button) {
   background-color: black;
   color: white;

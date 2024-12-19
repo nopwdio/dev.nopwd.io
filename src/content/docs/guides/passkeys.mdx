@@ -1,42 +1,41 @@
 ---
-title: Passkeys authentication
+title: Passkeys Authentication
 sidebar:
   order: 2
 ---
 
-Based on FIDO Alliance and **W3C standards**, Passkeys are a safer and easier alternative to passwords.
-With passkeys, users can sign in to apps and websites with a biometric sensor (such as a fingerprint or facial recognition), PIN, or pattern, freeing them from having to remember and manage passwords.
+Based on FIDO Alliance and **W3C standards**, passkeys are a safer and easier alternative to passwords.
+With passkeys, users can sign in to apps and websites using a biometric sensor (such as a fingerprint or facial recognition), PIN, or pattern, eliminating the need to remember and manage passwords.
 
 Passkeys are:
 
-- **easier** - users can select an account to sign in with biometric sensor.
-- **safer** - passkeys are proven to be resistant to phishing, credential stuffing, and other remote attacks.
+- **Easier** - Users can sign in using a biometric sensor.
+- **Safer** - Passkeys are resistant to phishing, credential stuffing, and other remote attacks.
 
+## Creating a Passkey
 
-## Creating a passkey
-
-Before asking your user to create a Passkey you need to make sure that their browsers are compatible.
+Before asking your user to create a passkey, ensure their browser is compatible.
 The `np:login` event emitted from the email authentication [`<np-login>`](/reference/components/np-login) component contains a `suggest_passkeys` attribute.
-It is set to `true` if the user's browser support Passkeys. Use it to suggest a passkey creation process only for compatible browsers.
+It is set to `true` if the user's browser supports passkeys. Use it to suggest the passkey creation process only for compatible browsers.
 
-To create a passkey, just add the [`<np-passkey-register>`](/reference/components/np-passkey-register) component.
+To create a passkey, add the [`<np-passkey-register>`](/reference/components/np-passkey-register) component.
 
-Once the user clicks on this button, the browser will prompt the user to create a passkey.
-This component will then emit a `np:register` event when created.
+Once the user clicks on this button, the browser will prompt them to create a passkey.
+This component will then emit a `np:register` event once the passkey is created.
 
 ```html
 <np-passkey-register></np-passkey-register>
 
 <script type="module">
-  el.addEventListner("np:register", (e) => {
+  el.addEventListener("np:register", (e) => {
     // The passkey has been created 🎉
-    const { id } = e.detail; // the passkey id.
+    const { id } = e.detail; // The passkey ID.
   });
 </script>
 ```
 
-This `np:register` event contains the passkey `id`.
-It can be used to perform further optional administration operations such as revokation.
+The `np:register` event contains the passkey `id`.
+It can be used for further optional administrative operations such as revocation.
 
 ## Authenticating with Passkeys
 
@@ -47,24 +46,24 @@ also enables the selection of passkeys created on your domain. The user simply h
 <np-login></np-login>
 
 <script type="module">
-  // listen to the 'np:login' event
+  // Listen to the 'np:login' event
   const el = document.querySelector("np-login");
 
-  el.addEventListner("np:login", async (e) => {
-  // a session has been created 🎉
-  const { expires_at, token } = await e.target.getSession();
+  el.addEventListener("np:login", async (e) => {
+    // A session has been created 🎉 
+    const { expires_at, token } = await e.target.getSession();
   });
 </script>
 ```
 
-**What if the user didn't create a passkey yet?**
+**What if the user hasn't created a passkey yet?**
 
 Don’t worry, the [`<np-login>`](/reference/components/np-login) component allows the user to enter their email address (as a fallback) and will send them an authentication link.
 
 ## You are done!
 
-Once the session established, you only have to transmit the session token to your server and verify it.
+Once the session is established, you only need to transmit the session token to your server and verify it.
 
 import { LinkCard } from "@astrojs/starlight/components";
 
-<LinkCard title="Session management" description="Learn how to manage session and verify the session token" href="/guides/session" />
+<LinkCard title="Session Management" description="Learn how to manage sessions and verify the session token" href="/guides/session" />

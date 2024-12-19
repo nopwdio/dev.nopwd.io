@@ -6,63 +6,58 @@ sidebar:
 
 | Description                                           | Overview               |
 | ----------------------------------------------------- | ---------------------- |
-| An `button` component to logout an authenticated user.|<np-logout></np-logout> |
-
-A `button` component .
+| A `button` component to log out an authenticated user.|<np-logout></np-logout> |
 
 ## Properties
 
-| Name    | Format | required | default   | Description                     |
+| Name    | Type   | Required | Default   | Description                     |
 | ------- | ------ | -------- | --------- | ------------------------------- |
 | `state` | State  | no       | undefined | The component's internal state. |
 
-
 ```ts
 enum State {
-  LOGGINGOUT = "loggingout", // revoking session
-  LOGGEDOUT = "loggedout", // session is revoked
-  ERROR = "error", // something went wrong
+  LOGGINGOUT = "loggingout", // Revoking session
+  LOGGEDOUT = "loggedout", // Session is revoked
+  ERROR = "error", // Something went wrong
 }
 ```
 
 ## Methods
 
-| Name         | Description           |
-| ------------ | --------------------- |
-| `logout()` | End the current session.|
-
+| Name     | Description            |
+| -------- | ---------------------- |
+| `logout` | Ends the current session.|
 
 ## Custom Events
 
-| Name          | Description                   | Type          |
-| ------------- | ------------------------------ | ------------- |
-| `np:logout` | The session is closed. | void   |
-| `np:error`    | Something went wrong.         | NoPwdError    |
+| Name       | Description            | Type       |
+| ---------- | ---------------------- | ---------- |
+| `np:logout`| The session is closed. | void       |
+| `np:error` | Something went wrong.  | NoPwdError |
 
-The `np:error` custom event detail inherites from the `NoPwdError`.
-
+The `np:error` custom event detail inherits from the `NoPwdError`.
 
 ## Slots
 
-| Name          | Description                       |
-| ------------- | --------------------------------- |
-| (default)     | The button’s label.               |
-| `loggingout` | closing the session. |
-| `loggedout`  | Session is closed.      |
-| `error`       | An error occured.                 |
+| Name        | Description               |
+| ----------- | ------------------------- |
+| (default)   | The button’s label.       |
+| `loggingout`| Closing the session.      |
+| `loggedout` | Session is closed.        |
+| `error`     | An error occurred.        |
 
-Usage:
+**Usage:**
 
 ```html
-<!-- To override the default slot-->
+<!-- Override the default slot -->
 <np-logout></np-logout>
 
-<!-- to override specific slots-->
+<!-- Override specific slots -->
 <np-logout>
   Logout
-  <span slot="loggingout">please wait</span>
+  <span slot="loggingout">Please wait</span>
   <span slot="loggedout">Bye!</span>
-  <span slot="error">Oooooops</span>
+  <span slot="error">Oops</span>
 </np-logout>
 ```
 
@@ -72,12 +67,10 @@ Usage:
 | -------- | ------------------------------- |
 | `button` | The component’s button wrapper. |
 
-
-
-Usage:
+**Usage:**
 
 ```css
-/* to target only the default state  */
+/* Target only the default state */
 np-logout:not([state])::part(button) {
   background-color: black;
   color: white;

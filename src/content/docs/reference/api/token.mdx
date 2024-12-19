@@ -1,44 +1,44 @@
 ---
-title: Tokens endpoints
+title: Token Endpoints
 sidebar:
   order: 4
 ---
 
-| Method | Ressources          | Purpose                                                     |
+| Method | Resource            | Purpose                                                     |
 | ------ | ------------------- | ----------------------------------------------------------- |
 | GET    | **/tokens/\:token** | Verifies an access `token` and returns its payload if valid |
 
 ## GET /tokens/\:token
 
 Verifies an access `token` and returns its payload if valid.
-The returned payload respects the [RFC7519](https://tools.ietf.org/html/rfc7519) specs.
+The returned payload adheres to the [RFC7519](https://tools.ietf.org/html/rfc7519) specifications.
 
 ### Parameters
 
-| Param   | Type | Mandatory | Description                  |
-| ------- | ---- | --------- | ---------------------------- |
-| `token` | Path | Yes       | The access `token` to verify |
+| Parameter | Type | Mandatory | Description                  |
+| --------- | ---- | --------- | ---------------------------- |
+| `token`   | Path | Yes       | The access `token` to verify |
 
 ### Response
 
 ```ts
 interface JwtPayload {
   sub: string; // the user's email address
-  aud: string; // the domain where this user has given access to
+  aud: string; // the domain where this user has granted access
   iss: string; // the issuer (i.e. nopwd.io)
-  exp: number; // when this token will expired (POSIX time in sec)
-  iat: number; // when this token has been issued (POSIX time in sec)
-  jti: string; // a unique identifier to the auth flow
-  amr: string[]; // a list of authentication method used to generate this token "webauthn" or "magiclink" for now
+  exp: number; // the expiration time of this token (POSIX time in seconds)
+  iat: number; // the issuance time of this token (POSIX time in seconds)
+  jti: string; // a unique identifier for the authentication flow
+  amr: string[]; // a list of authentication methods used to generate this token, e.g., "webauthn" or "magiclink"
 }
 ```
 
 | Code | Description                                                                    |
 | ---- | ------------------------------------------------------------------------------ |
-| 200  | This token is valid and has not expired                                        |
+| 200  | The token is valid and has not expired                                         |
 | 400  | The access `token` is malformed                                                |
-| 401  | The access `token` is invalid (expired signature key or wrong token signature) |
-| 403  | The access `token` has a wrong issuer (iss != nopwd.io)                        |
+| 401  | The access `token` is invalid (expired signature key or incorrect token signature) |
+| 403  | The access `token` has an incorrect issuer (iss != nopwd.io)                   |
 | 404  | The access `token` is valid but has expired (exp < now)                        |
 
 ### Usage

@@ -11,42 +11,39 @@ sidebar:
 **Usage:**
 
 ```html
-<!-- And yes, it works out of the box -->
+<!-- Works out of the box -->
 <np-login></np-login>
 
-<!-- You can also customize the placeholder -->
-<np-login placeholder="enter your email"></np-login>
+<!-- Customize the placeholder -->
+<np-login placeholder="Enter your email"></np-login>
 
-<!-- and the session lifetime -->
-<np-login lifetime="86000"></np-login>
+<!-- Set the session lifetime -->
+<np-login lifetime="86400"></np-login>
 
-<!-- or the session idle timeout -->
-<np-login idletimeout="3600" lifetime="86000"></np-login>
+<!-- Set the session idle timeout -->
+<np-login idletimeout="3600" lifetime="86400"></np-login>
 ```
-
 
 ## Properties
 
-| Name    | Format | required | default   | Description                     |
-| ------- | ------ | -------- | --------- | ------------------------------- |
-| `id` | text  | no      | "input" | The input component id.               |
-| `value` | email  | no      | undefined | The user's email.               |
-| `placeholder`  | text   | no       | "Your email" | The input field placeholder. |
-| `passkeys` | boolean  | no      | undefined | True if passkeys is supported and ready to authenticate.               |
-| `state` | State  | no       | undefined | The component's internal state. |
-| `lifetime`        | number   | no       | "86400" (24h)      | The session maximum duration in seconds |
-| `idletimeout`        | number   | no       | `lifetime`      | The session inactivity timeout in seconds |
-
-  
+| Name          | Type    | Required | Default   | Description                                      |
+| ------------- | ------- | -------- | --------- | ------------------------------------------------ |
+| `id`          | text    | no       | "input"   | The input component id.                          |
+| `value`       | email   | no       | undefined | The user's email.                                |
+| `placeholder` | text    | no       | "Your email" | The input field placeholder.                     |
+| `passkeys`    | boolean | no       | undefined | True if passkeys are supported and ready to authenticate. |
+| `state`       | State   | no       | undefined | The component's internal state.                  |
+| `lifetime`    | number  | no       | "86400" (24h) | The session maximum duration in seconds.         |
+| `idletimeout` | number  | no       | `lifetime` | The session inactivity timeout in seconds.       |
 
 ```ts
 enum State {
-  EMAIL_SENDING = "email:link:sending", // sending an email link 
-  EMAIL_SENT = "email:link:sent", // the email link has been sent
-  EMAIL_VERIFYING = "email:link:verifying", // verifying the callback code from the email link
-  AUTHENTICATED = "authenticated", // the user is authenticated (using email or passkey)
-  PASSKEYS_VERIFYING = "passkeys:verifying", // the user is anthenticating with passkey
-  ERROR = "error", // an error occured
+  EMAIL_SENDING = "email:link:sending", // Sending an email link 
+  EMAIL_SENT = "email:link:sent", // The email link has been sent
+  EMAIL_VERIFYING = "email:link:verifying", // Verifying the callback code from the email link
+  AUTHENTICATED = "authenticated", // The user is authenticated (using email or passkey)
+  PASSKEYS_VERIFYING = "passkeys:verifying", // The user is authenticating with passkey
+  ERROR = "error", // An error occurred
 }
 ```
 
@@ -54,40 +51,39 @@ enum State {
 
 | Name                | Description                                                                                                    |
 | ------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `loginWithEmail()`  | Starts programmatically the email link login flow. Don't forget to set the `email` property before calling it. |
+| `loginWithEmail()`  | Starts the email link login flow programmatically. Set the `email` property before calling it.                 |
 | `getSession()`      | Returns the current session (`Promise<Session>`). Null if not authenticated.                                   |
 
 ## Custom Events
 
 | Name       | Description                      | Type       |
 | ---------- | -------------------------------- | ---------- |
-| `np:login`  | The user has been authenticated. | Session  |
+| `np:login` | The user has been authenticated. | Session    |
 | `np:error` | Something went wrong.            | NoPwdError |
 
-The `np:login` custom event detail is defined as follow:
+The `np:login` custom event detail is defined as follows:
 
 ```ts
 // AuthEvent type definition
 interface Session {
-  created_at: number; // when the session has been created
-  expires_at: number; // the session expiration date
-  idle_lifetime: number; // the session idle lifetime
+  created_at: number; // When the session was created
+  expires_at: number; // The session expiration date
+  idle_lifetime: number; // The session idle lifetime
 
-  token: string; // the last generated token
-  refreshed_at: number; // when a new token has been generated
-  token_payload: TokenPayload; // its payload
+  token: string; // The last generated token
+  refreshed_at: number; // When a new token was generated
+  token_payload: TokenPayload; // Its payload
 
-  suggest_passkeys: boolean; // true if the user doesn't use a passkey and the browser support it
+  suggest_passkeys: boolean; // True if the user doesn't use a passkey and the browser supports it
 }
 ```
 
-The `np:error` custom event detail inherites from the `NoPwdError`.
-
+The `np:error` custom event detail inherits from the `NoPwdError`.
 
 # Parts
 
 | Name     | Description                     |
 | -------- | ------------------------------- |
-| `input` | The component’s input wrapper. |
+| `input`  | The component’s input wrapper.  |
 | `button` | The component’s button wrapper. |
 

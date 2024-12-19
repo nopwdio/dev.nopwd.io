@@ -1,69 +1,61 @@
 ---
-title: Session management
+title: Session Management
 sidebar:
   order: 1
 ---
 
-## Customizing the session duration
+## Customizing the Session Duration
 
-Depending on the business domain of an application, there might be different requirements for how long users should remain signed in.
-Criteria to base this decision upon typically revolve around user activity on the application and how long it has been since the user first signed in.
+Depending on your application's business domain, the required session duration may vary. This decision typically depends on user activity and the time elapsed since the user first signed in.
 
-Ultimately, picking the ideal session lifetime is a trade-off between security and user experience.
-Longer sessions are generally better for UX but worse for security; and vice-versa.
+Choosing the ideal session lifetime is a balance between security and user experience. Longer sessions enhance UX but may compromise security, and vice versa.
 
-Fortunately, with Nopwd you have to ability to fully control the lifetime of your users' sessions.
-There are two settings for doing so and you can specify the authentication components attributes:
- - `lifetime`: to set the maximum session lifetime (up to a year);
- - `idletimeout` : to optionaly set the inactivity timeout.
+With Nopwd, you have full control over your users' session lifetimes. You can configure two settings:
+ - `lifetime`: Sets the maximum session duration (up to a year).
+ - `idletimeout`: Optionally sets the inactivity timeout.
 
 ```html
-<!-- by default, session lifetime is set to 24 hours without any inactivity threshold -->
+<!-- Default: session lifetime is 24 hours with no inactivity threshold -->
 <np-login></np-login>
 
-<!-- to set a one week session lifetime -->
+<!-- Set a one-week session lifetime -->
 <np-login lifetime="604800"></np-login>
 
-<!-- to set a one week session lifetime with one day inactivity timeout -->
+<!-- Set a one-week session lifetime with a one-day inactivity timeout -->
 <np-login lifetime="604800" idletimeout="86400"></np-login>
 ```
 
+## Getting a Fresh Session Token
 
-## Getting a fresh session token
+A session starts when a user authenticates using the `<np-login>` component.
 
-A session is initiated when a user is authenticated with `<np-login>`
-authentication component.
-
-To retrieve the user's session token just call `get` method:
+To retrieve the user's session token, call the `get` method:
 
 ```ts
 import { get } from "@nopwdio/sdk-js/dist/core/session";
 
 const session = await get();
 
-if(session === null) {
-  // user is not authenticated
+if (session === null) {
+  // User is not authenticated
   return;
 }
 
-// accessing the session token
+// Accessing the session token
 const { token } = session;
-
 ```
 
-:::tip[about token expiration]
-Session token as a short living (up to ten minutes) secret.
-Don't cache the session token, always call the `get` method to ensure getting always a non-expired session token.
-This method uses a cache so a network request will only be made if the token in memory has expired.
+:::tip[About Token Expiration]
+Session tokens are short-lived (up to ten minutes). Do not cache the session token; always call the `get` method to ensure you have a valid token. This method uses a cache, so a network request is only made if the token in memory has expired.
 :::
 
-## Transmitting the session token
+## Transmitting the Session Token
 
-Your frontend is reponsible for sending the `token` to your server. A typical way to do this is to transmit the `token` in an `Authorization` header like this:
+Your frontend is responsible for sending the `token` to your server. Typically, this is done by transmitting the `token` in an `Authorization` header:
 
 ```ts
 // From your website
-const response = await fetch("[your api endpoint]", {
+const response = await fetch("[your API endpoint]", {
   // ...
   headers: {
     Authorization: `Bearer ${token}`,
@@ -72,21 +64,20 @@ const response = await fetch("[your api endpoint]", {
 });
 ```
 
-:::caution[Security consideration]
+:::caution[Security Consideration]
 Always use a TLS connection to send the `token` to your backend.
 :::
 
-## Verifying the session token
+## Verifying the Session Token
 
-Once transmitted to your server, you must verify that the token is valid (generated for your application and not expired).
-You can achieve that by:
- - Using our API endpoint (simplest way);
- - Using Third-Party JWT Libraries (recommanded);
- - On your own.
+Once transmitted to your server, you must verify that the token is valid (generated for your application and not expired). You can do this by:
+ - Using our API endpoint (simplest way).
+ - Using third-party JWT libraries (recommended).
+ - Verifying it yourself.
 
-### Using our API endpoint
+### Using Our API Endpoint
 
-If you don't have a backend server, for example, if you're using Webflow, we have provided an API endpoint to validate the access token from nopwd.io.
+If you don't have a backend server, for example, if you're using Webflow, we provide an API endpoint to validate the access token from nopwd.io.
 
 ```ts
 const accessToken = "...";
@@ -95,14 +86,14 @@ const myDomain = "mywebsite.com";
 const response = await fetch(`https://api.nopwd.io/v0/tokens/${accessToken}`);
 
 if (!response.ok) {
-  return; // invalid/expired token
+  return; // Invalid/expired token
 }
 
-// the access token decoded payload
+// The access token's decoded payload
 const jwt = await response.json();
 
 if (jwt.aud !== myDomain) {
-  return; // audiance missmatch your website
+  return; // Audience mismatch with your website
 }
 ```
 
@@ -110,68 +101,64 @@ See the API specs [here](/reference/api/token) to learn more.
 
 ### Using Third-Party JWT Libraries
 
-To avoid mistakes in this critical flow, you can use third party libraries to verify JWT tokens. [Check the list of third party libraries here](https://jwt.io/libraries). Make sure you check for the `ES256` algorithm that NoPwd uses.
+To avoid mistakes in this critical flow, you can use third-party libraries to verify JWT tokens. [Check the list of third-party libraries here](https://jwt.io/libraries). Ensure you check for the `ES256` algorithm that NoPwd uses.
 
 Here is an example using the battle-tested [jose library](https://github.com/panva/jose/blob/main/docs/functions/jwt_verify.jwtVerify.md).
 
 ```ts
-const token = "..."; // the user's access token
+const token = "..."; // The user's access token
 const JWKS = createRemoteJWKSet(new URL("https://api.nopwd.io/v0/jwks"));
 
 const { payload } = await jwtVerify(token, JWKS, {
   issuer: "nopwd.io",
-  audience: "[your website domain]", // your own domain
+  audience: "[your website domain]", // Your own domain
 });
 ```
 
-### On your own
+### Verifying It Yourself
 
-The `token` is a JWT Token, and it's signed using Asymmetric Signing Algorithm ES256. This means, unlike symmetric JWT tokens that are signed and verified using the same secret key, this asymmetric JWT Token is signed using a secret key that only Nopwd knows, but can be verified using a public key that you can find [here](/reference/api/jwks).
+The `token` is a JWT token signed using the ES256 asymmetric signing algorithm. Unlike symmetric JWT tokens, which are signed and verified using the same secret key, this asymmetric JWT token is signed using a secret key known only to Nopwd but can be verified using a public key available [here](/reference/api/jwks).
 
 **Checklist:**
 
-- [ ] check 1: Check that the JWT is well-formed
-- [ ] check 2: Make sure that the token is issued by nopwd: `iss = nopwd.io`
-- [ ] check 3: Make sure that the audience matches your own domain's name:`aud = yourwebsite.com`
-- [ ] check 4: Make sure that the token is not expired: `now < exp`
-- [ ] check 5: Check the signature
+- [ ] Check that the JWT is well-formed.
+- [ ] Ensure the token is issued by nopwd: `iss = nopwd.io`.
+- [ ] Ensure the audience matches your domain: `aud = yourwebsite.com`.
+- [ ] Ensure the token is not expired: `now < exp`.
+- [ ] Verify the signature.
 
-:::tip[Performance tips]
-To avoid calling public keys endpoint on every verification, you can cache them for further use. You then have to update your cache only when the key is not found locally.
-In all case, never hard-code it. Key may change to ensure key rotation.
+:::tip[Performance Tips]
+To avoid calling the public keys endpoint on every verification, you can cache them for future use. Update your cache only when the key is not found locally. Never hard-code the key, as it may change to ensure key rotation.
 :::
 
+## Terminating a Session
 
-## Terminating a session
-A session is typically terminated when the user logs out with the `<np-logout>` button 
-component or after a period of inactivity. In that case, this component emit a `np:logout` event.
+A session typically ends when the user logs out using the `<np-logout>` button component or after a period of inactivity. In such cases, this component emits an `np:logout` event.
 
 ```html
 <np-logout></np-logout>
 
 <script type="module">
-  // listen to the 'np:logout' event
+  // Listen to the 'np:logout' event
   const el = document.querySelector("np-logout");
 
-  el.addEventListner("np:logout", (e) => {
-    // session is terminated
+  el.addEventListener("np:logout", (e) => {
+    // Session is terminated
   });
 </script>
 ```
 
-You can also terminate a session programmaticaly using the revoke method:
+You can also terminate a session programmatically using the `revoke` method:
+
 ```ts
 import { revoke } from "@nopwdio/sdk-js/dist/core/session";
 
 await revoke();
 ```
 
+## A Word About Security
 
-## A word about Security
-
-To strengthen security, we use **asymmetric cryptography** (also known as public-key cryptographic) to maintain and verify the validity of a session.
-The **private key** is generated and stored (only) on the end-user device and **can't be extracted** even by your web application.
-A compromission of a session token don't compromize the entire session.
+To enhance security, we use **asymmetric cryptography** (public-key cryptography) to maintain and verify session validity. The **private key** is generated and stored only on the end-user device and **cannot be extracted** even by your web application. Compromising a session token does not compromise the entire session.
 
 
 

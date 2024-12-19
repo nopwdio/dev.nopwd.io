@@ -1,21 +1,20 @@
 ---
-title: JWKS endpoints
+title: JWKS Endpoints
 sidebar:
   order: 2
 ---
 
-These two endpoints are used to retrieve the public keys to verify any access `token` issued by our authorization server (iss=nopwd.io).
+These endpoints allow you to retrieve the public keys needed to verify any access `token` issued by our authorization server (iss=nopwd.io).
 
-Nopwd uses the JSON Web Key (JWK) specification to represent the cryptographic keys used for signing P256 tokens. This specification defines two high-level data structures: JSON Web Key (JWK) and JSON Web Key Set (JWKS)
-Public key is in [the JWKS Format](https://tools.ietf.org/html/rfc7517) so you can verify the signature for all generated access `token`.
+Nopwd uses the JSON Web Key (JWK) specification to represent the cryptographic keys used for signing P256 tokens. This specification defines two high-level data structures: JSON Web Key (JWK) and JSON Web Key Set (JWKS). The public key is in [the JWKS Format](https://tools.ietf.org/html/rfc7517), enabling you to verify the signature of all generated access `tokens`.
 
-| Method | Ressources      | Purpose                               |
+| Method | Resource        | Purpose                               |
 | ------ | --------------- | ------------------------------------- |
 | GET    | **/jwks/\:kid** | Returns a specific JSON Web Key (JWK) |
-| GET    | **/jwks**       | Returns a set of JSON Web Key (JWK)   |
+| GET    | **/jwks**       | Returns a set of JSON Web Keys (JWKS) |
 
-:::tip[Signing keys rotation]
-Nopwd signs with only one signing key at a time but we performing key rotation for security reasons. As your `access_token` could be signed just before our key rotation, we must let you access the previous one using these two endpoints.
+:::tip[Signing Keys Rotation]
+Nopwd uses only one signing key at a time but performs key rotation for security reasons. Since your `access_token` could be signed just before a key rotation, we provide access to the previous key using these endpoints.
 :::
 
 ## GET /jwks/\:kid
@@ -26,10 +25,10 @@ Returns a JWK identified by its `kid`.
 
 | Param  | Type | Mandatory | Description                                          |
 | ------ | ---- | --------- | ---------------------------------------------------- |
-| `:kid` | Path | Yes       | represents the unique identifier for the signing key |
+| `:kid` | Path | Yes       | The unique identifier for the signing key            |
 
-:::tip[How to retrieve the jwk kid?]
-You can get the signing key's `kid` used to sign any of our access `token` from its JWT Header (`kid` parameter).
+:::tip[How to Retrieve the JWK Kid?]
+You can find the signing key's `kid` used to sign any of our access `tokens` in the JWT Header (`kid` parameter).
 :::
 
 ### Response
@@ -37,10 +36,10 @@ You can get the signing key's `kid` used to sign any of our access `token` from 
 ```ts
 interface Jwk {
   kid: string; // The unique identifier for the key
-  kty: string; // The family of cryptographic algorithms used with the key (we are using EC)
-  crv: string; // we are using "P-256"
-  x: string; // the x coordinate of the elliptic Curve (base64 url safe)
-  y: string; // the y coordinate of the elliptic Curve (base64 url safe)
+  kty: string; // The family of cryptographic algorithms used with the key (we use EC)
+  crv: string; // The curve used, which is "P-256"
+  x: string; // The x coordinate of the elliptic curve (base64 url safe)
+  y: string; // The y coordinate of the elliptic curve (base64 url safe)
 }
 ```
 
@@ -48,8 +47,8 @@ interface Jwk {
 
 | Code | Description                                 |
 | ---- | ------------------------------------------- |
-| 200  | You did great.                              |
-| 404  | This key doesn't exist or has been revoked. |
+| 200  | Request was successful.                     |
+| 404  | The key doesn't exist or has been revoked.  |
 
 ### Usage
 
@@ -60,7 +59,7 @@ const jwk = await response.json();
 
 ## GET /jwks
 
-Returns all valid JSON Web Keys (JWK).
+Returns all valid JSON Web Keys (JWKs).
 
 ### Response
 
@@ -74,7 +73,7 @@ interface Jwks {
 
 | Code | Description    |
 | ---- | -------------- |
-| 200  | You did great. |
+| 200  | Request was successful. |
 
 ### Usage
 

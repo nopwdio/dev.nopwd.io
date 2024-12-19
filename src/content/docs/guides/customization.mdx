@@ -1,27 +1,26 @@
 ---
-title: Component customization
+title: Component Customization
 sidebar:
   order: 3
 ---
 
-Nopwd components can be customized at a high level.
-This gives you control over theme colors, general styling and localization.
+Nopwd components can be customized extensively. This allows you to control theme colors, general styling, and localization.
 
 ## Styling
 
-### using CSS Parts
-Nopwd uses standard [CSS parts](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) to let you target and styling individual components.
+### Using CSS Parts
+Nopwd uses standard [CSS parts](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) to let you target and style individual components.
 
 Example to target the empty state:
 
 ```css
-/* To customize the default state */
+/* Customize the default state */
 np-logout:not([state])::part(button) {
   background-color: black;
   color: white;
 }
 
-/* You can also customize every component's state */
+/* Customize each component state */
 np-logout[state="loggingout"]::part(button) {
   background-color: transparent;
   color: grey;
@@ -38,26 +37,26 @@ np-logout[state="error"]::part(button) {
 }
 ```
 
-### using tokens
+### Using Tokens
 
 
 ## Localization
 
-Override with ease strings for any element to localize to any language or change the wording to match your brand.
+Easily override strings for any element to localize to any language or change the wording to match your brand.
 
 ```html
-<!-- To override the default slot-->
+<!-- Override the default slot -->
 <np-logout></np-logout>
 
-<!-- to override specific slots-->
+<!-- Override specific slots -->
 <np-logout>
   Logout
-  <span slot="loggingout">please wait</span>
+  <span slot="loggingout">Please wait</span>
   <span slot="loggedout">Bye!</span>
-  <span slot="error">Oooooops</span>
+  <span slot="error">Oops!</span>
 </np-logout>
 ```
 
-:::tip[Read the component's reference]
-To prevent unexpected behaviors, please take the time to review the [component reference](/reference/components) explaining all `::part` and `slots` for each of them.
+:::tip[Read the Component Reference]
+To prevent unexpected behaviors, please review the [component reference](/reference/components) which explains all `::part` and `slots` for each component.
 :::

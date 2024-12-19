@@ -1,37 +1,37 @@
 ---
-title: Passkeys endpoints
+title: Passkeys Endpoints
 sidebar:
   order: 2
 ---
 
-| Method | Ressources                  | Purpose             |
-| ------ | --------------------------- | ------------------- |
-| GET    | **/webauthn/passkeys/\:id** | Get a passkey info. |
-| DELETE | **/webauthn/passkeys/\:id** | Revoke a passkey.   |
+| Method | Resource                    | Purpose               |
+| ------ | --------------------------- | --------------------- |
+| GET    | **/webauthn/passkeys/\:id** | Retrieve passkey info |
+| DELETE | **/webauthn/passkeys/\:id** | Revoke a passkey      |
 
 ## GET /webauthn/passkeys/\:id
 
-Returns a Passkey info identified by its `id`.
+Retrieves information about a passkey identified by its `id`.
 
 ### Request
 
 | Param | Type | Mandatory | Description                                    |
 | ----- | ---- | --------- | ---------------------------------------------- |
-| `:id` | Path | Yes       | represents the unique identifier for a passkey |
+| `:id` | Path | Yes       | The unique identifier for a passkey            |
 
 :::tip[How to retrieve the passkey id?]
-The id is emitted on the passkey registration flow.
-See [np-passkey-register](/reference/components/np-passkey-register) to learn more.
+The id is provided during the passkey registration process.
+See [np-passkey-register](/reference/components/np-passkey-register) for more details.
 :::
 
 ### Response
 
 ```ts
 interface Passkey {
-  alg: string; // The passkey algorithm (ex: P-256)
-  created_at: number; // the unix time when this passkey has been created
-  last_use: number; // the unix time when this passkey has been used
-  created_with: string[]; // a list of authentication methods used to generate this passkey
+  alg: string; // The passkey algorithm (e.g., P-256)
+  created_at: number; // The Unix timestamp when this passkey was created
+  last_use: number; // The Unix timestamp when this passkey was last used
+  created_with: string[]; // A list of authentication methods used to generate this passkey
 }
 ```
 
@@ -39,37 +39,37 @@ interface Passkey {
 
 | Code | Description                                             |
 | ---- | ------------------------------------------------------- |
-| 200  | You did great.                                          |
-| 404  | This passkey doesn't exist or has been already revoked. |
+| 200  | Request was successful.                                 |
+| 404  | The passkey does not exist or has already been revoked. |
 
 ### Usage
 
 ```ts
 const response = await fetch(`https://api.nopwd.io/v0/webauthn/passkeys/${id}`);
-const jwk = await response.json();
+const passkey = await response.json();
 ```
 
 ## DELETE /webauthn/passkeys/\:id
 
-Revoke a Passkey by its `id`.
+Revokes a passkey identified by its `id`.
 
 ### Request
 
 | Param | Type | Mandatory | Description                                    |
 | ----- | ---- | --------- | ---------------------------------------------- |
-| `:id` | Path | Yes       | represents the unique identifier for a passkey |
+| `:id` | Path | Yes       | The unique identifier for a passkey            |
 
 :::tip[How to retrieve the passkey id?]
-The id is emitted on the passkey registration flow.
-See [np-passkey-register](/reference/components/np-passkey-register) to learn more.
+The id is provided during the passkey registration process.
+See [np-passkey-register](/reference/components/np-passkey-register) for more details.
 :::
 
 ### Response Codes
 
 | Code | Description                                             |
 | ---- | ------------------------------------------------------- |
-| 200  | You did great.                                          |
-| 404  | This passkey doesn't exist or has been already revoked. |
+| 200  | Request was successful.                                 |
+| 404  | The passkey does not exist or has already been revoked. |
 
 ### Usage
 

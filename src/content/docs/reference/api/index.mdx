@@ -1,42 +1,42 @@
 ---
-title: Getting started
+title: Getting Started
 sidebar:
   order: 0
 ---
 
-## API base url
+## API Base URL
 
-All endpoints live under the URL `https://api.nopwd.io/:version` and then generally follow the REST architecture.
+All endpoints are located at `https://api.nopwd.io/:version` and generally follow REST architecture principles.
 
 The current version is `v0`.
 
 :::tip[encoding]
-All requests must be encoded as JSON with the `Content-Type: application/json` header. If not otherwise specified, responses from the NoPwd API, including errors, are encoded exclusively as JSON as well.
+All requests must be encoded as JSON with the `Content-Type: application/json` header. Unless otherwise specified, responses from the NoPwd API, including errors, are also encoded exclusively as JSON.
 :::
 
-## Managing error
+## Managing Errors
 
-### Error Code
+### Error Codes
 
-Nopwd uses conventional HTTP response codes to indicate the success or failure of an API request. In general: Codes in the 2xx range indicate success. Codes in the 4xx range indicate an error that failed given the information provided (e.g., a required parameter was omitted or malformed). Codes in the 5xx range indicate an error with Nopwd's servers (these are rare).
+NoPwd uses standard HTTP response codes to indicate the success or failure of an API request. In general: Codes in the 2xx range indicate success. Codes in the 4xx range indicate an error due to the information provided (e.g., a required parameter was omitted or malformed). Codes in the 5xx range indicate an error with NoPwd's servers (these are rare).
 
-All error responses match the following format:
+All error responses follow this format:
 
 ```ts
 {
-  error: "The attribute 'email' is missing", // a short description of the issue
+  error: "The attribute 'email' is missing", // A short description of the issue
 }
 ```
 
-Some of them (such as 429) may have additional parameters (see rate limits section).
+Some errors (such as 429) may include additional parameters (see the Rate Limits section).
 
-### Rate limits
+### Rate Limits
 
-The Nopwd API employs a number of safeguards against bursts of incoming traffic to help maximize its stability. Users who send many requests in quick succession may see error responses that show up as status code 429.
+The NoPwd API employs several safeguards against bursts of incoming traffic to help maintain stability. Users who send many requests in quick succession may receive error responses with status code 429.
 
 ```ts
 {
-  error: "slow down", // a short description of the issue
-  retry_at: 408430500, // unix date to reach out before retry.
+  error: "slow down", // A short description of the issue
+  retry_at: 408430500, // Unix timestamp indicating when to retry.
 }
 ```

@@ -1,29 +1,29 @@
 ---
-title: email endpoints
+title: Email Endpoints
 sidebar:
   order: 1
 ---
 
-These two API allow you to authenticate a user using a **magic link**.
+These APIs allow you to authenticate a user using a **magic link**.
 
-| Method | Ressources          | Description                                           |
+| Method | Resource            | Description                                           |
 | ------ | ------------------- | ----------------------------------------------------- |
 | POST   | **/email/requests** | Send an authentication request                        |
-| POST   | **/email/tokens**   | Exchange an authorization `code` to an `access_token` |
+| POST   | **/email/tokens**   | Exchange an authorization `code` for an `access_token` |
 
 ## POST /email/requests
 
-This endpoint send an authentication request to the provided user's `email`.
-The user is sent back to the `callback_uri` url with an authorization `code`.
+This endpoint sends an authentication request to the provided user's `email`.
+The user is redirected to the `callback_uri` URL with an authorization `code`.
 
 ### Request Body
 
 ```ts
 interface Request {
-  email: string; // the user's email
-  callback_uri: string; // the callback url the user is redirected to
-  lang?: string; // Optional: the language used for the email (optional). If not specified, 'EN' will be used.
-  code_challenge?: string; // Optional: an hashed random string (random string -> sha256 -> url safe base64).
+  email: string; // The user's email
+  callback_uri: string; // The callback URL the user is redirected to
+  lang?: string; // Optional: The language used for the email. Defaults to 'EN' if not specified.
+  code_challenge?: string; // Optional: A hashed random string (random string -> sha256 -> URL-safe base64).
 }
 ```
 
@@ -31,7 +31,7 @@ interface Request {
 
 ```ts
 type Response = {
-  expires_at: string; // the unix time before this authentication request expires
+  expires_at: string; // The Unix time when this authentication request expires
 };
 ```
 
@@ -39,13 +39,13 @@ type Response = {
 
 | Code | Description                                                                                                                                                      |
 | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 200  | You did great.                                                                                                                                                   |
-| 400  | Malformed request. Could be a malformed `email` or `callback` url. Important: callback url must use `https`.                                                     |
-| 429  | Too many auth requests. The user must retry after `retry_at`. Could append if too many requests are made against a specific email address or from an abusing IP. |
+| 200  | Request successful.                                                                                                                                              |
+| 400  | Malformed request. This could be due to an invalid `email` or `callback_uri`. Note: The callback URL must use `https`.                                           |
+| 429  | Too many authentication requests. The user must retry after `retry_at`. This can occur if too many requests are made for a specific email address or from an abusive IP. |
 
 ### Usage
 
-#### simple authentication
+#### Simple Authentication
 
 ```ts
 await fetch("https://api.nopwd.io/v0/email/requests", {
@@ -59,19 +59,19 @@ await fetch("https://api.nopwd.io/v0/email/requests", {
 
 #### Optional: With Proof Key for Code Exchange (PKCE)
 
-For additional security and prevent the authorization code to be intercepted (URL scheme spoofing on app, malicious browser extension, web server logs, etc.) you can generate a random string and send the associated hash result (`code_challenge`) to the authenticate endpoint.
+For additional security and to prevent the authorization code from being intercepted (e.g., via URL scheme spoofing on apps, malicious browser extensions, web server logs), you can generate a random string and send the associated hash result (`code_challenge`) to the authentication endpoint.
 
 ```ts
-// assuming codeVerifier is random and stored on the client side
+// Assuming codeVerifier is random and stored on the client side
 var digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(codeVerifier));
 
-// convert it to urlsafe base64
+// Convert it to URL-safe base64
 const digest64 = btoa(String.fromCharCode(...new Uint8Array(digest)))
   .replace(/=/g, "")
   .replace(/\+/g, "-")
   .replace(/\//g, "_");
 
-// pass it to the server along with the authenticate request
+// Pass it to the server along with the authentication request
 await fetch("https://api.nopwd.io/v0/email/requests", {
   method: "POST",
   body: JSON.stringify({
@@ -84,17 +84,17 @@ await fetch("https://api.nopwd.io/v0/email/requests", {
 
 ## POST /email/tokens
 
-Once the user has clicked on the link sent by email, they will be redirected to the url defined by `callback_uri` with the parameter `code`.
-This can be exchanged for an access `token` with this following API endpoint.
+Once the user has clicked on the link sent by email, they will be redirected to the URL defined by `callback_uri` with the parameter `code`.
+This can be exchanged for an access `token` using the following API endpoint.
 
-The authorization `code` is valid **only one time** and up to **20 minutes**: Your users have to click on the authorization button before this delay to grant the access.
+The authorization `code` is valid **only once** and for up to **20 minutes**. Users must click on the authorization link within this time frame to grant access.
 
 ### Request Body
 
 ```ts
 interface Request {
-  code: string; // the authorization code parameter from your callback url
-  code_verifier?: string; // Optional: the random string used during the authentication step
+  code: string; // The authorization code parameter from your callback URL
+  code_verifier?: string; // Optional: The random string used during the authentication step
 }
 ```
 
@@ -108,30 +108,31 @@ interface Response {
 
 The access `token` is valid for **10 minutes**.
 
-:::tip[Security considerations]
-Never store the access `token` from your client side nor server side.
-It has to be send securely to your backend with **https**.
+:::tip[Security Considerations]
+Never store the access `token` on the client side or server side.
+It must be sent securely to your backend using **https**.
 :::
 
 ### Response Codes
 
 | Code | Description                                                                          |
 | ---- | ------------------------------------------------------------------------------------ |
-| 200  | You are awesome!                                                                     |
+| 200  | Request successful.                                                                  |
 | 400  | Malformed request.                                                                   |
-| 401  | The authorization `code` is invalid (malformed or expired) or has already been used. |
+| 401  | The authorization `code` is invalid (malformed, expired, or already used).           |
 
 ### Usage
 
 ```ts
-// retrieve the code paramater from your url.
+// Retrieve the code parameter from your URL.
 // ...
 
-// pass it to the server along with the authenticate request
+// Pass it to the server along with the authentication request
 await fetch("https://api.nopwd.io/v0/email/tokens", {
   method: "POST",
   body: JSON.stringify({
-    code, // the code parameter from your callback url
+    code, // The code parameter from your callback URL
   }),
 });
 ```
+
