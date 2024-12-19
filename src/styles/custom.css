@@ -79,6 +79,7 @@
 /* customizing link card */
 .card-grid > div:hover,
 .pagination-links a:hover {
+  background: transparent;
   border: var(--sl-color-accent) 1px solid;
 }
 
