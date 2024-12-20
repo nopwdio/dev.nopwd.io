@@ -1,0 +1,34 @@
+---
+title: <np-if>
+sidebar:
+  order: 4
+---
+
+| Description                                           | 
+| ----------------------------------------------------- | 
+| The `<np-if>` component provides a simple way to conditionally render UI elements based on the user's authentication state.|
+
+## Slots
+
+| Name              | Description                                   |
+| ----------------- | --------------------------------------------- |
+| `authenticated`   | Rendered when a session is active.            |
+| `unauthenticated` | Rendered when the user is not logged in.      |
+| `unknown`         | Rendered when the session state is currently unknown. |
+
+**Usage:**
+
+```html
+<np-if>
+  <!-- Displayed if a session is active -->
+  <div slot="authenticated">You are authenticated</div>
+
+  <!-- Displayed if the user is not logged in -->
+  <div slot="unauthenticated">You are not authenticated</div>
+
+  <!-- Displayed when the session state is currently unknown -->
+  <div slot="unknown">Please wait...</div>
+</np-if>
+```
+
+

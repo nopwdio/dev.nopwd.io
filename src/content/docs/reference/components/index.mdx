@@ -8,9 +8,10 @@ sidebar:
 
 | Name                                                   | Type     | Description                           |
 | ------------------------------------------------------ | -------- | ------------------------------------- |
-| [`np-login`](/reference/components/np-login) | `input` | Authenticate a user with a magic link or passkey |
-| [`np-passkey-register`](/reference/components/np-passkey-register)       | `button` | Register a passkey               |
-| [`np-logout`](/reference/components/np-logout) | `button` | Revoke the current session |
+| [`np-login`](/reference/components/np-login)           | `input`  | Authenticate a user with a magic link or passkey |
+| [`np-passkey-register`](/reference/components/np-passkey-register) | `button` | Register a passkey                    |
+| [`np-logout`](/reference/components/np-logout)         | `button` | Revoke the current session             |
+| [`np-if`](/reference/components/np-if)                 | `slot`   | Render specific slots based on user's session states |
 
 ## How to Install
 
@@ -33,7 +34,7 @@ import "@nopwdio/sdk-js/dist/components/{component-name}.js";
 </TabItem>
 
 <TabItem label="Using CDN">
-Each component (`np-login`, `np-passkey-register`, `np-logout`) can be loaded individually from a CDN.
+Each component (`np-login`, `np-passkey-register`, `np-logout`, `np-if`) can be loaded individually from a CDN.
 
 Example using the email link authentication button component:
 

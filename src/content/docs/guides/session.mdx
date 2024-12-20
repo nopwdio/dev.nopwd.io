@@ -4,6 +4,40 @@ sidebar:
   order: 1
 ---
 
+## Managing Session States for the UI
+
+The `<np-if>` component can be used to conditionally render UI elements based on the user's authentication state. This component provides three slots:
+- `authenticated`: Rendered when a session is active.
+- `unauthenticated`: Rendered when the user is not logged in.
+- `unknown`: Rendered when the session state is currently unknown.
+
+You can also use the `<np-if>` component to show different parts of your application based on the user's authentication state.
+
+```html
+<np-if>
+  <!-- Displayed if a session is active -->
+  <div slot="authenticated">
+    <h1>Welcome back!</h1>
+    <p>You have access to all features.</p>
+  </div>
+
+  <!-- Displayed if the user is not logged in -->
+  <div slot="unauthenticated">
+    <h1>Welcome!</h1>
+    <p>Please log in to access more features.</p>
+    <np-login></np-login>
+  </div>
+
+  <!-- Displayed when the session state is currently unknown -->
+  <div slot="unknown">
+    <h1>Loading...</h1>
+    <p>Checking your session status.</p>
+  </div>
+</np-if>
+```
+
+This approach ensures that your application provides a seamless user experience by dynamically adjusting the UI based on the user's session state.
+
 ## Customizing the Session Duration
 
 Depending on your application's business domain, the required session duration may vary. This decision typically depends on user activity and the time elapsed since the user first signed in.
@@ -155,6 +189,7 @@ import { revoke } from "@nopwdio/sdk-js/dist/core/session";
 
 await revoke();
 ```
+
 
 ## A Word About Security
 
