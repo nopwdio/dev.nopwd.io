@@ -45,9 +45,9 @@
 }
 
 :root {
-  --sl-text-h1: 2em;
-  --sl-text-h2: 1.6em;
-  --sl-text-h3: 1.2em;
+  --sl-text-h1: 1.8em;
+  --sl-text-h2: 1.4em;
+  --sl-text-h3: 1em;
   --sl-text-h4: 1em;
 }
 
@@ -73,16 +73,10 @@
 
 /* customizing tips */
 :root .starlight-aside {
-  border-radius: 0.5em;
+  margin-top: 1.5em;
   border-width: 2px;
-}
-
-:root .starlight-aside--tip {
-  background-color: var(--sl-color-gray-6);
-}
-
-:root[data-theme="light"] .starlight-aside--tip {
-  background-color: var(--sl-color-gray-7);
+  background-color: transparent;
+  padding: 0 0 0 1em;
 }
 
 /* customizing darkmod selector */
@@ -144,6 +138,10 @@
   background: transparent;
   padding: 0.5em 1em;
   border-radius: 0.5em;
+}
+
+:root np-status {
+  margin-top: 0.5em;
 }
 
 :root[data-theme="light"] np-status::part(link) {
