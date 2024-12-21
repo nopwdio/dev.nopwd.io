@@ -20,19 +20,6 @@ You can load our web components via CDN or install them locally using a package 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 
 <Tabs>
-<TabItem label="Using NPM">
-If you prefer not to use the CDN, you can install the latest version of our SDK from npm with the following command:
-```sh
-npm i @nopwdio/sdk-js@latest
-```
-
-Once installed, simply import the desired component:
-
-```js
-import "@nopwdio/sdk-js/dist/components/{component-name}.js";
-```
-</TabItem>
-
 <TabItem label="Using CDN">
 Each component (`np-login`, `np-passkey-register`, `np-logout`, `np-if`) can be loaded individually from a CDN.
 
@@ -44,6 +31,7 @@ Example using the email link authentication button component:
   src="https://cdn.jsdelivr.net/npm/@nopwdio/sdk-js@latest/cdn/components/{component-name}.js"
 ></script>
 ```
+
 
 :::tip[Version Management]
 It is not recommended to use the `@latest` suffix, as a major release could break your application.
@@ -71,6 +59,19 @@ document.body.classList.add("ready");
 ```
 
 </TabItem>
+<TabItem label="Using NPM">
+If you prefer not to use the CDN, you can install the latest version of our SDK from npm with the following command:
+```sh
+npm i @nopwdio/sdk-js@latest
+```
+
+Once installed, simply import the desired component:
+
+```js
+import "@nopwdio/sdk-js/dist/components/{component-name}.js";
+```
+</TabItem>
+
 </Tabs>
 
 ## CDN vs NPM

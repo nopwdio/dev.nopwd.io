@@ -1,7 +1,10 @@
 :root {
-  --sl-color-accent-low: #242424;
+  --sl-color-accent-low: #4b2cb6;
   --sl-color-accent: #6b4cd6;
   --sl-color-accent-high: #8b5cf6;
+  --sl-color-accent-low: #90909f;
+  --sl-color-accent: #c0c0cf;
+  --sl-color-accent-high: #f0f0ff;
 
   --sl-color-white: #ffffff;
   --sl-color-gray-1: #eeeeee;
@@ -18,9 +21,13 @@
 }
 /* Light mode colors. */
 :root[data-theme="light"] {
-  --sl-color-accent-low: #d7d7d7;
-  --sl-color-accent: #8b5cf6;
+  --sl-color-accent-low: #d7d7df;
+  --sl-color-accent: #8b5cff;
   --sl-color-accent-high: #ab7cff;
+
+  --sl-color-accent-low: #10101a;
+  --sl-color-accent: #30303a;
+  --sl-color-accent-high: #50505a;
 
   --sl-color-white: #181818;
   --sl-color-gray-1: #272727;
@@ -44,6 +51,16 @@
   --sl-text-h4: 1em;
 }
 
+/* customizing link */
+.sl-markdown-content a:not(:where(.not-content *)) {
+  text-decoration-color: var(--sl-color-gray-4);
+}
+
+/* customizing code */
+.expressive-code pre {
+  border-radius: 0.5em !important;
+}
+
 /* customizing site title */
 .site-title {
   font-size: 1em;
@@ -56,7 +73,8 @@
 
 /* customizing tips */
 :root .starlight-aside {
-  border-left-width: 2px;
+  border-radius: 0.5em;
+  border-width: 2px;
 }
 
 :root .starlight-aside--tip {
@@ -82,6 +100,16 @@
 .pagination-links a:hover {
   background: transparent;
   border: var(--sl-color-accent) 1px solid;
+}
+
+.pagination-links .link-title {
+  font-size: 1em;
+  font-weight: bold;
+}
+.pagination-links a {
+  padding: 0.2em;
+  box-shadow: none;
+  border: 1px solid transparent;
 }
 
 /* right nav bar */
