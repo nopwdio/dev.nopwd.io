@@ -42,7 +42,13 @@ export default defineConfig({
 				},
 			],
 			head: [
-				// Example: add Fathom analytics script tag.
+				{
+					tag: 'meta',
+					attrs:{
+						property: 'og:image',
+						content: 'https://dev.nopwd.io/og.png',
+					},
+				},
 				{
 					tag: 'script',
 					attrs: {
