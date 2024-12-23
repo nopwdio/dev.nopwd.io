@@ -51,6 +51,10 @@
   --sl-text-h4: 1em;
 }
 
+table td code {
+  word-wrap: normal;
+}
+
 /* customizing link */
 .sl-markdown-content a:not(:where(.not-content *)) {
   text-decoration-color: var(--sl-color-gray-4);
