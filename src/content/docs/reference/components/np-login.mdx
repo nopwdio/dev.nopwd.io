@@ -4,9 +4,12 @@ sidebar:
   order: 1
 ---
 
-| Description | Overview                                                                                                      |
-| ----------- | ------------------------------------------------------------------------------------------------------------- |
-| An `input` component to authenticate a user using an authentication link or passkeys (if registered).|<np-login></np-login> |
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+  <TabItem label="Description">An `input` component to authenticate a user using an authentication link or passkeys (if registered).</TabItem>
+  <TabItem label="Overview"><np-login></np-login></TabItem>
+</Tabs>
 
 **Usage:**
 

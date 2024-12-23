@@ -4,9 +4,17 @@ sidebar:
   order: 4
 ---
 
-| Description                                           | 
-| ----------------------------------------------------- | 
-| The `<np-if>` component provides a simple way to conditionally render UI elements based on the user's authentication state.|
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+  <TabItem label="Description">The `<np-if>` component provides a simple way to conditionally render UI elements based on the user's authentication state.</TabItem>
+  <TabItem label="Overview">
+    <np-if>
+      <div slot="authenticated">You are authenticated.</div>
+      <div slot="unauthenticated">You are not authenticated.</div>
+    </np-if>
+  </TabItem>
+</Tabs>
 
 ## Slots
 

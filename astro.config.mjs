@@ -59,6 +59,13 @@ export default defineConfig({
 				{
 					tag: 'script',
 					attrs: {
+						src: 'https://cdn.jsdelivr.net/npm/@nopwdio/sdk-js@latest/cdn/components/np-if.js',
+						type: "module"
+					},
+				},
+				{
+					tag: 'script',
+					attrs: {
 						src: 'https://cdn.jsdelivr.net/npm/@nopwdio/sdk-js@latest/cdn/components/np-login.js',
 						type: "module"
 					},

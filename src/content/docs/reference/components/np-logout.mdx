@@ -4,9 +4,12 @@ sidebar:
   order: 3
 ---
 
-| Description                                           | Overview               |
-| ----------------------------------------------------- | ---------------------- |
-| A `button` component to log out an authenticated user.|<np-logout></np-logout> |
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+  <TabItem label="Description">A `button` component to log out an authenticated user.</TabItem>
+  <TabItem label="Overview"><np-logout></np-logout></TabItem>
+</Tabs>
 
 ## Properties
 
